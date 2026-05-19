@@ -30,17 +30,17 @@ export default function HeroSection() {
             <div className="inline-block bg-[rgba(184,134,11,0.15)] border border-[rgba(184,134,11,0.3)]
                             text-[#F5C518] text-xs font-bold tracking-widest uppercase
                             px-4 py-2 rounded-full mb-6">
-              Warri · Effurun · Delta State
+              Penticostal . Warri · Effurun · Delta State
             </div>
 
             {/* Church name — Playfair Display, large on desktop, responsive on mobile */}
             {/* font-[family-name:var(--font-heading)] applies our Playfair Display font */}
             {/* text-4xl = 36px on mobile, sm:text-5xl = 48px, lg:text-6xl = 60px */}
             <h1 className="font-[family-name:var(--font-heading)] text-4xl sm:text-5xl lg:text-6xl
-                           font-bold text-white leading-tight mb-4">
-              Sure Word{' '}
-              <span className="text-[#B8860B]">Glorious</span>{' '}
-              Gospel Assembly
+                          font-bold text-white leading-tight mb-4">
+              Sure Word<br />
+              <em className="text-[#B8860B] not-italic">Glorious Gospel</em><br />
+              Assembly
             </h1>
 
             {/* Gold divider line */}
@@ -50,6 +50,10 @@ export default function HeroSection() {
             <p className="text-blue-100 text-lg sm:text-xl leading-relaxed mb-8 max-w-lg">
               &ldquo;Raising a nation of discipled men who are grounded, rooted and are
               living in the Word of God.&rdquo;
+            </p>
+
+            <p className="text-blue-200 text-base leading-relaxed mb-6 max-w-lg">
+              ... Making a difference by the Word.
             </p>
 
             {/* Pastor attribution */}
