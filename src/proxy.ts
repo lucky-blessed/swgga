@@ -19,7 +19,7 @@ const PUBLIC_API_ROUTES = [
   '/api/v1/prayer-connect/session',
 ]
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl
 
   // Allow public API routes through without any checks
