@@ -23,13 +23,12 @@ export default function Footer() {
                 <span className="text-white font-bold text-sm">SW</span>
               </div>
               <div>
-                <p className="text-white font-bold text-sm leading-tight">Sure Word GGA</p>
+                <p className="text-white font-bold text-sm leading-tight">S W G G A</p>
                 <p className="text-white/40 text-xs">Warri · Delta State</p>
               </div>
             </div>
             <p className="text-white/40 text-sm leading-relaxed italic">
-              &ldquo;Raising a nation of discipled men who are grounded, rooted
-              and are living in the Word of God.&rdquo;
+              &ldquo;Making a difference by the Word.&rdquo;
             </p>
           </div>
 
@@ -64,8 +63,8 @@ export default function Footer() {
             </h5>
             <div className="flex flex-col gap-2.5">
               {[
-                { label: 'Youth Ministry',     href: '/ministries/youth' },
-                { label: "Women's Fellowship", href: '/ministries/womens-fellowship' },
+                { label: 'CTY Royal Force',     href: '/ministries/youth' },
+                { label: "Daughter of Esther", href: '/ministries/womens-fellowship' },
                 { label: 'Healing Streams',    href: '/ministries/healing-streams' },
                 { label: 'Pastor Chii Daily',  href: '/ministries/pastor-chii-daily' },
                 { label: 'CTY Outreach',       href: '/cty' },
