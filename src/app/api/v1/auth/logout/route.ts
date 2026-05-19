@@ -20,7 +20,7 @@ export async function POST(request: NextRequest) {
           await redis.set(`jwt_blacklist:${payload.jti}`, '1', { ex: ttl })
         }
       }
-    }
+    } 
 
     // Clear the refresh token cookie
     const response = NextResponse.json({ success: true })

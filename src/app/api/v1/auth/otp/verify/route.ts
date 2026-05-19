@@ -17,6 +17,7 @@ export async function POST(request: NextRequest) {
         { status: 400 }
       )
     }
+    
 
     // Retrieve stored OTP from Redis
     const otpKey = `otp:${phone}`
