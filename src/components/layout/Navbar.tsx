@@ -63,6 +63,10 @@ export default function Navbar() {
               className="text-blue-100 hover:text-white text-sm font-medium transition-colors">
               Events
             </Link>
+            <Link href="/contact"
+              className="text-blue-100 hover:text-white text-sm font-medium transition-colors">
+              Contact
+            </Link>
           </div>
 
           {/* RIGHT SIDE — Give button + mobile hamburger */}
@@ -128,6 +132,10 @@ export default function Navbar() {
             <Link href="/events" onClick={() => setMenuOpen(false)}
               className="text-blue-100 hover:text-white text-sm font-medium py-2">
               Events
+            </Link>
+            <Link href="/contact" onClick={() => setMenuOpen(false)}
+              className="text-blue-100 hover:text-white text-sm font-medium py-2 border-b border-blue-800">
+              Contact
             </Link>
           </div>
         </div>
