@@ -105,19 +105,51 @@ export default function CTYPage() {
       </section>
 
       {/* LEADERSHIP */}
-      <section className="bg-white py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-gradient-to-r from-[#DCFCE7] to-[#F0FDF4] border border-[#4ADE80]/30 rounded-2xl p-6 sm:p-8 flex flex-col sm:flex-row items-start sm:items-center gap-6">
-            <div className="w-16 h-16 rounded-2xl bg-[#4ADE80] flex items-center justify-center flex-shrink-0">
-              <Star size={28} className="text-[#166534]" />
+      <section
+        className="py-20 lg:py-28 relative overflow-hidden"
+        style={{background: "linear-gradient(135deg, #bfcfb8 0%, #d4e0ce 30%, #e8f0e4 55%, #f4f7f2 75%, #ffffff 100%)"}}
+      >
+        {/* Atmospheric radial glow behind subject */}
+        <div className="absolute inset-0 pointer-events-none" style={{background: "radial-gradient(ellipse 55% 70% at 25% 50%, rgba(180,210,170,0.5) 0%, rgba(180,210,170,0.2) 40%, transparent 70%)"}} />
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <p className="text-[#166534] text-xs font-bold tracking-widest uppercase mb-2">National Coordinating Pastor</p>
+          <h2 className="font-[family-name:var(--font-heading)] text-3xl sm:text-4xl font-bold text-[#1A1A1A] mb-10">Leading the Vision</h2>
+
+          <div className="flex flex-col lg:flex-row items-center">
+
+            {/* Portrait — cinematic blend, no hard edges */}
+            <div className="lg:w-2/5 relative flex-shrink-0" style={{minHeight: "560px"}}>
+
+              <img
+                src="/images/pastor-victory.png"
+                alt="Pastor Victory Uba"
+                className="absolute inset-0 w-full h-full object-cover object-top"
+                style={{
+                  maskImage: "radial-gradient(ellipse 85% 80% at 45% 45%, black 20%, rgba(0,0,0,0.97) 35%, rgba(0,0,0,0.85) 50%, rgba(0,0,0,0.5) 65%, rgba(0,0,0,0.15) 80%, transparent 92%)",
+                  WebkitMaskImage: "radial-gradient(ellipse 85% 80% at 45% 45%, black 20%, rgba(0,0,0,0.97) 35%, rgba(0,0,0,0.85) 50%, rgba(0,0,0,0.5) 65%, rgba(0,0,0,0.15) 80%, transparent 92%)",
+                  filter: "brightness(1.03) contrast(1.02) saturate(0.98)",
+                }}
+              />
+              <div className="absolute inset-0 pointer-events-none" style={{background: "linear-gradient(135deg, rgba(196,216,188,0.7) 0%, rgba(196,216,188,0.3) 20%, transparent 45%)"}} />
+              <div className="absolute inset-0 pointer-events-none" style={{background: "linear-gradient(to top, rgba(212,224,206,0.85) 0%, rgba(212,224,206,0.4) 18%, transparent 38%)"}} />
+              <div className="absolute inset-0 pointer-events-none" style={{background: "linear-gradient(to right, transparent 40%, rgba(212,224,206,0.3) 65%, rgba(212,224,206,0.7) 80%, rgba(220,232,216,0.95) 95%, rgba(228,238,224,1) 100%)"}} />
+              <div className="absolute inset-0 pointer-events-none" style={{background: "linear-gradient(to right, rgba(196,216,188,0.6) 0%, rgba(196,216,188,0.2) 12%, transparent 28%)"}} />
             </div>
-            <div>
-              <p className="text-[#166534] text-xs font-bold uppercase tracking-widest mb-1">National Coordinating Pastor</p>
-              <h3 className="font-[family-name:var(--font-heading)] text-2xl font-bold text-[#1A1A1A] mb-1">Pastor Victory Uba</h3>
-              <p className="text-[#374151] text-sm leading-relaxed">
-                Pastor Victory Uba serves as the National Coordinating Pastor of Catch Them Young Outreach Ministry, overseeing all chapters across Nigeria and guiding the ministry in its mission to reach the next generation for God.
-              </p>
+
+            {/* Info */}
+            <div className="flex-1 p-6 sm:p-8 lg:pl-2 flex flex-col justify-center">
+              <div className="w-10 h-1 bg-[#166534] rounded-full mb-5" />
+              <h3 className="font-[family-name:var(--font-heading)] text-2xl sm:text-3xl font-bold text-[#1A1A1A] mb-1">Pastor Victory Uba</h3>
+              <p className="text-[#166534] font-semibold text-sm tracking-wide mb-6">National Coordinating Pastor · Catch Them Young</p>
+              <p className="text-[#374151] text-base leading-relaxed mb-8">Pastor Victory Uba serves as the National Coordinating Pastor of Catch Them Young Outreach Ministry, overseeing all chapters across Nigeria and guiding the ministry in its mission to reach the next generation for God and for good. Under his coordination, CTY has expanded its reach across Delta State, Rivers State, Benue State, and beyond — touching hundreds of young lives through the gospel, skills training, and community outreach.</p>
+              <div className="flex flex-wrap gap-3">
+                <div className="bg-[#166534]/10 border border-[#166534]/20 text-[#166534] text-xs font-bold px-3 py-1.5 rounded-full">Delta State Chapters</div>
+                <div className="bg-[#166534]/10 border border-[#166534]/20 text-[#166534] text-xs font-bold px-3 py-1.5 rounded-full">Rivers State Chapters</div>
+                <div className="bg-[#166534]/10 border border-[#166534]/20 text-[#166534] text-xs font-bold px-3 py-1.5 rounded-full">Benue State Chapters</div>
+              </div>
             </div>
+
           </div>
         </div>
       </section>
