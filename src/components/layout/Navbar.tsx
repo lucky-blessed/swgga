@@ -40,7 +40,7 @@ export default function Navbar() {
               <span className="text-white font-bold text-sm">SW</span>
             </div>
             <div className="hidden md:block">
-              <p className="text-white font-bold text-sm leading-tight">Sure Word GGA</p>
+              <p className="text-white font-bold text-sm leading-tight">Sure Word Glorious Gospel Assembly</p>
               <p className="text-blue-300 text-xs">Warri · Delta State</p>
             </div>
           </Link>
