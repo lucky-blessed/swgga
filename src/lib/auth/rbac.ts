@@ -4,7 +4,7 @@
 
 export const ROLES = {
     SUPER_ADMIN:            'R01',
-    SENIOR_PASTOR:          'R01',
+    SENIOR_PASTOR:          'R02',
     ADMIN_SECRETARY:        'R03',
     TREASURER:              'R04',
     DEPARTMENT_HEAD:        'R05',
@@ -25,6 +25,8 @@ export const PERMISSIONS = {
     ADMIN_ACCESS: ['R01', 'R02', 'R03', 'R04', 'R05', 'R06', 'R07', 'R08', 'R09'],
 
     // Who can view financial records
+    FINANCIAL_ACCESS: ['R01', 'R02', 'R04'],
+    // Who can manage members
     MEMBER_MANAGEMENT: ['R01', 'R02', 'R03'],
 
     // Who can read pastoral notes on member profiles
