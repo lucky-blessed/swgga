@@ -1,4 +1,5 @@
 import ServicesStrip from '@/components/layout/ServicesStrip'
+import CTYNavbar from '@/components/layout/CTYNavbar'
 import CTYFooter from '@/components/layout/CTYFooter'
 import { BookOpen, Briefcase, Globe, Heart, Users, Flame, MapPin, Star, Tent, Network } from 'lucide-react'
 import Link from 'next/link'
@@ -61,7 +62,7 @@ export default function CTYPage() {
               <Link href="#programmes"   className="text-white/70 hover:text-white text-sm transition-colors">Programmes</Link>
               <Link href="#chapters"     className="text-white/70 hover:text-white text-sm transition-colors">Chapters</Link>
               <Link href="#get-involved" className="text-white/70 hover:text-white text-sm transition-colors">Get Involved</Link>
-              <Link href="/"             className="text-white/70 hover:text-white text-sm transition-colors">Sure Word GGA</Link>
+              <Link href="/" className="flex items-center gap-1.5 bg-white/15 hover:bg-white/25 border border-white/30 text-white text-xs font-bold px-3 py-1.5 rounded-full transition-colors">← Sure Word GGA</Link>
             </div>
             <Link href="#get-involved" className="bg-[#4ADE80] hover:bg-[#22C55E] text-[#166534] text-sm font-bold px-4 py-2 rounded-full transition-colors">
               Get Involved
@@ -119,7 +120,7 @@ export default function CTYPage() {
           <div className="flex flex-col lg:flex-row items-center">
 
             {/* Portrait — cinematic blend, no hard edges */}
-            <div className="lg:w-2/5 relative flex-shrink-0" style={{minHeight: "560px"}}>
+            <div className="w-full lg:w-2/5 relative flex-shrink-0" style={{minHeight: "420px", height: "420px"}}>
 
               <img
                 src="/images/pastor-victory.png"
