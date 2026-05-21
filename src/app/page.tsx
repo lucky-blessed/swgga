@@ -7,6 +7,7 @@ import FeaturedSermon from '@/components/public/home/FeaturedSermon'
 import UpcomingEvents from '@/components/public/home/UpcomingEvents'
 import MinistriesGrid from '@/components/public/home/MinistriesGrid'
 import GiveCTA from '@/components/public/home/GiveCTA'
+import Testimonials from '@/components/public/home/Testimonials'
 import Footer from '@/components/layout/Footer'
 
 
@@ -21,6 +22,7 @@ export default function HomePage() {
       <FeaturedSermon />
       <UpcomingEvents />
       <MinistriesGrid />
+      <Testimonials />
       <GiveCTA />
       <Footer />
 
