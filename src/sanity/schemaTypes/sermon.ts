@@ -13,6 +13,7 @@ export const sermonType = defineType({
     defineField({ name: 'sermonType', title: 'Type', type: 'string',
       options: { list: ['video', 'audio', 'notes'], layout: 'radio' }, validation: r => r.required() }),
     defineField({ name: 'youtubeUrl', title: 'YouTube URL', type: 'url' }),
+    defineField({ name: 'facebookUrl', title: 'Facebook Video URL', type: 'url', description: 'Paste the Facebook video or live replay link here' }),
     defineField({ name: 'audioUrl', title: 'Audio File URL (S3)', type: 'url' }),
     defineField({ name: 'notesUrl', title: 'Notes PDF URL (S3)', type: 'url' }),
     defineField({ name: 'duration', title: 'Duration (e.g. 42 min)', type: 'string' }),

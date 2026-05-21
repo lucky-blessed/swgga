@@ -55,6 +55,7 @@ export const latestSermonsQuery = groq`
     publishedAt,
     sermonType,
     youtubeUrl,
+    facebookUrl,
     audioUrl,
     notesUrl,
     duration,
@@ -78,5 +79,6 @@ export const upcomingEventsQuery = groq`
     registrationEnabled,
     featured,
     "imageUrl": image.asset->url,
+    "imageLqip": image.asset->metadata.lqip,
   }
 `
