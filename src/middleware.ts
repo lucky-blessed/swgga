@@ -19,7 +19,7 @@ const PUBLIC_API_ROUTES = [
   '/api/v1/prayer-connect/session',
 ]
 
-export async function proxy(request: NextRequest) {
+export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
 
   // ── DEV BYPASS — remove before production ──────────────────────────

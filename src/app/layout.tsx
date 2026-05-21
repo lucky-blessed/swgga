@@ -1,5 +1,6 @@
 // src/app/layout.tsx
 import type { Metadata } from 'next'
+import { Toaster } from 'sonner'
 import { Playfair_Display, Lato } from 'next/font/google'
 import './globals.css'
 
@@ -32,7 +33,8 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${playfair.variable} ${lato.variable} font-sans antialiased`}>
         {children}
-      </body>
+        <Toaster position="top-right" theme="dark" />
+</body>
     </html>
   )
 }
