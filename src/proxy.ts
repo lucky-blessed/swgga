@@ -25,8 +25,15 @@ export async function proxy(request: NextRequest) {
   // ── DEV BYPASS — remove before production ──────────────────────────
   // Allows admin access without a JWT during development
   // The real RBAC guard activates once the login flow is built in Week 6
-  if (process.env.NODE_ENV === 'development' && pathname.startsWith('/admin')) {
-    return NextResponse.next()
+  if (process.env.NODE_ENV === 'development' && (
+    pathname.startsWith('/admin') ||
+    pathname.startsWith('/api/v1/admin')
+  )) {
+    const requestHeaders = new Headers(request.headers)
+    requestHeaders.set('x-user-id',   'dev-001')
+    requestHeaders.set('x-user-role', 'R01')
+    requestHeaders.set('x-user-name', 'Blessed')
+    return NextResponse.next({ request: { headers: requestHeaders } })
   }
   // ───────────────────────────────────────────────────────────────────
 

@@ -8,6 +8,10 @@ import { createContext, useContext, useEffect, useState, ReactNode } from 'react
 import type { Role } from '@/lib/auth/rbac'
 import { ROLES } from '@/lib/auth/rbac'
 
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+
+const queryClient = new QueryClient()
+
 interface AdminUser {
   id:       string
   role:     Role
@@ -85,9 +89,11 @@ export function AdminProvider({ children }: { children: ReactNode }) {
   }, [])
 
   return (
-    <AdminContext.Provider value={{ user, loading }}>
-      {children}
-    </AdminContext.Provider>
+    <QueryClientProvider client={queryClient}>
+      <AdminContext.Provider value={{ user, loading }}>
+        {children}
+      </AdminContext.Provider>
+    </QueryClientProvider>
   )
 }
 
