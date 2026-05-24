@@ -22,7 +22,7 @@ export async function GET(
 
   const { data, error } = await supabase
     .from('members')
-    .select('pastoral_notes, has_pastoral_notes, updated_at')
+    .select('pastoral_notes, updated_at')
     .eq('id', params.id)
     .single()
 
@@ -30,7 +30,7 @@ export async function GET(
 
   return NextResponse.json({
     notes:            data.pastoral_notes    ?? '',
-    hasPastoralNotes: data.has_pastoral_notes ?? false,
+    
     updatedAt:        data.updated_at,
   })
 }
@@ -56,7 +56,7 @@ export async function POST(
     .from('members')
     .update({
       pastoral_notes:     notes,
-      has_pastoral_notes: notes.length > 0,
+      
       updated_at:         new Date().toISOString(),
     })
     .eq('id', params.id)
@@ -69,7 +69,6 @@ export async function POST(
     actor_id: userId,
     action:   'UPDATE_PASTORAL_NOTES',
     resource: `member:${params.id}`,
-    metadata: { noteLength: notes.length },
   })
 
   return NextResponse.json({ success: true })

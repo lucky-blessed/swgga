@@ -23,12 +23,12 @@ export async function GET() {
     const days = eachDayOfInterval({ start: thirtyAgo, end: today })
 
     const [attendanceResult, givingResult] = await Promise.all([
-      supabase.from('attendance')
-        .select('created_at')
-        .gte('created_at', thirtyAgo.toISOString()),
+      supabase.from('service_records')
+        .select('service_date, total_count')
+        .gte('service_date', format(thirtyAgo, 'yyyy-MM-dd')),
       supabase.from('giving_transactions')
         .select('amount, created_at')
-        .gte('created_at', thirtyAgo.toISOString()),
+        .gte('service_date', format(thirtyAgo, 'yyyy-MM-dd')),
     ])
 
     // Group by day
@@ -36,8 +36,8 @@ export async function GET() {
     const givingByDay: Record<string, number> = {};
 
     (attendanceResult.data || []).forEach((r: any) => {
-      const day = format(new Date(r.created_at), 'MMM dd')
-      attendanceByDay[day] = (attendanceByDay[day] || 0) + 1
+      const day = format(new Date(r.service_date), 'MMM dd')
+      attendanceByDay[day] = (attendanceByDay[day] || 0) + (r.total_count || 0)
     });
 
     (givingResult.data || []).forEach((r: any) => {

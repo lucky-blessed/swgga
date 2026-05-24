@@ -10,35 +10,30 @@ import {
   // ─── Types ────────────────────────────────────────────────────────────────────
   
   export interface AdminMember {
-    id:                 string
-    user_id:            string
-    full_name:          string
-    phone:              string | null
-    date_of_birth:      string | null
-    address:            string | null
-    joined_date:        string | null
-    has_pastoral_notes: boolean
-    created_at:         string
-    users: {
-      id:                string
-      email:             string | null
-      phone:             string | null
-      role:              string
-      status:            'active' | 'inactive' | 'pending'
-      word_streak:       number
-      profile_photo_url: string | null
-      created_at:        string
-    }
-    ministries: {
-      id:   string
-      name: string
-      slug: string
-    } | null
-    cell_groups: {
-      id:       string
-      name:     string
-      location: string
-    } | null
+    id:                   string
+    full_name:            string
+    first_name:           string
+    last_name:            string
+    phone:                string | null
+    email:                string | null
+    date_of_birth:        string | null
+    address:              string | null
+    marital_status:       string | null
+    occupation:           string | null
+    baptism_date:         string | null
+    joined_date:          string | null
+    membership_status:    string
+    last_attendance_date: string | null
+    pastoral_notes:       string | null
+    user_role:            string
+    is_active:            boolean
+    is_cty_youth:         boolean
+    ministry_id:          string | null
+    cell_group_id:        string | null
+    word_streak_count:    number
+    profile_photo_url:    string | null
+    ministry:             { id: string; name: string; slug: string } | null
+    created_at:           string
   }
   
   export interface MembersResponse {
@@ -207,13 +202,13 @@ import {
   
     const rows = members.map(m => [
       m.full_name,
-      m.users.email            ?? '',
-      m.users.phone ?? m.phone ?? '',
-      m.users.role,
-      m.users.status,
-      m.ministries?.name       ?? '',
-      String(m.users.word_streak),
-      m.joined_date            ?? '',
+      m.email                ?? '',
+      m.phone                ?? '',
+      m.user_role            ?? '',
+      m.membership_status    ?? '',
+      m.ministry?.name       ?? '',
+      String(m.word_streak_count ?? 0),
+      m.joined_date          ?? '',
     ])
   
     const csv = [headers, ...rows]

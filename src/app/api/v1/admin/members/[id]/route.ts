@@ -23,10 +23,10 @@ export async function GET(
       *,
       users!members_user_id_fkey (
         id, email, phone, role, status,
-        word_streak, profile_photo_url, created_at
+        word_streak_count, profile_photo_url, created_at
       ),
       ministries ( id, name, slug ),
-      cell_groups ( id, name, location )
+      cell_group_id
     `)
     .eq('id', params.id)
     .single()
@@ -37,7 +37,7 @@ export async function GET(
 
   // Strip pastoral notes from response for R03 and below
   if (role !== 'R01' && role !== 'R02') {
-    const { pastoral_notes, has_pastoral_notes, ...rest } = data as any
+    const { pastoral_notes, ...rest } = data as any
     return NextResponse.json({ member: rest })
   }
 

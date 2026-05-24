@@ -32,7 +32,7 @@ export async function GET() {
       supabase.from('members').select('id', { count: 'exact', head: true }),
       supabase.from('giving_transactions').select('amount').gte('created_at', monthStart),
       supabase.from('prayer_requests').select('id', { count: 'exact', head: true }).eq('status', 'pending'),
-      supabase.from('events').select('id', { count: 'exact', head: true }).gte('date', now.toISOString()),
+      supabase.from('events').select('id', { count: 'exact', head: true }).gte('start_time', now.toISOString()),
       supabase.from('attendance').select('id', { count: 'exact', head: true }).gte('created_at', monthStart),
     ])
 

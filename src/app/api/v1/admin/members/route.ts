@@ -37,7 +37,7 @@ export async function GET(req: NextRequest) {
       membership_status,
       pastoral_notes,
       last_attendance_date,
-      users!members_id_fkey (
+      users (
         id,
         email,
         phone,
@@ -74,6 +74,7 @@ export async function GET(req: NextRequest) {
     .range(offset, offset + limit - 1)
 
   const { data, count, error } = await query
+  console.log('[members debug] count:', count, 'error:', error?.message, 'row0:', JSON.stringify(data?.[0]))
 
   if (error) {
     console.error('[admin/members] error:', error.message)
@@ -157,7 +158,6 @@ export async function PATCH(req: NextRequest) {
     action:        'UPDATE_MEMBER_STATUS',
     resource_type: 'member',
     resource_id:   body.memberId,
-    metadata:      { newStatus: body.status },
   })
 
   return NextResponse.json({ success: true })

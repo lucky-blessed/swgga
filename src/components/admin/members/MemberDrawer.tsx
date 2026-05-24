@@ -97,7 +97,7 @@ export default function MemberDrawer({
 
   function handleStatusToggle() {
     if (!member || !memberId) return
-    const newStatus = member.users.status === 'active' ? 'inactive' : 'active'
+    const newStatus = member.membership_status === 'active' ? 'inactive' : 'active'
     updateStatus({ memberId, status: newStatus }, { onSuccess: onStatusChange })
   }
 
@@ -165,9 +165,9 @@ export default function MemberDrawer({
               <div className="flex items-start gap-4 mb-6">
                 {/* Avatar */}
                 <div className="relative flex-shrink-0">
-                  {member.users.profile_photo_url ? (
+                  {member.profile_photo_url ? (
                     <img
-                      src={member.users.profile_photo_url}
+                      src={member.profile_photo_url}
                       alt={member.full_name}
                       className="w-16 h-16 rounded-2xl object-cover border border-white/10"
                     />
@@ -189,26 +189,26 @@ export default function MemberDrawer({
                     {member.full_name}
                   </h3>
                   <p className="text-[#64748B] text-xs mt-0.5 truncate">
-                    {member.users.email}
+                    {member.email}
                   </p>
                   <div className="flex flex-wrap gap-1.5 mt-2">
                     {/* Role badge */}
                     <span className="px-2 py-0.5 rounded-full bg-[#1E3A8A]/20
                                      border border-[#1E3A8A]/30 text-[#93C5FD]
                                      text-[10px] font-bold">
-                      {ROLE_LABELS[member.users.role] ?? member.users.role}
+                      {ROLE_LABELS[member.user_role] ?? member.user_role}
                     </span>
                     {/* Ministry tag */}
-                    {member.ministries && (
+                    {member.ministry && (
                       <span className="px-2 py-0.5 rounded-full bg-[#B8860B]/10
                                        border border-[#B8860B]/20 text-[#F5C518]
                                        text-[10px] font-bold">
-                        {member.ministries.name}
+                        {member.ministry.name}
                       </span>
                     )}
                     {/* Status badge */}
                     {(() => {
-                      const s = STATUS_CONFIG[member.users.status as keyof typeof STATUS_CONFIG]
+                      const s = STATUS_CONFIG[member.membership_status as keyof typeof STATUS_CONFIG]
                       return (
                         <span className={`px-2 py-0.5 rounded-full border
                                           text-[10px] font-bold ${s.bg} ${s.color}`}>
@@ -217,12 +217,12 @@ export default function MemberDrawer({
                       )
                     })()}
                     {/* Word streak */}
-                    {member.users.word_streak > 0 && (
+                    {member.word_streak_count > 0 && (
                       <span className="flex items-center gap-1 px-2 py-0.5 rounded-full
                                        bg-orange-500/10 border border-orange-500/20
                                        text-orange-400 text-[10px] font-bold">
                         <Zap size={9} />
-                        {member.users.word_streak}d streak
+                        {member.word_streak_count}d streak
                       </span>
                     )}
                   </div>
@@ -271,12 +271,12 @@ export default function MemberDrawer({
                       disabled={isStatusPending}
                       className={`flex items-center gap-1.5 px-3 py-2 rounded-lg
                                   border text-xs font-medium transition-all duration-200
-                                  ${member.users.status === 'active'
+                                  ${member.membership_status === 'active'
                                     ? 'bg-[#F87171]/10 border-[#F87171]/20 text-[#F87171] hover:bg-[#F87171]/20'
                                     : 'bg-[#22C55E]/10 border-[#22C55E]/20 text-[#22C55E] hover:bg-[#22C55E]/20'
                                   }`}
                     >
-                      {member.users.status === 'active'
+                      {member.membership_status === 'active'
                         ? <><XCircle size={12} /> Deactivate</>
                         : <><CheckCircle2 size={12} /> Activate</>
                       }
@@ -338,9 +338,9 @@ export default function MemberDrawer({
                   ) : (
                     <>
                       <Field label="Phone"
-                        value={member.users.phone ?? member.phone} />
+                        value={member.phone ?? member.phone} />
                       <Field label="Email"
-                        value={member.users.email} />
+                        value={member.email} />
                       <Field label="Date of Birth"
                         value={member.date_of_birth
                           ? new Date(member.date_of_birth).toLocaleDateString('en-GB', {
@@ -369,13 +369,13 @@ export default function MemberDrawer({
                 </p>
                 <div className="grid grid-cols-2 gap-x-6 gap-y-4">
                   <Field label="Ministry"
-                    value={member.ministries?.name} />
+                    value={member.ministry?.name} />
                   <Field label="Cell Group"
-                    value={member.cell_groups?.name} />
+                    value={member.cell_group_id ?? '—'} />
                   <Field label="Word Streak"
-                    value={`${member.users.word_streak} days`} />
+                    value={`${member.word_streak_count} days`} />
                   <Field label="Platform Role"
-                    value={ROLE_LABELS[member.users.role]} />
+                    value={ROLE_LABELS[member.user_role]} />
                 </div>
               </div>
 

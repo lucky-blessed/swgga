@@ -1,12 +1,10 @@
 // src/app/admin/members/page.tsx
-// Task 3 — Member Management main page
-
 'use client'
 
 import { useState } from 'react'
 import {
   Search, Download, UserPlus, ChevronLeft, ChevronRight,
-  CheckCircle2, XCircle, Clock, Lock, Shield,
+  CheckCircle2, XCircle, Lock, Shield,
   Zap, Users, RefreshCw, ChevronDown, X
 } from 'lucide-react'
 import {
@@ -33,19 +31,21 @@ const ROLE_LABELS: Record<string, string> = {
 }
 
 const MINISTRIES = [
-  { slug: 'youth',             name: 'CTY Royal Force'    },
-  { slug: 'womens-fellowship', name: 'Daughter of Esther' },
-  { slug: 'mens-fellowship',   name: 'Mighty Men of David'},
-  { slug: 'healing-streams',   name: 'Healing Streams'    },
-  { slug: 'impact-fellowship', name: 'Impact Fellowship'  },
-  { slug: 'choir',             name: 'Choir & Worship'    },
-  { slug: 'cty',               name: 'CTY Outreach'       },
+  { slug: 'choir',                name: 'Choir'              },
+  { slug: 'media-technical',      name: 'Media & Technical'  },
+  { slug: 'daughters-of-esther',  name: 'Daughters of Esther'},
+  { slug: 'cty-royal-force',      name: 'CTY Royal Force'    },
+  { slug: 'children-of-destiny',  name: 'Children of Destiny'},
+  { slug: 'prayer-programme',     name: 'Prayer & Programme' },
+  { slug: 'ushering',             name: 'Ushering'           },
+  { slug: 'impact-fellowship',    name: 'Impact Fellowship'  },
+  { slug: 'cty',                  name: 'CTY'                },
 ]
 
-// ─── Small sub-components ─────────────────────────────────────────────────────
+// ─── Sub-components ───────────────────────────────────────────────────────────
 
-function StatusBadge({ status }: { status: 'active' | 'inactive' | 'pending' }) {
-  const cfg = STATUS_CONFIG[status]
+function StatusBadge({ status }: { status: string }) {
+  const cfg = STATUS_CONFIG[status as keyof typeof STATUS_CONFIG] ?? STATUS_CONFIG.pending
   return (
     <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full
                        border text-[10px] font-bold ${cfg.bg} ${cfg.color}`}>
@@ -70,7 +70,7 @@ function RoleBadge({ role }: { role: string }) {
   )
 }
 
-// ─── Member row ───────────────────────────────────────────────────────────────
+// ─── Member Row ───────────────────────────────────────────────────────────────
 
 function MemberRow({
   member,
@@ -87,7 +87,7 @@ function MemberRow({
 }) {
   const canSeePastoral = currentUserRole === 'R01' || currentUserRole === 'R02'
   const initials = member.full_name
-    .split(' ').slice(0, 2).map(n => n[0]).join('').toUpperCase()
+    .split(' ').slice(0, 2).map((n: string) => n[0]).join('').toUpperCase()
 
   return (
     <div
@@ -121,9 +121,9 @@ function MemberRow({
 
       {/* Avatar */}
       <div className="flex-shrink-0">
-        {member.users.profile_photo_url ? (
+        {member.profile_photo_url ? (
           <img
-            src={member.users.profile_photo_url}
+            src={member.profile_photo_url}
             alt={member.full_name}
             className="w-9 h-9 rounded-xl object-cover border border-white/10"
           />
@@ -142,35 +142,33 @@ function MemberRow({
                             text-sm font-bold truncate max-w-[180px]">
             {member.full_name}
           </span>
-          {/* Lock icon — pastoral notes indicator, R01/R02 only */}
-          {canSeePastoral && member.has_pastoral_notes && (
-            <Lock size={10} className="text-[#B8860B] flex-shrink-0" title="Has pastoral notes" />
-          )}
+          {canSeePastoral && member.pastoral_notes !== null && (
+            <Lock size={10} className="text-[#B8860B] flex-shrink-0" aria-label="Has pastoral notes" />          )}
         </div>
         <p className="text-[#64748B] text-xs truncate max-w-[220px]">
-          {member.users.email ?? member.users.phone ?? '—'}
+          {member.email ?? member.phone ?? '—'}
         </p>
       </div>
 
       {/* Role */}
       <div className="hidden lg:block flex-shrink-0">
-        <RoleBadge role={member.users.role} />
+        <RoleBadge role={member.user_role ?? 'R10'} />
       </div>
 
       {/* Ministry */}
       <div className="hidden xl:block flex-shrink-0 w-32">
         <span className="text-[#64748B] text-xs truncate block">
-          {member.ministries?.name ?? '—'}
+          {member.ministry?.name ?? '—'}
         </span>
       </div>
 
       {/* Word streak */}
       <div className="hidden lg:flex flex-shrink-0 items-center gap-1 w-16">
-        {member.users.word_streak > 0 ? (
+        {(member.word_streak_count ?? 0) > 0 ? (
           <>
             <Zap size={10} className="text-orange-400" />
             <span className="text-orange-400 text-xs font-bold">
-              {member.users.word_streak}d
+              {member.word_streak_count}
             </span>
           </>
         ) : (
@@ -180,15 +178,18 @@ function MemberRow({
 
       {/* Status */}
       <div className="flex-shrink-0">
-        <StatusBadge status={member.users.status} />
+        <StatusBadge status={member.membership_status ?? 'pending'} />
       </div>
 
       {/* Date joined */}
       <div className="hidden 2xl:block flex-shrink-0 w-24 text-right">
         <span className="text-[#64748B] text-xs">
-          {new Date(member.created_at).toLocaleDateString('en-GB', {
-            day: '2-digit', month: 'short', year: '2-digit'
-          })}
+          {member.joined_date
+            ? new Date(member.joined_date).toLocaleDateString('en-GB', {
+                day: '2-digit', month: 'short', year: '2-digit'
+              })
+            : '—'
+          }
         </span>
       </div>
 
@@ -199,13 +200,12 @@ function MemberRow({
   )
 }
 
-// ─── Main page ────────────────────────────────────────────────────────────────
+// ─── Main Page ────────────────────────────────────────────────────────────────
 
 export default function MembersPage() {
-  const { user }         = useAdminUser()
-  const currentUserRole  = user?.role ?? 'R10'
+  const { user }        = useAdminUser()
+  const currentUserRole = user?.role ?? 'R10'
 
-  // Filters
   const [searchInput,    setSearchInput]    = useState('')
   const [statusFilter,   setStatusFilter]   = useState<MemberFilters['status']>('all')
   const [ministryFilter, setMinistryFilter] = useState('all')
@@ -221,12 +221,11 @@ export default function MembersPage() {
     limit:    20,
   }
 
-  // Data
   const { data, isLoading, isFetching, refetch } = useMembers(filters)
   const { mutate: bulkStatus, isPending: isBulkPending } = useUpdateMemberStatus()
 
-  // Selection
-  const [selected, setSelected] = useState<Set<string>>(new Set())
+  const [selected,       setSelected]       = useState<Set<string>>(new Set())
+  const [drawerMemberId, setDrawerMemberId] = useState<string | null>(null)
 
   function toggleSelect(id: string, checked: boolean) {
     setSelected(prev => {
@@ -237,7 +236,7 @@ export default function MembersPage() {
   }
 
   function toggleSelectAll() {
-    const ids = data?.members.map(m => m.id) ?? []
+    const ids = data?.members.map((m: AdminMember) => m.id) ?? []
     if (selected.size === ids.length) {
       setSelected(new Set())
     } else {
@@ -245,11 +244,7 @@ export default function MembersPage() {
     }
   }
 
-  // Drawer
-  const [drawerMemberId, setDrawerMemberId] = useState<string | null>(null)
-
-  // Bulk actions
-  const canBulkAction   = ['R01', 'R02', 'R03'].includes(currentUserRole)
+  const canBulkAction    = ['R01', 'R02', 'R03'].includes(currentUserRole)
   const hasActiveFilters = !!(searchInput || statusFilter !== 'all' || ministryFilter !== 'all')
 
   function handleBulkActivate() {
@@ -277,10 +272,10 @@ export default function MembersPage() {
     setPage(1)
   }
 
-  const members     = data?.members ?? []
-  const total       = data?.total   ?? 0
-  const pages       = data?.pages   ?? 1
-  const allSelected = members.length > 0 && selected.size === members.length
+  const members      = data?.members ?? []
+  const total        = data?.total   ?? 0
+  const pages        = data?.pages   ?? 1
+  const allSelected  = members.length > 0 && selected.size === members.length
   const someSelected = selected.size > 0
 
   return (
@@ -544,7 +539,7 @@ export default function MembersPage() {
               )}
             </div>
           ) : (
-            members.map(member => (
+            members.map((member: AdminMember) => (
               <MemberRow
                 key={member.id}
                 member={member}
@@ -579,10 +574,10 @@ export default function MembersPage() {
 
                 {Array.from({ length: Math.min(5, pages) }).map((_, i) => {
                   let p: number
-                  if (pages <= 5)          p = i + 1
-                  else if (page <= 3)      p = i + 1
+                  if (pages <= 5)             p = i + 1
+                  else if (page <= 3)         p = i + 1
                   else if (page >= pages - 2) p = pages - 4 + i
-                  else                     p = page - 2 + i
+                  else                        p = page - 2 + i
 
                   return (
                     <button
