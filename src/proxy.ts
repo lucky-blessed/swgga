@@ -17,6 +17,9 @@ const PUBLIC_API_ROUTES = [
   '/api/v1/health',
   '/api/v1/devotionals/rss',
   '/api/v1/prayer-connect/session',
+  '/api/v1/events',
+  '/api/v1/sermons',
+  '/api/v1/devotionals',
 ]
 
 export async function proxy(request: NextRequest) {

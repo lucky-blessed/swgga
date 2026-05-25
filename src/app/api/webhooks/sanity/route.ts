@@ -54,6 +54,22 @@ export async function POST(req: NextRequest) {
         break
       }
 
+      case 'event': {
+        const supabase = await createClient()
+        await supabase.from('events').insert({
+          title:                body.title            ?? 'Untitled',
+          description:          body.description      ?? null,
+          start_time:           body.date             ?? new Date().toISOString(),
+          location:             body.location         ?? null,
+          registration_enabled: body.registrationEnabled ?? true,
+          members_only:         false,
+          is_recurring:         false,
+          is_cty_event:         false,
+          created_by:           null,
+        })
+        console.log(`[webhook/sanity] Event inserted: ${_id}`)
+        break
+      }
       default:
         console.log(`[webhook/sanity] Unhandled type: ${_type}`)
     }
