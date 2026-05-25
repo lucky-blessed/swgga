@@ -76,11 +76,11 @@ export function AdminProvider({ children }: { children: ReactNode }) {
           })
         } else {
           // During development — use mock admin user
-          setUser({ id: 'dev-001', role: ROLES.SUPER_ADMIN, name: 'Blessed', initials: 'BN' })
+          setUser({ id: 'b1000000-0000-0000-0000-000000000001', role: ROLES.SUPER_ADMIN, name: 'Blessed', initials: 'BN' })
         }
       } catch {
         // Fallback for development when API is not yet connected
-        setUser({ id: 'dev-001', role: ROLES.SUPER_ADMIN, name: 'Blessed', initials: 'BN' })
+        setUser({ id: 'b1000000-0000-0000-0000-000000000001', role: ROLES.SUPER_ADMIN, name: 'Blessed', initials: 'BN' })
       } finally {
         setLoading(false)
       }

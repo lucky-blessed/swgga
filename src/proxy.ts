@@ -30,7 +30,7 @@ export async function proxy(request: NextRequest) {
     pathname.startsWith('/api/v1/admin')
   )) {
     const requestHeaders = new Headers(request.headers)
-    requestHeaders.set('x-user-id',   'dev-001')
+    requestHeaders.set('x-user-id',   'b1000000-0000-0000-0000-000000000001')
     requestHeaders.set('x-user-role', 'R01')
     requestHeaders.set('x-user-name', 'Blessed')
     return NextResponse.next({ request: { headers: requestHeaders } })

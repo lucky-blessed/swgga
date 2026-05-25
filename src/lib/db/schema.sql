@@ -102,7 +102,7 @@ CREATE TABLE public.devotionals (
   scripture              TEXT,
   audio_url              TEXT,                          -- S3/CloudFront URL
   audio_duration_seconds INTEGER,
-  youtube_url            TEXT,
+  video_url            TEXT,
   podcast_episode_number INTEGER,
   notify_sent            BOOLEAN DEFAULT false,         -- SMS notification dispatched
   published_by           UUID REFERENCES public.users(id),
@@ -162,7 +162,7 @@ CREATE TABLE public.sermons (
   sanity_id        TEXT UNIQUE NOT NULL,
   title            TEXT NOT NULL,
   content_type     TEXT NOT NULL,                      -- video_youtube | audio_s3 | podcast | notes_pdf
-  youtube_url      TEXT,
+  video_url      TEXT,
   audio_url        TEXT,
   notes_url        TEXT,
   speaker          TEXT NOT NULL,
