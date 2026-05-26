@@ -8,13 +8,14 @@ const ALLOWED_ROLES = ['R01', 'R02', 'R03', 'R04', 'R05']
 
 export async function GET(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   const role = req.headers.get('x-user-role')
   if (!role || !ALLOWED_ROLES.includes(role)) {
     return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
   }
 
+  const { id } = await params
   const supabase = await createClient()
 
   const { data, error } = await supabase
@@ -28,7 +29,7 @@ export async function GET(
       ministries ( id, name, slug ),
       cell_group_id
     `)
-    .eq('id', params.id)
+    .eq('id', id)
     .single()
 
   if (error || !data) {
@@ -46,7 +47,7 @@ export async function GET(
 
 export async function PUT(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   const role = req.headers.get('x-user-role')
   if (!role || !['R01', 'R02', 'R03'].includes(role)) {
@@ -56,6 +57,7 @@ export async function PUT(
   const body = await req.json().catch(() => null)
   if (!body) return NextResponse.json({ error: 'Invalid body' }, { status: 400 })
 
+  const { id } = await params
   const supabase = await createClient()
 
   const { email, role: newRole, status, ...memberFields } = body
@@ -72,7 +74,7 @@ export async function PUT(
     const { error } = await supabase
       .from('members')
       .update(memberUpdate)
-      .eq('id', params.id)
+      .eq('id', id)
     if (error) return NextResponse.json({ error: 'Failed to update member' }, { status: 500 })
   }
 
@@ -80,14 +82,14 @@ export async function PUT(
     const { data: member } = await supabase
       .from('members')
       .select('user_id')
-      .eq('id', params.id)
+      .eq('id', id)
       .single()
 
     if (member) {
       const userUpdate: Record<string, string> = {}
-      if (email)  userUpdate.email  = email
-      if (status) userUpdate.status = status
-      if (newRole && role === 'R01') userUpdate.role = newRole
+      if (email)                    userUpdate.email  = email
+      if (status)                   userUpdate.status = status
+      if (newRole && role === 'R01') userUpdate.role  = newRole
 
       await supabase.from('users').update(userUpdate).eq('id', member.user_id)
     }
