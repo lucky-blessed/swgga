@@ -5,7 +5,7 @@
 
 import { enqueueNotification } from '@/lib/notifications/queue'
 import { devotionalAlertEmail } from '@/lib/notifications/email'
-import { supabaseServer } from '@/lib/supabase/server'
+import { createServiceClient } from '@/lib/supabase/server'
 
 export async function onDevotionalPublished(params: {
   title: string
@@ -15,7 +15,7 @@ export async function onDevotionalPublished(params: {
   const { title, episode, scripture } = params
 
   // Fetch all members who have opted in to devotional notifications
-  const supabase = supabaseServer()
+  const supabase = createServiceClient()
   const { data: members } = await supabase
     .from('users')
     .select('phone, email, first_name')
@@ -37,13 +37,13 @@ export async function onDevotionalPublished(params: {
 
     // Queue email if member has email
     if (member.email) {
-      const { subject, html } = devotionalAlertEmail(episode, title, scripture)
-      await enqueueNotification({
-        type:    'email',
-        to:      member.email,
-        subject,
-        html,
-      })
+      await devotionalAlertEmail(
+        member.email,
+        member.first_name ?? 'Member',
+        title,
+        episode,
+        `${process.env.NEXT_PUBLIC_APP_URL}/ministries/pastor-chii-daily`
+      )
     }
   }
 

@@ -23,12 +23,6 @@ export async function onMemberRegistered(params: {
 
   // Queue welcome email
   if (email) {
-    const { subject, html } = welcomeEmail(firstName)
-    await enqueueNotification({
-      type: 'email',
-      to: email,
-      subject,
-      html,
-    })
+    await welcomeEmail(email, firstName)
   }
 }

@@ -27,17 +27,12 @@ export async function onEventRegistered(params: {
 
   // Queue email confirmation
   if (email) {
-    const { subject, html } = eventRegistrationEmail(
+    await eventRegistrationEmail(
+      email,
       firstName,
       eventTitle,
       eventDate,
       location
     )
-    await enqueueNotification({
-      type:    'email',
-      to:      email,
-      subject,
-      html,
-    })
   }
 }

@@ -17,6 +17,9 @@ const PUBLIC_API_ROUTES = [
   '/api/v1/health',
   '/api/v1/devotionals/rss',
   '/api/v1/prayer-connect/session',
+  '/api/v1/auth/register',
+  '/api/v1/auth/verify-email',
+  '/api/v1/auth/resend-verification',
   '/api/v1/events',
   '/api/v1/sermons',
   '/api/v1/devotionals',
@@ -25,20 +28,7 @@ const PUBLIC_API_ROUTES = [
 export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl
 
-  // ── DEV BYPASS — remove before production ──────────────────────────
-  // Allows admin access without a JWT during development
-  // The real RBAC guard activates once the login flow is built in Week 6
-  if (process.env.NODE_ENV === 'development' && (
-    pathname.startsWith('/admin') ||
-    pathname.startsWith('/api/v1/admin')
-  )) {
-    const requestHeaders = new Headers(request.headers)
-    requestHeaders.set('x-user-id',   'b1000000-0000-0000-0000-000000000001')
-    requestHeaders.set('x-user-role', 'R01')
-    requestHeaders.set('x-user-name', 'Blessed')
-    return NextResponse.next({ request: { headers: requestHeaders } })
-  }
-  // ───────────────────────────────────────────────────────────────────
+
 
   // Allow public API routes through without any checks
   const isPublicAPI = PUBLIC_API_ROUTES.some(route =>
@@ -47,6 +37,14 @@ export async function proxy(request: NextRequest) {
   if (isPublicAPI) return NextResponse.next()
 
   // Determine if this is a protected route
+  // Portal auth pages are public — must not be protected
+  const isPortalAuthPage = pathname.startsWith('/portal/login') ||
+                           pathname.startsWith('/portal/register') ||
+                           pathname.startsWith('/portal/verify-email') ||
+                           pathname.startsWith('/portal/pending-verification') ||
+                           pathname.startsWith('/portal/forgot-password')
+  if (isPortalAuthPage) return NextResponse.next()
+
   const isProtectedPage = pathname.startsWith('/portal') ||
                           pathname.startsWith('/admin')
   const isProtectedAPI  = pathname.startsWith('/api/v1') && !isPublicAPI

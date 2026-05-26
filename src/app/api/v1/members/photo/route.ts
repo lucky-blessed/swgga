@@ -5,7 +5,7 @@
 
 import { NextRequest, NextResponse } from 'next/server'
 import { uploadProfilePhoto } from '@/lib/storage/cloudinary'
-import { supabaseServer } from '@/lib/supabase/server'
+import { createServiceClient } from '@/lib/supabase/server'
 
 // Max file size — 5MB
 const MAX_SIZE = 5 * 1024 * 1024
@@ -49,7 +49,7 @@ export async function POST(req: NextRequest) {
     const { url, publicId } = await uploadProfilePhoto(buffer, memberId)
 
     // Save the photo URL to Supabase members table
-    const supabase = supabaseServer()
+    const supabase = createServiceClient()
     const { error: dbError } = await supabase
       .from('members')
       .update({ photo_url: url, photo_public_id: publicId })

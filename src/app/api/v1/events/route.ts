@@ -26,6 +26,18 @@ export async function GET(req: NextRequest) {
   if (filter === 'upcoming') query = query.gte('start_time', now)
   if (filter === 'past')     query = query.lt('start_time',  now)
 
+  // Hide members-only events from public — check JWT if present
+  const authHeader = req.headers.get('authorization')
+  const token = authHeader?.replace('Bearer ', '') ??
+                req.cookies.get('swgga_access')?.value
+  const { verifyAccessToken } = await import('@/lib/auth/jwt')
+  const payload = token ? verifyAccessToken(token) : null
+  const isAuthenticated = !!payload
+
+  if (!isAuthenticated) {
+    query = query.eq('members_only', false)
+  }
+
   query = query
     .order('start_time', { ascending: filter !== 'past' })
     .range(offset, offset + limit - 1)

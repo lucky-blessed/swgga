@@ -4,7 +4,7 @@
 
 import { NextRequest, NextResponse } from 'next/server'
 import bcrypt from 'bcryptjs'
-import { createClient } from '@/lib/supabase/server'
+import { createServiceClient } from '@/lib/supabase/server'
 import { createAccessToken, createRefreshToken } from '@/lib/auth/jwt'
 import { redis } from '@/lib/db/redis'
 import { AUTH_CONFIG } from '@/lib/auth/config'
@@ -32,7 +32,7 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    const supabase = await createClient()
+    const supabase = createServiceClient()
 
     // Find the user by email in our users table
     const { data: user, error } = await supabase

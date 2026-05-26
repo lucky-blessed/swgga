@@ -75,12 +75,10 @@ export function AdminProvider({ children }: { children: ReactNode }) {
             initials: (data.name || 'AU').split(' ').map((n: string) => n[0]).join('').toUpperCase().slice(0, 2),
           })
         } else {
-          // During development — use mock admin user
-          setUser({ id: 'b1000000-0000-0000-0000-000000000001', role: ROLES.SUPER_ADMIN, name: 'Blessed', initials: 'BN' })
+          window.location.href = "/portal/login"
         }
       } catch {
-        // Fallback for development when API is not yet connected
-        setUser({ id: 'b1000000-0000-0000-0000-000000000001', role: ROLES.SUPER_ADMIN, name: 'Blessed', initials: 'BN' })
+        window.location.href = "/portal/login"
       } finally {
         setLoading(false)
       }

@@ -3,7 +3,7 @@
 
 import { NextRequest, NextResponse } from 'next/server'
 import { redis } from '@/lib/db/redis'
-import { createClient } from '@/lib/supabase/server'
+import { createServiceClient } from '@/lib/supabase/server'
 import { createAccessToken, createRefreshToken } from '@/lib/auth/jwt'
 import type { Role } from '@/lib/auth/rbac'
 
@@ -41,7 +41,7 @@ export async function POST(request: NextRequest) {
     await redis.del(otpKey)
 
     // Find the user by phone number
-    const supabase = await createClient()
+    const supabase = createServiceClient()
     const { data: user, error } = await supabase
       .from('users')
       .select('id, phone, role, is_active')
