@@ -34,6 +34,7 @@ const NAV_ITEMS: NavItem[] = [
   { label: 'Announcements',  href: '/admin/announcements',icon: Megaphone,       permission: null },
   { label: 'Conference Room',href: '/admin/conference',   icon: Video,           permission: 'CONFERENCE_SCHEDULE' },
   { label: 'Audit Logs',     href: '/admin/audit',        icon: ClipboardList,   permission: null },
+  { label: 'Admin Accounts', href: '/admin/settings/accounts', icon: Users, permission: null },
   { label: 'RBAC & Security',href: '/admin/security',     icon: ShieldCheck,     permission: null },
 ]
 

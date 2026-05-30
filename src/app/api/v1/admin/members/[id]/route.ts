@@ -22,7 +22,7 @@ export async function GET(
     .from('members')
     .select(`
       *,
-      users!members_user_id_fkey (
+      users (
         id, email, phone, role, status,
         word_streak_count, profile_photo_url, created_at
       ),

@@ -84,7 +84,7 @@ export default function PortalPrayerPage() {
       const params = new URLSearchParams({ page: String(page), limit: '10' })
       if (statusFilter !== 'all') params.set('status', statusFilter)
 
-      const res = await fetch(`/api/v1/prayer?${params.toString()}`)
+      const res = await fetch(`/api/v1/prayer/me?${params.toString()}`)
       if (!res.ok) throw new Error('Failed to load prayer requests')
       setData(await res.json())
     } catch (e: unknown) {

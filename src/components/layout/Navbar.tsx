@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
-import { Flame, ChevronDown, Users, Heart, Shield, Star, Music, Globe, Home, HeartHandshake, Zap } from 'lucide-react'
+import { Flame, ChevronDown, Users, Heart, Shield, Star, Music, Globe, Home, HeartHandshake, Zap, LogIn } from 'lucide-react'
 
 const ministryLinks = [
   { label: 'CTY Royal Force',     href: '/ministries/youth',             icon: Zap,           desc: 'Youth Ministry' },
@@ -25,9 +25,9 @@ const navLinks = [
 ]
 
 export default function Navbar() {
-  const [menuOpen, setMenuOpen] = useState(false)
-  const [ministryOpen, setMinistryOpen] = useState(false)
-  const [mobileMinistryOpen, setMobileMinistryOpen] = useState(false)
+  const [menuOpen,             setMenuOpen]             = useState(false)
+  const [ministryOpen,         setMinistryOpen]         = useState(false)
+  const [mobileMinistryOpen,   setMobileMinistryOpen]   = useState(false)
 
   return (
     <nav className="bg-[#1E3A8A] sticky top-0 z-50 shadow-lg">
@@ -48,7 +48,8 @@ export default function Navbar() {
           {/* DESKTOP NAV */}
           <div className="hidden lg:flex items-center gap-5">
             {navLinks.map((link) => (
-              <Link key={link.label} href={link.href} className="text-blue-100 hover:text-white text-sm font-medium transition-colors">
+              <Link key={link.label} href={link.href}
+                className="text-blue-100 hover:text-white text-sm font-medium transition-colors">
                 {link.label}
               </Link>
             ))}
@@ -68,7 +69,8 @@ export default function Navbar() {
                     {ministryLinks.map((link) => {
                       const Icon = link.icon
                       return (
-                        <Link key={link.label} href={link.href} className="flex items-start gap-3 px-3 py-3 rounded-xl hover:bg-gray-50 transition-colors group">
+                        <Link key={link.label} href={link.href}
+                          className="flex items-start gap-3 px-3 py-3 rounded-xl hover:bg-gray-50 transition-colors group">
                           <div className="w-8 h-8 bg-[#EBF0FA] group-hover:bg-[#1E3A8A] rounded-lg flex items-center justify-center flex-shrink-0 transition-colors duration-200">
                             <Icon size={15} className="text-[#1E3A8A] group-hover:text-white transition-colors duration-200" />
                           </div>
@@ -81,7 +83,8 @@ export default function Navbar() {
                     })}
                   </div>
                   <div className="border-t border-gray-100 px-4 py-3 bg-gray-50">
-                    <Link href="/ministries" className="flex items-center justify-between text-[#1E3A8A] font-bold text-xs hover:text-[#B8860B] transition-colors">
+                    <Link href="/ministries"
+                      className="flex items-center justify-between text-[#1E3A8A] font-bold text-xs hover:text-[#B8860B] transition-colors">
                       <span>View All Ministries</span>
                       <span>→</span>
                     </Link>
@@ -90,15 +93,28 @@ export default function Navbar() {
               )}
             </div>
 
-            {/* Pastor Chii Daily — standalone */}
-            <Link href="/ministries/pastor-chii-daily" className="flex items-center gap-1.5 bg-[rgba(184,134,11,0.15)] hover:bg-[#B8860B] border border-[#B8860B] text-[#F5C518] hover:text-white text-xs font-bold px-3 py-1.5 rounded-full transition-all duration-200">
+            {/* Pastor Chii Daily */}
+            <Link href="/ministries/pastor-chii-daily"
+              className="flex items-center gap-1.5 bg-[rgba(184,134,11,0.15)] hover:bg-[#B8860B] border border-[#B8860B] text-[#F5C518] hover:text-white text-xs font-bold px-3 py-1.5 rounded-full transition-all duration-200">
               <Flame size={12} /> Pastor Chii Daily
+            </Link>
+
+            {/* Member Portal */}
+            <Link href="/portal/login"
+              className="flex items-center gap-1.5 text-blue-100 hover:text-white text-sm font-medium transition-colors border border-blue-400/30 hover:border-white/50 px-3 py-1.5 rounded-full">
+              <LogIn size={14} />
+              Member Portal
             </Link>
           </div>
 
-          {/* RIGHT — Give + hamburger */}
+          {/* RIGHT — Join Us + Give + hamburger */}
           <div className="flex items-center gap-2">
-            <Link href="/give" className="bg-[#B8860B] hover:bg-[#92650A] text-white text-sm font-bold px-4 py-2 rounded-full transition-colors">
+            <Link href="/portal/register"
+              className="hidden sm:block border border-white/30 hover:border-white text-white text-sm font-bold px-4 py-2 rounded-full transition-colors hover:bg-white/10">
+              Join Us
+            </Link>
+            <Link href="/give"
+              className="bg-[#B8860B] hover:bg-[#92650A] text-white text-sm font-bold px-4 py-2 rounded-full transition-colors">
               Give
             </Link>
             <button onClick={() => setMenuOpen(!menuOpen)} className="lg:hidden text-white p-1" aria-label="Toggle menu">
@@ -121,16 +137,36 @@ export default function Navbar() {
       {menuOpen && (
         <div className="lg:hidden bg-[#0F2460] px-4 pb-4 pt-2 max-h-screen overflow-y-auto">
           <div className="flex flex-col gap-1">
-            <Link href="/ministries/pastor-chii-daily" onClick={() => setMenuOpen(false)} className="flex items-center gap-2 bg-[rgba(184,134,11,0.15)] border border-[#B8860B] text-[#F5C518] font-bold py-2.5 px-3 rounded-xl text-sm mb-1">
+
+            {/* Member Portal + Join Us — mobile top */}
+            <div className="flex gap-2 mb-2 pt-1">
+              <Link href="/portal/register" onClick={() => setMenuOpen(false)}
+                className="flex-1 text-center border border-white/30 text-white text-sm font-bold py-2.5 rounded-xl hover:bg-white/10 transition-colors">
+                Join Us
+              </Link>
+              <Link href="/portal/login" onClick={() => setMenuOpen(false)}
+                className="flex-1 flex items-center justify-center gap-1.5 bg-white/10 border border-white/20 text-white text-sm font-bold py-2.5 rounded-xl hover:bg-white/20 transition-colors">
+                <LogIn size={14} />
+                Sign In
+              </Link>
+            </div>
+
+            <Link href="/ministries/pastor-chii-daily" onClick={() => setMenuOpen(false)}
+              className="flex items-center gap-2 bg-[rgba(184,134,11,0.15)] border border-[#B8860B] text-[#F5C518] font-bold py-2.5 px-3 rounded-xl text-sm mb-1">
               <Flame size={14} className="text-[#B8860B]" /> Pastor Chii Daily
             </Link>
+
             {navLinks.map((link) => (
-              <Link key={link.label} href={link.href} onClick={() => setMenuOpen(false)} className="text-blue-100 hover:text-white text-sm font-medium py-2.5 border-b border-blue-800/30 transition-colors">
+              <Link key={link.label} href={link.href} onClick={() => setMenuOpen(false)}
+                className="text-blue-100 hover:text-white text-sm font-medium py-2.5 border-b border-blue-800/30 transition-colors">
                 {link.label}
               </Link>
             ))}
+
             <div className="border-b border-blue-800/30">
-              <button onClick={() => setMobileMinistryOpen(!mobileMinistryOpen)} className="w-full flex items-center justify-between text-blue-100 text-sm font-medium py-2.5 transition-colors">
+              <button
+                onClick={() => setMobileMinistryOpen(!mobileMinistryOpen)}
+                className="w-full flex items-center justify-between text-blue-100 text-sm font-medium py-2.5 transition-colors">
                 <span>Ministries</span>
                 <ChevronDown size={14} className={`transition-transform duration-200 ${mobileMinistryOpen ? 'rotate-180' : ''}`} />
               </button>
@@ -139,13 +175,15 @@ export default function Navbar() {
                   {ministryLinks.map((link) => {
                     const Icon = link.icon
                     return (
-                      <Link key={link.label} href={link.href} onClick={() => setMenuOpen(false)} className="flex items-center gap-2 text-blue-200 hover:text-white text-sm py-1.5 transition-colors">
+                      <Link key={link.label} href={link.href} onClick={() => setMenuOpen(false)}
+                        className="flex items-center gap-2 text-blue-200 hover:text-white text-sm py-1.5 transition-colors">
                         <Icon size={13} className="text-blue-400 flex-shrink-0" />
                         {link.label}
                       </Link>
                     )
                   })}
-                  <Link href="/ministries" onClick={() => setMenuOpen(false)} className="text-[#1E3A8A] bg-white text-xs font-bold px-3 py-1.5 rounded-full mt-1 text-center hover:bg-blue-50 transition-colors">
+                  <Link href="/ministries" onClick={() => setMenuOpen(false)}
+                    className="text-[#1E3A8A] bg-white text-xs font-bold px-3 py-1.5 rounded-full mt-1 text-center hover:bg-blue-50 transition-colors">
                     View All Ministries →
                   </Link>
                 </div>

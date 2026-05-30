@@ -51,8 +51,8 @@ export async function POST(req: NextRequest) {
     // Save the photo URL to Supabase members table
     const supabase = createServiceClient()
     const { error: dbError } = await supabase
-      .from('members')
-      .update({ photo_url: url, photo_public_id: publicId })
+      .from('users')
+      .update({ profile_photo_url: url })
       .eq('id', memberId)
 
     if (dbError) {

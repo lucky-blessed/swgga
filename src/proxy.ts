@@ -20,6 +20,9 @@ const PUBLIC_API_ROUTES = [
   '/api/v1/auth/register',
   '/api/v1/auth/verify-email',
   '/api/v1/auth/resend-verification',
+  '/admin/login',
+  '/admin/set-password',
+  '/api/v1/admin/accounts/set-password',
   '/api/v1/events',
   '/api/v1/sermons',
   '/api/v1/devotionals',
@@ -60,7 +63,8 @@ export async function proxy(request: NextRequest) {
 
   if (!token) {
     if (isProtectedPage) {
-      return NextResponse.redirect(new URL('/portal/login', request.url))
+      const loginUrl = pathname.startsWith('/admin') ? '/admin/login' : '/portal/login'
+      return NextResponse.redirect(new URL(loginUrl, request.url))
     }
     return NextResponse.json({ error: 'Unauthorised' }, { status: 401 })
   }
@@ -69,7 +73,8 @@ export async function proxy(request: NextRequest) {
   const payload = verifyAccessToken(token)
   if (!payload) {
     if (isProtectedPage) {
-      return NextResponse.redirect(new URL('/portal/login', request.url))
+      const loginUrl = pathname.startsWith("/admin") ? "/admin/login" : "/portal/login"
+      return NextResponse.redirect(new URL(loginUrl, request.url))
     }
     return NextResponse.json(
       { error: 'Invalid or expired token' },
@@ -81,7 +86,8 @@ export async function proxy(request: NextRequest) {
   const isBlacklisted = await redis.get(`jwt_blacklist:${payload.jti}`)
   if (isBlacklisted) {
     if (isProtectedPage) {
-      return NextResponse.redirect(new URL('/portal/login', request.url))
+      const loginUrl = pathname.startsWith('/admin') ? '/admin/login' : '/portal/login'
+      return NextResponse.redirect(new URL(loginUrl, request.url))
     }
     return NextResponse.json(
       { error: 'Token has been revoked' },
@@ -99,7 +105,7 @@ export async function proxy(request: NextRequest) {
   }
 
   // RBAC — financial routes require R01, R02, or R04
-  if (pathname.includes('/giving') || pathname.includes('/financial')) {
+  if (pathname.startsWith('/api/v1/admin/giving') || pathname.includes('/financial')) {
     const hasFinancialAccess = (PERMISSIONS.FINANCIAL_ACCESS as readonly string[])
       .includes(payload.role)
     if (!hasFinancialAccess) {

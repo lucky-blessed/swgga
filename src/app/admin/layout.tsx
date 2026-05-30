@@ -7,12 +7,16 @@
 //   2. AdminProvider (client) — role-filters navigation items
 
 import { useState } from 'react'
+import { usePathname } from 'next/navigation'
 import { AdminProvider } from '@/components/admin/providers/AdminProvider'
 import AdminSidebar from '@/components/admin/layout/AdminSidebar'
 import AdminTopbar from '@/components/admin/layout/AdminTopbar'
 import { Toaster } from 'sonner'
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
+  const pathname = usePathname()
+  const ADMIN_AUTH_PATHS = ['/admin/login', '/admin/set-password']
+  if (ADMIN_AUTH_PATHS.some(p => pathname.startsWith(p))) return <>{children}</>
   const [collapsed,  setCollapsed]  = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
 

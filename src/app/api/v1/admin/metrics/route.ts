@@ -14,7 +14,7 @@ export async function GET() {
     // Try Redis cache first
     const cached = await redis.get(CACHE_KEY)
     if (cached) {
-      return NextResponse.json(JSON.parse(cached as string))
+      const parsed = typeof cached === "string" ? JSON.parse(cached) : cached; return NextResponse.json(parsed)
     }
 
     const supabase = await createClient()
