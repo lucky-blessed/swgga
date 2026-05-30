@@ -10,7 +10,8 @@ import { persistAccessToken } from '@/lib/auth/client'
 
 type State = 'verifying' | 'success' | 'error'
 
-export default function VerifyEmailPage() {
+import { Suspense } from "react"
+function VerifyEmailContent() {
   const router       = useRouter()
   const searchParams = useSearchParams()
   const token        = searchParams.get('token')
@@ -151,5 +152,13 @@ export default function VerifyEmailPage() {
         </p>
       </div>
     </div>
+  )
+}
+
+export default function VerifyEmailPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-[#060E1A] flex items-center justify-center"><div className="w-8 h-8 border-2 border-white/20 border-t-white rounded-full animate-spin" /></div>}>
+      <VerifyEmailContent />
+    </Suspense>
   )
 }

@@ -1,38 +1,42 @@
 // src/lib/notifications/queue.ts
 // BullMQ queue for all outgoing notifications
-// Jobs are added here, the worker processes them asynchronously
-// This keeps API responses fast — SMS/email delivery happens in background
+// Uses dynamic import to prevent build-time Redis connection attempts
 
-import { Queue } from 'bullmq'
-import { redis } from '@/lib/db/redis'
+export interface NotificationJob {
+  type: 'sms' | 'email' | 'whatsapp'
+  to: string
+  subject?: string
+  body?: string
+  html?: string
+  templateId?: string
+  templateData?: Record<string, unknown>
+}
 
-// Single queue for all notification types
-export const notificationQueue = new Queue('notifications', {
-  connection: redis,
-  defaultJobOptions: {
-    attempts: 3,           // retry up to 3 times if delivery fails
-    backoff: {
-      type: 'exponential',
-      delay: 5000,         // wait 5s, then 10s, then 20s between retries
-    },
-    removeOnComplete: 100, // keep last 100 completed jobs for audit
-    removeOnFail: 200,     // keep last 200 failed jobs for debugging
-  },
-})
+export async function enqueueNotification(job: NotificationJob): Promise<void> {
+  // Skip queue in build/test environments
+  if (!process.env.UPSTASH_REDIS_REST_URL) {
+    console.warn('[queue] Redis not configured, skipping notification queue')
+    return
+  }
 
-// Job type definitions — what data each notification type needs
-export type NotificationJob =
-  | { type: 'sms';             to: string;   body: string }
-  | { type: 'email';           to: string;   subject: string; html: string }
-  | { type: 'devotional_alert';phone: string; title: string; episode: number }
-  | { type: 'giving_receipt';  phone: string; email?: string; amount: number; fund: string; reference: string }
-  | { type: 'event_reminder';  phone: string; eventTitle: string; eventDate: string }
-  | { type: 'welcome_sms';     phone: string; firstName: string }
-  | { type: 'otp';             phone: string; code: string }
+  try {
+    // Dynamic import prevents BullMQ from connecting at build time
+    const { Queue } = await import('bullmq')
+    const { redis } = await import('@/lib/db/redis')
 
-// Helper — add any notification job to the queue
-export async function enqueueNotification(job: NotificationJob, delayMs = 0) {
-  await notificationQueue.add(job.type, job, {
-    delay: delayMs,
-  })
+    const queue = new Queue('notifications', {
+      connection: redis as any,
+      defaultJobOptions: {
+        attempts: 3,
+        backoff: { type: 'exponential', delay: 5000 },
+        removeOnComplete: 100,
+        removeOnFail: 200,
+      },
+    })
+
+    await queue.add(job.type, job, { priority: job.type === 'sms' ? 1 : 2 })
+  } catch (err) {
+    console.error('[queue] Failed to enqueue notification:', err)
+    // Don't throw — notification failure should not break the main request
+  }
 }
