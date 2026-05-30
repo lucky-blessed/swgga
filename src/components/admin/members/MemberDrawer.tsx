@@ -78,7 +78,8 @@ export default function MemberDrawer({
   function handleEdit() {
     if (!member) return
     setEditData({
-      full_name:     member.full_name,
+      first_name: member.first_name || '',
+      last_name:  member.last_name  || '',
       phone:         member.phone,
       address:       member.address,
       date_of_birth: member.date_of_birth,
@@ -168,7 +169,7 @@ export default function MemberDrawer({
                   {member.profile_photo_url ? (
                     <img
                       src={member.profile_photo_url}
-                      alt={member.full_name}
+                      alt={(member.first_name + " " + member.last_name).trim()}
                       className="w-16 h-16 rounded-2xl object-cover border border-white/10"
                     />
                   ) : (
@@ -176,7 +177,7 @@ export default function MemberDrawer({
                                     border border-[#1E3A8A]/30
                                     flex items-center justify-center">
                       <span className="text-[#93C5FD] font-bold text-xl">
-                        {member.full_name.charAt(0).toUpperCase()}
+                        {((member.first_name || member.last_name || "?").charAt(0)).toUpperCase()}
                       </span>
                     </div>
                   )}
@@ -186,7 +187,7 @@ export default function MemberDrawer({
                 <div className="flex-1 min-w-0">
                   <h3 className="font-[family-name:var(--font-heading)] text-white
                                   text-lg font-bold leading-tight truncate">
-                    {member.full_name}
+                    {((member.first_name || "") + " " + (member.last_name || "")).trim()}
                   </h3>
                   <p className="text-[#64748B] text-xs mt-0.5 truncate">
                     {member.email}
@@ -295,7 +296,8 @@ export default function MemberDrawer({
                   {isEditing ? (
                     <>
                       {[
-                        { key: 'full_name',     label: 'Full Name',     type: 'text' },
+                        { key: 'first_name', label: 'First Name', type: 'text' },
+                        { key: 'last_name',  label: 'Last Name',  type: 'text' },
                         { key: 'phone',         label: 'Phone',         type: 'tel'  },
                         { key: 'date_of_birth', label: 'Date of Birth', type: 'date' },
                         { key: 'joined_date',   label: 'Joined Date',   type: 'date' },
@@ -383,7 +385,7 @@ export default function MemberDrawer({
               {canSeePastoral && (
                 <PastoralNotesSection
                   memberId={memberId!}
-                  memberName={member.full_name}
+                  memberName={((member.first_name || "") + " " + (member.last_name || "")).trim()}
                 />
               )}
             </>
