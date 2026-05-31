@@ -54,7 +54,8 @@ export default function PortalLayout({ children }: { children: React.ReactNode }
   const router   = useRouter()
   const pathname = usePathname()
 
-  const AUTH_PATHS = ['/portal/login', '/portal/register', '/portal/verify-email', '/portal/pending-verification', '/portal/forgot-password']
+  const AUTH_PATHS = ['/portal/login', '/portal/register', '/portal/verify-email', '/portal/pending-verification', '/portal/forgot-password',
+    '/portal/reset-password']
   const isAuthPage = AUTH_PATHS.some(p => pathname.startsWith(p))
   if (isAuthPage) return <>{children}</>
 

@@ -142,8 +142,15 @@ export default function AdminTopbar({ onMobileOpen }: AdminTopbarProps) {
                   <div className="my-1 border-t border-white/5" />
                   <button
                     onClick={async () => {
-                      await fetch('/api/v1/auth/logout', { method: 'POST' })
-                      window.location.href = '/portal/login'
+                      const token = localStorage.getItem('swgga_token')
+                      await fetch('/api/v1/auth/logout', {
+                        method: 'POST',
+                        headers: token ? { Authorization: 'Bearer ' + token } : {}
+                      })
+                      localStorage.removeItem('swgga_token')
+                      document.cookie = 'swgga_access=; path=/; max-age=0'
+                      document.cookie = 'swgga_refresh=; path=/; max-age=0'
+                      window.location.href = '/admin/login'
                     }}
                     className="w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-red-400 hover:text-red-300 hover:bg-red-400/10 text-sm transition-all"
                   >
