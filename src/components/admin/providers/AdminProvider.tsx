@@ -75,15 +75,32 @@ export function AdminProvider({ children }: { children: ReactNode }) {
             initials: (data.name || 'AU').split(' ').map((n: string) => n[0]).join('').toUpperCase().slice(0, 2),
           })
         } else {
-          window.location.href = "/portal/login"
+          window.location.href = "/admin/login"
         }
       } catch {
-        window.location.href = "/portal/login"
+        window.location.href = "/admin/login"
       } finally {
         setLoading(false)
       }
     }
     loadUser()
+
+    const handlePageShow = (e: PageTransitionEvent) => {
+      if (e.persisted) {
+        // Page restored from bfcache - re-validate token with server
+        fetch('/api/v1/auth/me').then(res => {
+          if (!res.ok) {
+            localStorage.removeItem('swgga_token')
+            document.cookie = 'swgga_access=; path=/; max-age=0'
+            window.location.replace('/admin/login')
+          }
+        }).catch(() => {
+          window.location.replace('/admin/login')
+        })
+      }
+    }
+    window.addEventListener('pageshow', handlePageShow)
+    return () => window.removeEventListener('pageshow', handlePageShow)
   }, [])
 
   return (

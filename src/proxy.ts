@@ -118,7 +118,15 @@ export async function proxy(request: NextRequest) {
   requestHeaders.set('x-user-id', payload.sub)
   requestHeaders.set('x-user-role', payload.role)
 
-  return NextResponse.next({ request: { headers: requestHeaders } })
+  const response = NextResponse.next({ request: { headers: requestHeaders } })
+
+  // Prevent browser from caching authenticated pages
+  // This ensures back button always triggers a fresh auth check
+  response.headers.set('Cache-Control', 'no-store, no-cache, must-revalidate, private')
+  response.headers.set('Pragma', 'no-cache')
+  response.headers.set('Expires', '0')
+
+  return response
 }
 
 // Apply middleware to these route patterns only

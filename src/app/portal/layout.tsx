@@ -80,6 +80,37 @@ export default function PortalLayout({ children }: { children: React.ReactNode }
       }
     }
     loadUser()
+
+    // Re-check auth when user returns to tab or navigates back
+    function handleVisibility() {
+      if (document.visibilityState === 'visible') {
+        const t = getAccessToken() ??
+          document.cookie.split('; ').find(r => r.startsWith('swgga_access='))?.split('=')[1]
+        if (!t) {
+          clearPersistedToken()
+          router.push('/portal/login')
+        }
+      }
+    }
+
+    document.addEventListener('visibilitychange', handleVisibility)
+    window.addEventListener('pageshow', (e) => {
+      if (e.persisted) {
+        fetch('/api/v1/auth/me', { credentials: 'include' }).then(res => {
+          if (!res.ok) {
+            clearPersistedToken()
+            window.location.replace('/portal/login')
+          }
+        }).catch(() => {
+          clearPersistedToken()
+          window.location.replace('/portal/login')
+        })
+      }
+    })
+
+    return () => {
+      document.removeEventListener('visibilitychange', handleVisibility)
+    }
   }, [])
 
   // Close avatar menu on outside click

@@ -3,13 +3,15 @@
 // Uses dynamic import to prevent build-time Redis connection attempts
 
 export interface NotificationJob {
-  type: 'sms' | 'email' | 'whatsapp'
-  to: string
+  type: 'sms' | 'email' | 'whatsapp' | 'otp' | 'devotional_alert' | 'event_reminder' | 'welcome_sms'
+  to?: string
+  phone?: string
   subject?: string
   body?: string
   html?: string
   templateId?: string
   templateData?: Record<string, unknown>
+  [key: string]: unknown
 }
 
 export async function enqueueNotification(job: NotificationJob): Promise<void> {

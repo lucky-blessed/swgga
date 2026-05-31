@@ -171,8 +171,15 @@ export default function AdminSidebar({
                 </div>
                 <button
                   onClick={async () => {
-                    await fetch('/api/v1/auth/logout', { method: 'POST' })
-                    window.location.href = '/portal/login'
+                    const token = localStorage.getItem('swgga_token')
+                    await fetch('/api/v1/auth/logout', {
+                      method: 'POST',
+                      headers: token ? { Authorization: 'Bearer ' + token } : {}
+                    })
+                    localStorage.removeItem('swgga_token')
+                    document.cookie = 'swgga_access=; path=/; max-age=0'
+                    document.cookie = 'swgga_refresh=; path=/; max-age=0'
+                    window.location.href = '/admin/login'
                   }}
                   title="Sign out"
                   className="text-[#475569] hover:text-red-400 transition-colors p-1 rounded-lg hover:bg-red-400/10"
