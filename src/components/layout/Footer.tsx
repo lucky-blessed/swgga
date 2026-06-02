@@ -29,7 +29,7 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 text-center sm:text-left">
 
-          {/* Column 1 — Brand */}
+          {/* Column 1 - Brand */}
           <div>
             <div className="flex items-center gap-3 mb-4 justify-center sm:justify-start">
               <Link href="/" className="flex items-center gap-3">
@@ -37,7 +37,7 @@ export default function Footer() {
                   <span className="text-white font-bold text-sm">SW</span>
                 </div>
                 <div>
-                  <p className="text-white font-bold text-sm leading-tight">Sure Word GGA</p>
+                  <p className="text-white font-bold text-sm leading-tight">Sure Word Glorious Gospel Assembly</p>
                   <p className="text-white/40 text-xs">Warri · Delta State</p>
                 </div>
               </Link>
@@ -62,7 +62,7 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Column 2 — Quick Links */}
+          {/* Column 2 - Quick Links */}
           <div>
             <h5 className="text-white font-bold text-xs tracking-widest uppercase mb-5 border-b border-white/10 pb-3">
               Quick Links
@@ -85,7 +85,7 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Column 3 — Ministries */}
+          {/* Column 3 - Ministries */}
           <div>
             <h5 className="text-white font-bold text-xs tracking-widest uppercase mb-5 border-b border-white/10 pb-3">
               Ministries
@@ -107,7 +107,7 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Column 4 — Contact */}
+          {/* Column 4 - Contact */}
           <div>
             <h5 className="text-white font-bold text-xs tracking-widest uppercase mb-5 border-b border-white/10 pb-3">
               Connect With Us

@@ -8,7 +8,7 @@ export default function CTYFooter() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 text-center sm:text-left">
 
-          {/* Column 1 — CTY Brand */}
+          {/* Column 1 - CTY Brand */}
           <div>
             <div className="flex items-center gap-3 mb-4 justify-center sm:justify-start">
               <div className="w-10 h-10 rounded-xl bg-[#4ADE80] flex items-center justify-center flex-shrink-0">
@@ -23,11 +23,11 @@ export default function CTYFooter() {
               &ldquo;Catching the next generation for God and for good.&rdquo;
             </p>
             <div className="mt-4 inline-block bg-white/10 text-green-400/70 text-xs px-3 py-1 rounded-full">
-              A Ministry of Sure Word GGA
+              A Ministry of Sure Word Glorious Gospel Assembly
             </div>
           </div>
 
-          {/* Column 2 — Quick Links */}
+          {/* Column 2 - Quick Links */}
           <div>
             <h5 className="text-white font-bold text-xs tracking-widest uppercase mb-5 border-b border-white/10 pb-3">
               Quick Links
@@ -47,7 +47,7 @@ export default function CTYFooter() {
             </div>
           </div>
 
-          {/* Column 3 — Programmes */}
+          {/* Column 3 - Programmes */}
           <div>
             <h5 className="text-white font-bold text-xs tracking-widest uppercase mb-5 border-b border-white/10 pb-3">
               Programmes
@@ -65,7 +65,7 @@ export default function CTYFooter() {
             </div>
           </div>
 
-          {/* Column 4 — Contact */}
+          {/* Column 4 - Contact */}
           <div>
             <h5 className="text-white font-bold text-xs tracking-widest uppercase mb-5 border-b border-white/10 pb-3">
               Contact CTY

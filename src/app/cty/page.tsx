@@ -15,7 +15,7 @@ const missions = [
   'To win the young people at a very early stage in life for the Lord Jesus.',
   'To nurture and train the young people in the Word of God and basic morality.',
   'To instil in the minds of the young that God loves them and that He has a purpose for them.',
-  'To educate young people on the basic rudiments of life — Relationship, Character, and Career — so as to prevent them from following error.',
+  'To educate young people on the basic rudiments of life - Relationship, Character, and Career - so as to prevent them from following error.',
   'To see that no young person makes a costly mistake that can haunt them for life, and to give hope to as many as have fallen victims.',
   'To offer counsel to young people at any time as the need arises.',
   'Encouraging young people to do better in every field of human endeavour by developing their gifts and talents.',
@@ -25,8 +25,8 @@ const missions = [
 const programmes = [
   { icon: BookOpen,  title: 'Gospel Clubs',          desc: 'Weekly after-school clubs in primary and secondary schools across Warri. Bible stories, games, prayer, and the gospel shared simply and powerfully.', freq: 'Weekly' },
   { icon: Briefcase, title: 'Skills Training',        desc: 'Practical life skills workshops: financial literacy, entrepreneurship, CV writing, and digital skills for ages 16 to 25. Always free to attend.', freq: 'Monthly' },
-  { icon: Globe,     title: 'Community Outreaches',   desc: 'Outreaches into underserved communities across Delta State and beyond — food, clothing, and the gospel shared boldly and compassionately.', freq: 'Quarterly' },
-  { icon: Tent,      title: 'Annual Camp Meeting',    desc: 'Held every August — a powerful gathering of CTY chapters across Nigeria for worship, the Word, discipleship, and community. A highlight of the CTY calendar.', freq: 'Every August' },
+  { icon: Globe,     title: 'Community Outreaches',   desc: 'Outreaches into underserved communities across Delta State and beyond - food, clothing, and the gospel shared boldly and compassionately.', freq: 'Quarterly' },
+  { icon: Tent,      title: 'Annual Camp Meeting',    desc: 'Held every August - a powerful gathering of CTY chapters across Nigeria for worship, the Word, discipleship, and community. A highlight of the CTY calendar.', freq: 'Every August' },
 ]
 
 const chapters = [
@@ -54,7 +54,7 @@ export default function CTYPage() {
               </div>
               <div>
                 <p className="text-white font-bold text-sm leading-tight">Catch Them Young</p>
-                <p className="text-green-400/60 text-xs">Outreach Ministry · Sure Word GGA</p>
+                <p className="text-green-400/60 text-xs">Outreach Ministry · Sure Word Glorious Gospel Assembly</p>
               </div>
             </div>
             <div className="hidden sm:flex items-center gap-4">
@@ -62,7 +62,7 @@ export default function CTYPage() {
               <Link href="#programmes"   className="text-white/70 hover:text-white text-sm transition-colors">Programmes</Link>
               <Link href="#chapters"     className="text-white/70 hover:text-white text-sm transition-colors">Chapters</Link>
               <Link href="#get-involved" className="text-white/70 hover:text-white text-sm transition-colors">Get Involved</Link>
-              <Link href="/" className="flex items-center gap-1.5 bg-white/15 hover:bg-white/25 border border-white/30 text-white text-xs font-bold px-3 py-1.5 rounded-full transition-colors">← Sure Word GGA</Link>
+              <Link href="/" className="flex items-center gap-1.5 bg-white/15 hover:bg-white/25 border border-white/30 text-white text-xs font-bold px-3 py-1.5 rounded-full transition-colors">← Sure Word Glorious Gospel Assembly</Link>
             </div>
             <Link href="#get-involved" className="bg-[#4ADE80] hover:bg-[#22C55E] text-[#166534] text-sm font-bold px-4 py-2 rounded-full transition-colors">
               Get Involved
@@ -119,7 +119,7 @@ export default function CTYPage() {
 
           <div className="flex flex-col lg:flex-row items-center">
 
-            {/* Portrait — cinematic blend, no hard edges */}
+            {/* Portrait - cinematic blend, no hard edges */}
             <div className="w-full lg:w-2/5 relative flex-shrink-0" style={{minHeight: "420px", height: "420px"}}>
 
               <img
@@ -143,7 +143,7 @@ export default function CTYPage() {
               <div className="w-10 h-1 bg-[#166534] rounded-full mb-5" />
               <h3 className="font-[family-name:var(--font-heading)] text-2xl sm:text-3xl font-bold text-[#1A1A1A] mb-1">Pastor Victory Uba</h3>
               <p className="text-[#166534] font-semibold text-sm tracking-wide mb-6">National Coordinating Pastor · Catch Them Young</p>
-              <p className="text-[#374151] text-base leading-relaxed mb-8">Pastor Victory Uba serves as the National Coordinating Pastor of Catch Them Young Outreach Ministry, overseeing all chapters across Nigeria and guiding the ministry in its mission to reach the next generation for God and for good. Under his coordination, CTY has expanded its reach across Delta State, Rivers State, Benue State, and beyond — touching hundreds of young lives through the gospel, skills training, and community outreach.</p>
+              <p className="text-[#374151] text-base leading-relaxed mb-8">Pastor Victory Uba serves as the National Coordinating Pastor of Catch Them Young Outreach Ministry, overseeing all chapters across Nigeria and guiding the ministry in its mission to reach the next generation for God and for good. Under his coordination, CTY has expanded its reach across Delta State, Rivers State, Benue State, and beyond - touching hundreds of young lives through the gospel, skills training, and community outreach.</p>
               <div className="flex flex-wrap gap-3">
                 <div className="bg-[#166534]/10 border border-[#166534]/20 text-[#166534] text-xs font-bold px-3 py-1.5 rounded-full">Delta State Chapters</div>
                 <div className="bg-[#166534]/10 border border-[#166534]/20 text-[#166534] text-xs font-bold px-3 py-1.5 rounded-full">Rivers State Chapters</div>
@@ -180,7 +180,7 @@ export default function CTYPage() {
             <div className="bg-white rounded-2xl p-6 border-l-4 border-[#166534] shadow-sm">
               <p className="text-[#166534] text-xs font-bold uppercase tracking-widest mb-3">Our Mandate</p>
               <p className="font-[family-name:var(--font-heading)] text-lg text-[#1A1A1A] leading-relaxed">
-                Raising an end-time youth army for the Lord Jesus that will move into the enemy&apos;s camp, take what belongs to them, and set free every captive — especially fellow youth.
+                Raising an end-time youth army for the Lord Jesus that will move into the enemy&apos;s camp, take what belongs to them, and set free every captive - especially fellow youth.
               </p>
             </div>
 
@@ -244,7 +244,7 @@ export default function CTYPage() {
               CTY Chapters
             </h2>
           </div>
-          <p className="text-gray-400 text-base mb-10">Active chapters across Nigeria — and growing</p>
+          <p className="text-gray-400 text-base mb-10">Active chapters across Nigeria - and growing</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {chapters.map((chapter) => (
               <div key={chapter.location} className={`flex items-start gap-4 p-5 rounded-2xl border transition-all duration-200 ${chapter.hq ? 'bg-[#0D3320] border-[#4ADE80]' : 'bg-white border-gray-100 hover:border-[#4ADE80]'}`}>
@@ -279,7 +279,7 @@ export default function CTYPage() {
               </div>
             </div>
             <p className="text-green-100/70 text-base leading-relaxed mb-6 max-w-3xl">
-              The Global Senior Friends and Partners Ministry is the alumni network of Catch Them Young — comprising former CTY members who have grown in faith and impact. Many are now pastors and founders of different ministries. Others are making a difference in various walks of life — business, education, medicine, law, technology, and the arts. They remain connected to CTY as mentors, partners, and ambassadors of the vision.
+              The Global Senior Friends and Partners Ministry is the alumni network of Catch Them Young - comprising former CTY members who have grown in faith and impact. Many are now pastors and founders of different ministries. Others are making a difference in various walks of life - business, education, medicine, law, technology, and the arts. They remain connected to CTY as mentors, partners, and ambassadors of the vision.
             </p>
             <div className="flex flex-wrap gap-3">
               <div className="bg-white/10 text-green-100/80 text-xs font-semibold px-4 py-2 rounded-full">Pastors & Ministry Founders</div>

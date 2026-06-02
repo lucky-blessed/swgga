@@ -51,7 +51,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Failed to reset password' }, { status: 500 })
   }
 
-  // Consume token — one-time use only
+  // Consume token - one-time use only
   await redis.del(`password_reset:${token}`)
 
   return NextResponse.json({ success: true, isAdmin })

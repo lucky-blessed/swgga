@@ -1,5 +1,5 @@
 // src/lib/notifications/worker.ts
-// BullMQ worker — processes notification jobs from the queue
+// BullMQ worker - processes notification jobs from the queue
 // Each job type has its own handler
 // Worker retries automatically on failure (configured in queue.ts)
 
@@ -9,30 +9,30 @@ import { twilioClient, TWILIO_PHONE } from './twilio'
 import type { NotificationJob } from './queue'
 import { sendEmail, welcomeEmail, givingReceiptEmail, devotionalAlertEmail } from './email'
 
-// SMS message templates — keep them short for Nigerian mobile networks
+// SMS message templates - keep them short for Nigerian mobile networks
 function buildSmsBody(job: NotificationJob): string {
   switch (job.type) {
     case 'otp':
-      return `Your Sure Word GGA login code is: ${job.code}. Valid for 10 minutes. Do not share this code.`
+      return `Your Sure Word Glorious Gospel Assembly login code is: ${job.code}. Valid for 10 minutes. Do not share this code.`
 
     case 'welcome_sms':
-      return `Welcome to Sure Word GGA, ${job.firstName}! We are glad you are here. Visit surewordgga.org or join Pastor Chii Daily on WhatsApp: wa.me/channel/0029VbB8W8k2f3ELvngFmd3W`
+      return `Welcome to Sure Word Glorious Gospel Assembly, ${job.firstName}! We are glad you are here. Visit surewordgga.org or join Pastor Chii Daily on WhatsApp: wa.me/channel/0029VbB8W8k2f3ELvngFmd3W`
 
     case 'devotional_alert':
       return `Pastor Chii Daily Ep.${job.episode}: "${job.title}" is now available. Read, listen or watch at surewordgga.org/ministries/pastor-chii-daily`
 
     case 'giving_receipt':
-      return `Thank you for giving to Sure Word GGA! Amount: NGN ${job.amount.toLocaleString()} | Fund: ${job.fund} | Ref: ${job.reference}. God bless you.`
+      return `Thank you for giving to Sure Word Glorious Gospel Assembly! Amount: NGN ${job.amount.toLocaleString()} | Fund: ${job.fund} | Ref: ${job.reference}. God bless you.`
 
     case 'event_reminder':
-      return `Reminder: "${job.eventTitle}" is coming up on ${job.eventDate}. We look forward to seeing you at Sure Word GGA, Warri.`
+      return `Reminder: "${job.eventTitle}" is coming up on ${job.eventDate}. We look forward to seeing you at Sure Word Glorious Gospel Assembly, Warri.`
 
     default:
       return ''
   }
 }
 
-// Create the worker — it listens to the notifications queue
+// Create the worker - it listens to the notifications queue
 export const notificationWorker = new Worker(
   'notifications',
   async (job) => {
@@ -41,7 +41,7 @@ export const notificationWorker = new Worker(
     // Route each job type to the right handler
     switch (data.type) {
 
-      // Raw SMS — used for OTP and other direct messages
+      // Raw SMS - used for OTP and other direct messages
       case 'sms': {
         await twilioClient.messages.create({
           body: data.body,

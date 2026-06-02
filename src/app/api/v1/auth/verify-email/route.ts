@@ -30,7 +30,7 @@ export async function POST(req: NextRequest) {
     const parsed = typeof stored === 'string' ? JSON.parse(stored) : stored
     const { userId, email } = parsed
 
-    // Delete token — one time use
+    // Delete token - one time use
     await redis.del(`email_verify:${token}`)
 
     const supabase = createServiceClient()
@@ -63,7 +63,7 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    // Issue JWT — auto-login after verification
+    // Issue JWT - auto-login after verification
     const accessToken  = createAccessToken(user.id, user.role as any)
     const refreshToken = createRefreshToken(user.id)
 

@@ -517,7 +517,7 @@ export default function MediaPage() {
                   />
                 </div>
 
-                {/* Media URL — conditional on type */}
+                {/* Media URL - conditional on type */}
                 {(form.content_type === 'video_youtube') && (
                   <div>
                     <label className="block text-xs text-[#64748B] mb-1">

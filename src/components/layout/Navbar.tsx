@@ -107,7 +107,7 @@ export default function Navbar() {
             </Link>
           </div>
 
-          {/* RIGHT — Join Us + Give + hamburger */}
+          {/* RIGHT - Join Us + Give + hamburger */}
           <div className="flex items-center gap-2">
             <Link href="/portal/register"
               className="hidden sm:block border border-white/30 hover:border-white text-white text-sm font-bold px-4 py-2 rounded-full transition-colors hover:bg-white/10">
@@ -138,7 +138,7 @@ export default function Navbar() {
         <div className="lg:hidden bg-[#0F2460] px-4 pb-4 pt-2 max-h-screen overflow-y-auto">
           <div className="flex flex-col gap-1">
 
-            {/* Member Portal + Join Us — mobile top */}
+            {/* Member Portal + Join Us - mobile top */}
             <div className="flex gap-2 mb-2 pt-1">
               <Link href="/portal/register" onClick={() => setMenuOpen(false)}
                 className="flex-1 text-center border border-white/30 text-white text-sm font-bold py-2.5 rounded-xl hover:bg-white/10 transition-colors">

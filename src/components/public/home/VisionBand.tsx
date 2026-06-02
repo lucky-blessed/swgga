@@ -1,4 +1,4 @@
-// VisionBand — elevated gold vision statement strip
+// VisionBand - elevated gold vision statement strip
 // Shimmer animation, better quote styling, pastor attribution
 export default function VisionBand() {
   return (
@@ -27,7 +27,7 @@ export default function VisionBand() {
           Raising a nation of discipled men who are grounded, rooted and are living in the Word of God.
         </p>
         <p className="text-[#0D1B2A]/60 text-sm font-semibold mt-3">
-          — Rev. Chijioke Igbani · Senior Pastor, Sure Word Glorious Gospel Assembly
+          - Rev. Chijioke Igbani · Senior Pastor, Sure Word Glorious Gospel Assembly
         </p>
       </div>
     </section>

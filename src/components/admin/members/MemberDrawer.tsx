@@ -381,7 +381,7 @@ export default function MemberDrawer({
                 </div>
               </div>
 
-              {/* Pastoral Notes — ONLY rendered for R01 and R02, not present in DOM otherwise */}
+              {/* Pastoral Notes - ONLY rendered for R01 and R02, not present in DOM otherwise */}
               {canSeePastoral && (
                 <PastoralNotesSection
                   memberId={memberId!}

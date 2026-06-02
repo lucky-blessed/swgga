@@ -1,5 +1,6 @@
 // src/app/api/v1/admin/members/[id]/notes/route.ts
-// Pastoral notes — R01 and R02 only
+// Pastoral notes - R01 and R02 only
+import { userHasPermission } from '@/lib/auth/permissions'
 
 import { NextRequest, NextResponse } from 'next/server'
 import { createServiceClient } from '@/lib/supabase/server'
@@ -11,9 +12,8 @@ export async function GET(
   { params }: { params: Promise<{ id: string }> }
 ) {
   const role = req.headers.get('x-user-role')
-  if (!role || !ALLOWED_ROLES.includes(role)) {
-    return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
-  }
+  const _uid = req.headers.get("x-user-id")
+  if (!(await userHasPermission(_uid ?? "", role ?? "", ALLOWED_ROLES, "PASTORAL_NOTES"))) return NextResponse.json({ error: "Forbidden" }, { status: 403 })
 
   const { id } = await params
   const supabase = await createServiceClient()
@@ -36,9 +36,8 @@ export async function PATCH(
   { params }: { params: Promise<{ id: string }> }
 ) {
   const role = req.headers.get('x-user-role')
-  if (!role || !ALLOWED_ROLES.includes(role)) {
-    return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
-  }
+  const _uid = req.headers.get("x-user-id")
+  if (!(await userHasPermission(_uid ?? "", role ?? "", ALLOWED_ROLES, "PASTORAL_NOTES"))) return NextResponse.json({ error: "Forbidden" }, { status: 403 })
 
   const body = await req.json().catch(() => null)
   if (body?.notes === undefined) {

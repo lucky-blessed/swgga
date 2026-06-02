@@ -1,5 +1,5 @@
 // src/app/api/v1/sermons/route.ts
-// Public sermons API — no auth required
+// Public sermons API - no auth required
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
 

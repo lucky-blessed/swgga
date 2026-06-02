@@ -1,5 +1,5 @@
 // src/components/public/home/MinistriesGrid.tsx
-// Ministry cards grid — matches v3 design exactly
+// Ministry cards grid - matches v3 design exactly
 // Uses Lucide icons, horizontal layout, Pastor Chii Daily has gold highlight
 
 import Link from 'next/link'
@@ -40,7 +40,7 @@ export default function MinistriesGrid() {
         </div>
 
         {/* Ministry cards */}
-        {/* 2 cols mobile, 3 cols tablet, 5 cols desktop — matches v3 */}
+        {/* 2 cols mobile, 3 cols tablet, 5 cols desktop - matches v3 */}
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
           {ministries.map((ministry) => {
             const Icon = ministry.icon

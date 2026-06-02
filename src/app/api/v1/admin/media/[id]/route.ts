@@ -1,5 +1,6 @@
 // src/app/api/v1/admin/media/[id]/route.ts
 import { NextRequest, NextResponse } from 'next/server'
+import { userHasPermission } from '@/lib/auth/permissions'
 import { createClient } from '@/lib/supabase/server'
 
 const VIEW_ROLES   = ['R01', 'R02', 'R03', 'R04', 'R05', 'R07']
@@ -21,9 +22,8 @@ export async function GET(
   { params }: { params: Promise<{ id: string }> }
 ) {
   const role = req.headers.get('x-user-role')
-  if (!role || !VIEW_ROLES.includes(role)) {
-    return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
-  }
+  const _uid = req.headers.get("x-user-id")
+  if (!(await userHasPermission(_uid ?? "", role ?? "", VIEW_ROLES, "MEDIA_MANAGEMENT"))) return NextResponse.json({ error: "Forbidden" }, { status: 403 })
 
   const { id } = await params
   const supabase = await createClient()
@@ -115,7 +115,7 @@ export async function DELETE(
   const { id } = await params
   const supabase = await createClient()
 
-  // Soft delete — sermons are never hard deleted per TADD
+  // Soft delete - sermons are never hard deleted per TADD
   const { error } = await supabase
     .from('sermons')
     .delete()

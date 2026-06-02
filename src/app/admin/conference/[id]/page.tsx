@@ -211,7 +211,7 @@ export default function MeetingDetailPage() {
             </div>
           </div>
 
-          {/* Meeting URL — R01/R02 only */}
+          {/* Meeting URL - R01/R02 only */}
           {isAdmin && meeting.meeting_url && (
             <div className="pt-3 border-t border-white/5">
               <p className="text-xs text-[#64748B] mb-2">Meeting Link</p>

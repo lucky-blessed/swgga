@@ -28,7 +28,7 @@ export default function ContactPage() {
             Get in Touch
           </h1>
           <p className="text-blue-200 text-lg max-w-xl mx-auto">
-            We would love to hear from you — whether you are visiting for the first time or have been with us for years
+            We would love to hear from you - whether you are visiting for the first time or have been with us for years
           </p>
         </div>
       </section>
@@ -36,7 +36,7 @@ export default function ContactPage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
 
-          {/* LEFT — First timer form */}
+          {/* LEFT - First timer form */}
           <div>
             <p className="text-[#B8860B] text-xs font-bold tracking-widest uppercase mb-2">
               First Time Here?
@@ -54,7 +54,7 @@ export default function ContactPage() {
                   <Send size={22} className="text-white" />
                 </div>
                 <h3 className="font-[family-name:var(--font-heading)] text-xl font-bold text-[#166534] mb-2">
-                  Welcome to Sure Word GGA!
+                  Welcome to Sure Word Glorious Gospel Assembly!
                 </h3>
                 <p className="text-[#374151] text-sm leading-relaxed">
                   Thank you for reaching out. Our welcome team will contact you within 24 hours.
@@ -143,7 +143,7 @@ export default function ContactPage() {
             )}
           </div>
 
-          {/* RIGHT — Contact details */}
+          {/* RIGHT - Contact details */}
           <div className="flex flex-col gap-6">
 
             <div>

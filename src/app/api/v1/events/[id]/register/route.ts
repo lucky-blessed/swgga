@@ -1,5 +1,5 @@
 // src/app/api/v1/events/[id]/register/route.ts
-// Member event registration — POST to register, DELETE to cancel
+// Member event registration - POST to register, DELETE to cancel
 
 import { NextRequest, NextResponse } from 'next/server'
 import { createServiceClient } from '@/lib/supabase/server'
@@ -45,7 +45,7 @@ export async function POST(
     )
   }
 
-  // Insert registration — UNIQUE(event_id, user_id) handles duplicates
+  // Insert registration - UNIQUE(event_id, user_id) handles duplicates
   const { data: registration, error: regError } = await supabase
     .from('event_registrations')
     .insert({ event_id: eventId, user_id: userId })
@@ -64,7 +64,7 @@ export async function POST(
   }
 
   // Fetch member details for confirmation email
-  // Non-blocking — don't fail registration if email fails
+  // Non-blocking - don't fail registration if email fails
   try {
     const { data: user } = await supabase
       .from('users')
@@ -89,7 +89,7 @@ export async function POST(
         firstName,
         event.title,
         eventDate,
-        event.location ?? 'Sure Word GGA, Warri',
+        event.location ?? 'Sure Word Glorious Gospel Assembly, Warri',
       )
     }
   } catch (emailErr: unknown) {

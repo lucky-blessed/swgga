@@ -1,7 +1,7 @@
 // src/lib/auth/email-validation.ts
 // 3-layer email validation:
-// 1. Format validation — RFC 5322 regex
-// 2. Domain blocklist — 500+ known disposable/temporary email providers
+// 1. Format validation - RFC 5322 regex
+// 2. Domain blocklist - 500+ known disposable/temporary email providers
 // 3. MX record check handled server-side via DNS lookup
 
 // ─── Layer 1: Format validation ───────────────────────────────────────────────
@@ -195,7 +195,7 @@ export function isDisposableEmail(email: string): boolean {
 }
 
 // ─── Layer 3: DNS MX record validation ───────────────────────────────────────
-// Server-side only — checks if the domain has valid mail exchange records
+// Server-side only - checks if the domain has valid mail exchange records
 
 export async function hasMxRecord(email: string): Promise<boolean> {
   try {

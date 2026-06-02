@@ -377,7 +377,7 @@ export default function PortalSettingsPage() {
             />
             <NotifRow
               label="Login OTP"
-              desc="One-time codes for phone number login — cannot be disabled"
+              desc="One-time codes for phone number login - cannot be disabled"
               enabled={prefs.sms_otp}
               onChange={v => setPref('sms_otp', v)}
               disabled={true}
@@ -386,7 +386,7 @@ export default function PortalSettingsPage() {
         )}
       </SectionCard>
 
-      {/* WhatsApp — Coming Soon */}
+      {/* WhatsApp - Coming Soon */}
       <SectionCard title="WhatsApp Notifications" icon={Bell}>
         <div className="flex items-start gap-4 py-2">
           <div className="w-10 h-10 rounded-xl bg-green-500/10 border border-green-500/20

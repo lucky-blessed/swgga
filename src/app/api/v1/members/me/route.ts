@@ -1,5 +1,5 @@
 // src/app/api/v1/members/me/route.ts
-// Member's own profile — GET details, PATCH update
+// Member's own profile - GET details, PATCH update
 
 import { NextRequest, NextResponse } from 'next/server'
 import { createServiceClient } from '@/lib/supabase/server'

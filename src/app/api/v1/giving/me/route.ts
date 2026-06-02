@@ -1,5 +1,5 @@
 // src/app/api/v1/giving/route.ts
-// Member-facing giving API — authenticated members see only their own records
+// Member-facing giving API - authenticated members see only their own records
 
 import { NextRequest, NextResponse } from 'next/server'
 import { createServiceClient } from '@/lib/supabase/server'

@@ -159,7 +159,7 @@ export default function LoginPage() {
           </div>
           <h1 className="text-2xl font-bold text-white"
               style={{ fontFamily: 'Playfair Display, serif' }}>
-            Sure Word GGA
+            Sure Word Glorious Gospel Assembly
           </h1>
           <p className="text-[#64748B] text-sm mt-1">
             Member & Admin Portal

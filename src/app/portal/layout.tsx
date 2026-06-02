@@ -167,7 +167,7 @@ export default function PortalLayout({ children }: { children: React.ReactNode }
             <button onClick={() => setMobileOpen(m => !m)} className="lg:hidden text-white/70 hover:text-white">
               <Menu size={20} />
             </button>
-            {/* SW logo — links to home */}
+            {/* SW logo - links to home */}
             <Link href="/" className="flex items-center gap-2.5 hover:opacity-80 transition-opacity">
               <div className="w-7 h-7 rounded-full bg-[#B8860B] flex items-center justify-center font-bold text-xs text-white">
                 SW

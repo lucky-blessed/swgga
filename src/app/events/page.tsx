@@ -308,7 +308,7 @@ export default function EventsPage() {
       <section className="bg-gradient-to-br from-[#0D1B2A] via-[#1E3A8A] to-[#0D1B2A] py-16 text-center">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h1 className="font-[family-name:var(--font-heading)] text-4xl sm:text-5xl font-bold text-white mb-4">Events Calendar</h1>
-          <p className="text-blue-200 text-lg max-w-2xl mx-auto">Services, programmes, and special events — stay connected with what is happening at Sure Word</p>
+          <p className="text-blue-200 text-lg max-w-2xl mx-auto">Services, programmes, and special events - stay connected with what is happening at Sure Word</p>
         </div>
       </section>
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">

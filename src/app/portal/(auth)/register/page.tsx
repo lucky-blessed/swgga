@@ -83,7 +83,7 @@ export default function RegisterPage() {
         setRegEmail(form.email)
         setRegistered(true)
       } else {
-        // Phone-only registration — go straight to portal
+        // Phone-only registration - go straight to portal
         router.push('/portal/dashboard')
       }
 
@@ -191,7 +191,7 @@ export default function RegisterPage() {
             Create Account
           </h1>
           <p className="text-[#64748B] text-sm mt-1">
-            Join the Sure Word GGA member portal
+            Join the Sure Word Glorious Gospel Assembly member portal
           </p>
         </div>
 
@@ -257,7 +257,7 @@ export default function RegisterPage() {
                 />
               </div>
 
-              {/* Phone — international with country dropdown */}
+              {/* Phone - international with country dropdown */}
               <div>
                 <label className="block text-xs text-[#64748B] mb-1.5">
                   Phone Number
@@ -326,7 +326,7 @@ export default function RegisterPage() {
 
               {/* Terms */}
               <p className="text-[#334155] text-xs leading-relaxed">
-                By registering you agree to abide by the Sure Word GGA community
+                By registering you agree to abide by the Sure Word Glorious Gospel Assembly community
                 guidelines and platform terms of use.
               </p>
 

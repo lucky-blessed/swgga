@@ -111,13 +111,13 @@ export default function PastorChiiDailyPage() {
         <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#B8860B] to-transparent" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="inline-block bg-[rgba(184,134,11,0.15)] border border-[rgba(184,134,11,0.3)] text-[#F5C518] text-xs font-bold tracking-widest uppercase px-4 py-2 rounded-full mb-4">
-            A Ministry of Sure Word GGA
+            A Ministry of Sure Word Glorious Gospel Assembly
           </div>
           <h1 className="font-[family-name:var(--font-heading)] text-4xl sm:text-5xl font-bold text-white mb-3">
             Pastor Chii Daily
           </h1>
           <p className="text-blue-200 text-lg max-w-xl leading-relaxed">
-            Daily prayer and devotion with Rev. Chijioke Igbani — grounding you in the Word of God, every single day.
+            Daily prayer and devotion with Rev. Chijioke Igbani - grounding you in the Word of God, every single day.
           </p>
         </div>
       </section>
@@ -203,7 +203,7 @@ export default function PastorChiiDailyPage() {
               {/* Scripture */}
               {devotional.scriptureText && (
                 <div className="bg-[#EBF0FA] border-l-4 border-[#1E3A8A] rounded-r-2xl p-5 mb-8">
-                  <p className="text-[#1E3A8A] text-xs font-bold uppercase tracking-widest mb-2">Today&apos;s Scripture — {devotional.scripture}</p>
+                  <p className="text-[#1E3A8A] text-xs font-bold uppercase tracking-widest mb-2">Today&apos;s Scripture - {devotional.scripture}</p>
                   <p className="font-[family-name:var(--font-heading)] text-base sm:text-lg text-[#1A1A1A] italic leading-relaxed">
                     &ldquo;{devotional.scriptureText}&rdquo;
                   </p>

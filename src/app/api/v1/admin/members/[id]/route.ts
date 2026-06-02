@@ -1,5 +1,6 @@
 // src/app/api/v1/admin/members/[id]/route.ts
-// Single member — GET full profile, PUT update fields
+// Single member - GET full profile, PUT update fields
+import { userHasPermission } from '@/lib/auth/permissions'
 
 import { NextRequest, NextResponse } from 'next/server'
 import { createServiceClient } from '@/lib/supabase/server'
@@ -11,9 +12,8 @@ export async function GET(
   { params }: { params: Promise<{ id: string }> }
 ) {
   const role = req.headers.get('x-user-role')
-  if (!role || !ALLOWED_ROLES.includes(role)) {
-    return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
-  }
+  const userId = req.headers.get("x-user-id")
+  if (!(await userHasPermission(userId ?? "", role ?? "", ALLOWED_ROLES, "MEMBER_MANAGEMENT"))) return NextResponse.json({ error: "Forbidden" }, { status: 403 })
 
   const { id } = await params
   const supabase = await createServiceClient()
@@ -106,7 +106,7 @@ export async function PUT(
     if (error) return NextResponse.json({ error: 'Failed to update member' }, { status: 500 })
   }
 
-  // Update users table fields — members.id = users.id directly
+  // Update users table fields - members.id = users.id directly
   if (email || newRole || is_active !== undefined) {
     const userUpdate: Record<string, unknown> = {}
     if (email)                             userUpdate.email     = email

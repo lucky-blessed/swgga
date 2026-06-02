@@ -35,7 +35,7 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Blacklist the old refresh token immediately — one time use
+    // Blacklist the old refresh token immediately - one time use
     const oldPayload = payload as any
     const ttl = oldPayload.exp
       ? oldPayload.exp - Math.floor(Date.now() / 1000)

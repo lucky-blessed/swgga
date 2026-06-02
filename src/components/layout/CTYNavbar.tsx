@@ -19,7 +19,7 @@ export default function CTYNavbar() {
             </div>
             <div>
               <p className="text-white font-bold text-sm leading-tight">Catch Them Young</p>
-              <p className="text-green-400/60 text-xs">Outreach Ministry · Sure Word GGA</p>
+              <p className="text-green-400/60 text-xs">Outreach Ministry · Sure Word Glorious Gospel Assembly</p>
             </div>
           </div>
 
@@ -30,11 +30,11 @@ export default function CTYNavbar() {
             <Link href="#chapters"     className="text-white/70 hover:text-white text-sm transition-colors">Chapters</Link>
             <Link href="#get-involved" className="text-white/70 hover:text-white text-sm transition-colors">Get Involved</Link>
             <Link href="/" className="flex items-center gap-1.5 bg-white/15 hover:bg-white border border-white/40 hover:border-white text-white hover:text-[#0D3320] text-xs font-bold px-3 py-1.5 rounded-full transition-all duration-200">
-              <ArrowLeft size={12} /> Sure Word GGA
+              <ArrowLeft size={12} /> Sure Word Glorious Gospel Assembly
             </Link>
           </div>
 
-          {/* Right — Get Involved + hamburger */}
+          {/* Right - Get Involved + hamburger */}
           <div className="flex items-center gap-2">
             <Link href="#get-involved" className="hidden lg:block bg-[#4ADE80] hover:bg-[#22C55E] text-[#166534] text-sm font-bold px-4 py-2 rounded-full transition-colors">
               Get Involved
@@ -64,7 +64,7 @@ export default function CTYNavbar() {
             <Link href="#chapters"     onClick={() => setMenuOpen(false)} className="text-white/70 hover:text-white text-sm font-medium py-2.5 border-b border-green-900/50">Chapters</Link>
             <Link href="#get-involved" onClick={() => setMenuOpen(false)} className="text-white/70 hover:text-white text-sm font-medium py-2.5 border-b border-green-900/50">Get Involved</Link>
             <Link href="/" className="flex items-center gap-2 mt-2 bg-white/10 hover:bg-white/20 border border-white/20 text-white text-sm font-bold px-4 py-2.5 rounded-xl transition-colors">
-              <ArrowLeft size={14} /> Return to Sure Word GGA
+              <ArrowLeft size={14} /> Return to Sure Word Glorious Gospel Assembly
             </Link>
           </div>
         </div>

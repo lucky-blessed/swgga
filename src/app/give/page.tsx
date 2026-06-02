@@ -123,7 +123,7 @@ export default function GivePage() {
             USSD Mobile Transfer
           </h3>
           <p className="text-gray-400 text-sm mb-6">
-            No internet needed — dial from any Nigerian phone
+            No internet needed - dial from any Nigerian phone
           </p>
           <div className="flex flex-col gap-4">
             {ussdCodes.map((ussd) => (

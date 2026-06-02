@@ -1,17 +1,16 @@
 // src/app/api/v1/admin/prayer/route.ts
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
+import { userHasPermission } from '@/lib/auth/permissions'
 
 const VIEW_ROLES   = ['R01', 'R02', 'R08']
 const VALID_STATUS = ['new', 'in_progress', 'prayed_for', 'resolved']
 
 export async function GET(req: NextRequest) {
-  const role   = req.headers.get('x-user-role')
-  const userId = req.headers.get('x-user-id')
-
-  if (!role || !VIEW_ROLES.includes(role)) {
-    return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
-  }
+  const role = req.headers.get("x-user-role")
+  
+  const userId = req.headers.get("x-user-id")
+  if (!(await userHasPermission(userId ?? "", role ?? "", VIEW_ROLES, "PRAYER_CONNECT"))) return NextResponse.json({ error: "Forbidden" }, { status: 403 })
 
   const { searchParams } = req.nextUrl
   const status   = searchParams.get('status')   ?? 'all'
@@ -22,7 +21,7 @@ export async function GET(req: NextRequest) {
   const offset   = (page - 1) * limit
 
   const supabase = await createClient()
-  const isAdmin  = ['R01', 'R02'].includes(role)
+  const isAdmin  = ['R01', 'R02'].includes(role ?? '')
 
   let query = supabase
     .from('prayer_requests')
@@ -102,11 +101,8 @@ export async function GET(req: NextRequest) {
 
 export async function PATCH(req: NextRequest) {
   const role   = req.headers.get('x-user-role')
-  const userId = req.headers.get('x-user-id')
-
-  if (!role || !VIEW_ROLES.includes(role)) {
-    return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
-  }
+  const userId = req.headers.get("x-user-id")
+  if (!(await userHasPermission(userId ?? "", role ?? "", VIEW_ROLES, "PRAYER_CONNECT"))) return NextResponse.json({ error: "Forbidden" }, { status: 403 })
 
   const body = await req.json().catch(() => null)
   if (!body?.ids || !Array.isArray(body.ids) || !body.status) {

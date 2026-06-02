@@ -41,7 +41,7 @@ export default function AdminForgotPasswordPage() {
               <span className="text-white font-bold text-lg">SW</span>
             </div>
             <div>
-              <p className="text-white font-bold text-sm">Sure Word GGA</p>
+              <p className="text-white font-bold text-sm">Sure Word Glorious Gospel Assembly</p>
               <p className="text-gray-500 text-xs">Admin Platform</p>
             </div>
           </Link>

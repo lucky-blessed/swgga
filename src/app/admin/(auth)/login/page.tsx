@@ -1,6 +1,6 @@
 'use client'
 // src/app/admin/login/page.tsx
-// Dedicated admin login page — separate from member portal login
+// Dedicated admin login page - separate from member portal login
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
@@ -35,7 +35,7 @@ export default function AdminLoginPage() {
         return
       }
 
-      // Check role — must be admin (R01-R09)
+      // Check role - must be admin (R01-R09)
       const adminRoles = ['R01','R02','R03','R04','R05','R06','R07','R08','R09']
       if (!adminRoles.includes(data.user.role)) {
         setError('This account does not have admin access. Use the Member Portal to sign in.')
@@ -72,7 +72,7 @@ export default function AdminLoginPage() {
               <span className="text-white font-bold text-lg">SW</span>
             </div>
             <div>
-              <p className="text-white font-bold text-sm">Sure Word GGA</p>
+              <p className="text-white font-bold text-sm">Sure Word Glorious Gospel Assembly</p>
               <p className="text-gray-500 text-xs">Admin Platform</p>
             </div>
           </Link>

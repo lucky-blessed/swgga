@@ -20,7 +20,7 @@ export async function uploadProfilePhoto(
   memberId: string
 ): Promise<{ url: string; publicId: string }> {
   return new Promise((resolve, reject) => {
-    // Upload stream — handles Buffer input directly
+    // Upload stream - handles Buffer input directly
     const uploadStream = cloudinary.uploader.upload_stream(
       {
         folder:         'swgga/members',

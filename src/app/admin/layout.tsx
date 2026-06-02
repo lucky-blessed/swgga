@@ -3,8 +3,8 @@
 // Root layout for the entire admin platform
 // Composes: AdminProvider → AdminSidebar + AdminTopbar + page content
 // RBAC guard is enforced at two levels:
-//   1. proxy.ts (server) — redirects non-admin roles before page loads
-//   2. AdminProvider (client) — role-filters navigation items
+//   1. proxy.ts (server) - redirects non-admin roles before page loads
+//   2. AdminProvider (client) - role-filters navigation items
 
 import { useState } from 'react'
 import { usePathname } from 'next/navigation'
@@ -33,13 +33,13 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           onMobileClose={() => setMobileOpen(false)}
         />
 
-        {/* Right panel — topbar + scrollable content */}
+        {/* Right panel - topbar + scrollable content */}
         <div className="flex flex-col flex-1 min-w-0 overflow-hidden">
 
           {/* Top navigation bar */}
           <AdminTopbar onMobileOpen={() => setMobileOpen(true)} />
 
-          {/* Page content — scrollable */}
+          {/* Page content - scrollable */}
           <main className="flex-1 overflow-y-auto bg-[#060E1A]">
             <div className="p-4 sm:p-6 max-w-[1600px] mx-auto">
               {children}
@@ -49,7 +49,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         </div>
       </div>
 
-      {/* Toast notifications — Sonner */}
+      {/* Toast notifications - Sonner */}
       <Toaster
         position="top-right"
         theme="dark"

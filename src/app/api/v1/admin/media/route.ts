@@ -1,5 +1,6 @@
 // src/app/api/v1/admin/media/route.ts
 import { NextRequest, NextResponse } from 'next/server'
+import { userHasPermission } from '@/lib/auth/permissions'
 import { createClient } from '@/lib/supabase/server'
 
 const VIEW_ROLES  = ['R01', 'R02', 'R03', 'R04', 'R05', 'R07']
@@ -11,9 +12,9 @@ const CONTENT_TYPES = [
 
 export async function GET(req: NextRequest) {
   const role = req.headers.get('x-user-role')
-  if (!role || !VIEW_ROLES.includes(role)) {
-    return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
-  }
+  const userId = req.headers.get("x-user-id")
+  const viewOk = await userHasPermission(userId ?? "", role ?? "", VIEW_ROLES, "MEDIA_MANAGEMENT")
+  if (!viewOk) return NextResponse.json({ error: "Forbidden" }, { status: 403 })
 
   const { searchParams } = req.nextUrl
   const search       = searchParams.get('search')?.trim() ?? ''
@@ -69,10 +70,9 @@ export async function GET(req: NextRequest) {
 export async function POST(req: NextRequest) {
   const role   = req.headers.get('x-user-role')
   const userId = req.headers.get('x-user-id')
-
-  if (!role || !WRITE_ROLES.includes(role)) {
-    return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
-  }
+  const writeUserId = req.headers.get('x-user-id')
+  const writeOk = await userHasPermission(writeUserId ?? '', role ?? '', WRITE_ROLES, 'MEDIA_MANAGEMENT')
+  if (!writeOk) return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
 
   const body = await req.json().catch(() => null)
 

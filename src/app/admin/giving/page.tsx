@@ -568,7 +568,7 @@ export default function GivingPage() {
                 {/* Member ID (optional) */}
                 <div>
                   <label className="block text-xs text-[#64748B] mb-1">
-                    Member ID <span className="text-[#334155]">(optional — leave blank for anonymous)</span>
+                    Member ID <span className="text-[#334155]">(optional - leave blank for anonymous)</span>
                   </label>
                   <input
                     type="text"

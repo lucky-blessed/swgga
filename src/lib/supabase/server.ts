@@ -31,7 +31,7 @@ export async function  createClient() {
         }
     )
 }           
-// Service role client — bypasses RLS for server-side operations
+// Service role client - bypasses RLS for server-side operations
 // Only use in API routes that have already verified the JWT
 import { createClient as createSupabaseClient } from '@supabase/supabase-js'
 

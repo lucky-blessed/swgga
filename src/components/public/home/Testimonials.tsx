@@ -1,8 +1,8 @@
-// Testimonials — 3 powerful member quotes
+// Testimonials - 3 powerful member quotes
 // Dark blue section, gold accents, clean card layout
 const testimonials = [
   {
-    quote: "Sure Word GGA changed my life completely. The Word preached here is deep, practical, and life-transforming. I have never been the same since I joined this church.",
+    quote: "Sure Word Glorious Gospel Assembly changed my life completely. The Word preached here is deep, practical, and life-transforming. I have never been the same since I joined this church.",
     name: "Brother Emeka O.",
     role: "Member since 2021",
     initial: "E",

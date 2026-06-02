@@ -21,7 +21,7 @@ export default function ForgotPasswordPage() {
         headers: { 'Content-Type': 'application/json' },
         body:    JSON.stringify({ email: email.trim() }),
       })
-      // Always show success — prevents email enumeration
+      // Always show success - prevents email enumeration
       setSent(true)
     } catch {
       setError('Something went wrong. Please try again.')
@@ -44,7 +44,7 @@ export default function ForgotPasswordPage() {
               <span className="text-white font-bold text-lg">SW</span>
             </div>
             <div>
-              <p className="text-white font-bold text-sm">Sure Word GGA</p>
+              <p className="text-white font-bold text-sm">Sure Word Glorious Gospel Assembly</p>
               <p className="text-gray-500 text-xs">Member Portal</p>
             </div>
           </Link>

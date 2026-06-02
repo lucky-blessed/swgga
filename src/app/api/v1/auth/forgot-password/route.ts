@@ -22,11 +22,11 @@ async function sendResetEmail(
   const html = `
     <!DOCTYPE html>
     <html>
-    <head><meta charset="utf-8"><title>Reset Your Password — Sure Word GGA</title></head>
+    <head><meta charset="utf-8"><title>Reset Your Password - Sure Word Glorious Gospel Assembly</title></head>
     <body style="margin:0;padding:0;background:#F3F4F6;">
       <div style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;max-width:600px;margin:0 auto;background:#ffffff;">
         <div style="background:linear-gradient(135deg,#0D1B2A 0%,#1E3A8A 100%);padding:32px 40px;text-align:center;">
-          <h1 style="color:#ffffff;margin:0;font-size:22px;font-weight:700;">Sure Word GGA</h1>
+          <h1 style="color:#ffffff;margin:0;font-size:22px;font-weight:700;">Sure Word Glorious Gospel Assembly</h1>
           <p style="color:#93C5FD;margin:6px 0 0;font-size:13px;">${platformLabel}</p>
         </div>
         <div style="padding:40px;color:#374151;line-height:1.6;">
@@ -34,7 +34,7 @@ async function sendResetEmail(
             Reset your password, ${firstName}
           </h2>
           <p style="margin:0 0 16px;">
-            We received a request to reset the password for your Sure Word GGA account.
+            We received a request to reset the password for your Sure Word Glorious Gospel Assembly account.
             Click the button below to choose a new password.
           </p>
           <p style="margin:0 0 8px;font-size:13px;color:#EF4444;font-weight:600;">
@@ -69,7 +69,7 @@ async function sendResetEmail(
     </html>
   `
 
-  await sendEmail(to, 'Reset your Sure Word GGA password', html)
+  await sendEmail(to, 'Reset your Sure Word Glorious Gospel Assembly password', html)
 }
 
 export async function POST(req: NextRequest) {
@@ -90,12 +90,12 @@ export async function POST(req: NextRequest) {
     .eq('email', email)
     .single()
 
-  // Always return success even if email not found — prevents email enumeration
+  // Always return success even if email not found - prevents email enumeration
   if (error || !user || !user.is_active) {
     return NextResponse.json({ success: true })
   }
 
-  // Rate limit — max 3 reset requests per hour per email
+  // Rate limit - max 3 reset requests per hour per email
   const rateLimitKey = `reset_rate:${email}`
   const attempts = await redis.incr(rateLimitKey)
   if (attempts === 1) await redis.expire(rateLimitKey, 3600)

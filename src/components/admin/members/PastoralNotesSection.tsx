@@ -1,5 +1,5 @@
 // src/components/admin/members/PastoralNotesSection.tsx
-// Pastoral notes editor — only imported and rendered when canSeePastoralNotes is true
+// Pastoral notes editor - only imported and rendered when canSeePastoralNotes is true
 // The parent is responsible for conditional rendering. The API enforces server-side.
 
 'use client'

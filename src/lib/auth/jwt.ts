@@ -10,7 +10,7 @@ import type { Role } from './rbac'
 export interface JWTPayload {
     sub: string    // user ID
     role: Role     // user's role (R01-R11)
-    jti: string    // unique token ID — used for blacklisting on logout
+    jti: string    // unique token ID - used for blacklisting on logout
     iat: number    // issued at timestamp
     exp: number    // expiry timestamp
   }
@@ -31,7 +31,7 @@ export function createAccessToken(userId: string, role: Role): string {
     )
 }
 
-// Creates a refresh token — longer lived, used to get a new access token
+// Creates a refresh token - longer lived, used to get a new access token
 export function createRefreshToken(userId: string): string {
     return jwt.sign(
       { sub: userId, jti: crypto.randomUUID() },

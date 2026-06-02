@@ -1,4 +1,4 @@
-// FeaturedSermon — premium sermon showcase
+// FeaturedSermon - premium sermon showcase
 // Dark blue card, video thumbnail, Watch/Listen/Notes CTA trio
 import Link from 'next/link'
 import { Play, Headphones, FileText, ArrowRight } from 'lucide-react'

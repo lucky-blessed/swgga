@@ -148,7 +148,7 @@ export default function MeetingCard({
           </span>
         )}
 
-        {/* Cancel button — R01/R02 only, scheduled meetings only */}
+        {/* Cancel button - R01/R02 only, scheduled meetings only */}
         {canEdit && isUpcoming && onCancel && (
           <button
             onClick={e => {

@@ -48,7 +48,7 @@ export async function POST(
     )
   }
 
-  // Record join time — only set once
+  // Record join time - only set once
   if (!participant.joined_at) {
     await supabase
       .from('conference_participants')

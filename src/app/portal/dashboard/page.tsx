@@ -1,6 +1,6 @@
 'use client'
 // src/app/portal/dashboard/page.tsx
-// Member portal dashboard — matches SWGGA UI Design v3 mockup
+// Member portal dashboard - matches SWGGA UI Design v3 mockup
 
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
@@ -126,7 +126,7 @@ export default function PortalDashboard() {
   const wordStreak   = user?.word_streak ?? 0
   const ministryName = user?.ministry?.name ?? 'General'
 
-  // Mock activity feed — will be replaced with real data in later weeks
+  // Mock activity feed - will be replaced with real data in later weeks
   const activity: ActivityItem[] = [
     {
       type:   'sermon',
@@ -136,7 +136,7 @@ export default function PortalDashboard() {
     },
     {
       type:   'streak',
-      title:  `Word Streak — ${wordStreak} Days!`,
+      title:  `Word Streak - ${wordStreak} Days!`,
       detail: wordStreak > 0
         ? `You have engaged with the daily Word for ${wordStreak} consecutive days. Keep going!`
         : 'Start your Word streak today by reading the daily devotional.',
@@ -145,13 +145,13 @@ export default function PortalDashboard() {
     {
       type:   'announcement',
       title:  'Church Announcement',
-      detail: 'Join us for our next Sunday service — Glory and His Secret Place',
+      detail: 'Join us for our next Sunday service - Glory and His Secret Place',
       time:   '3 days ago',
     },
     {
       type:   'cell',
       title:  'Cell Group This Week',
-      detail: `${ministryName} — Don't forget your Bible`,
+      detail: `${ministryName} - Don't forget your Bible`,
       time:   '1 week ago',
     },
   ]
@@ -166,7 +166,7 @@ export default function PortalDashboard() {
           {getGreeting()}, {firstName}
         </h2>
         <p className="text-[13px] text-[#6B7280] mt-0.5">
-          {getDateString()} · Welcome back to Sure Word GGA
+          {getDateString()} · Welcome back to Sure Word Glorious Gospel Assembly
         </p>
       </div>
 

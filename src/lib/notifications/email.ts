@@ -1,5 +1,5 @@
 // src/lib/notifications/email.ts
-// SendGrid email client — transactional emails
+// SendGrid email client - transactional emails
 // All emails use the verified sender from SENDGRID_FROM_EMAIL
 
 import sgMail from '@sendgrid/mail'
@@ -69,13 +69,13 @@ function baseTemplate(content: string): string {
     <head>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1">
-      <title>Sure Word GGA</title>
+      <title>Sure Word Glorious Gospel Assembly</title>
     </head>
     <body style="margin:0;padding:0;background:#F3F4F6;">
       <div style="${baseStyle}">
         <div style="${headerStyle}">
           <h1 style="color:#ffffff;margin:0;font-size:22px;font-weight:700;letter-spacing:-0.5px;">
-            Sure Word GGA
+            Sure Word Glorious Gospel Assembly
           </h1>
           <p style="color:#93C5FD;margin:6px 0 0;font-size:13px;">
             Warri, Delta State, Nigeria
@@ -109,7 +109,7 @@ export async function sendVerificationEmail(
       Welcome, ${firstName}! 🎉
     </h2>
     <p style="margin:0 0 16px;">
-      Thank you for creating an account with Sure Word GGA. We are glad to have you
+      Thank you for creating an account with Sure Word Glorious Gospel Assembly. We are glad to have you
       as part of our community.
     </p>
     <p style="margin:0 0 16px;">
@@ -133,7 +133,7 @@ export async function sendVerificationEmail(
     </p>
   `)
 
-  await sendEmail(to, 'Verify your Sure Word GGA account', html)
+  await sendEmail(to, 'Verify your Sure Word Glorious Gospel Assembly account', html)
 }
 
 // ─── Welcome email (after verification) ──────────────────────────────────────
@@ -144,7 +144,7 @@ export async function welcomeEmail(to: string, firstName: string) {
       Your account is verified! ✅
     </h2>
     <p style="margin:0 0 16px;">
-      Hi ${firstName}, your Sure Word GGA account is now fully active.
+      Hi ${firstName}, your Sure Word Glorious Gospel Assembly account is now fully active.
     </p>
     <p style="margin:0 0 16px;">
       You can now access the member portal to:
@@ -163,7 +163,7 @@ export async function welcomeEmail(to: string, firstName: string) {
     </div>
   `)
 
-  await sendEmail(to, 'Welcome to Sure Word GGA!', html)
+  await sendEmail(to, 'Welcome to Sure Word Glorious Gospel Assembly!', html)
 }
 
 // ─── Giving receipt email ─────────────────────────────────────────────────────
@@ -220,7 +220,7 @@ export async function givingReceiptEmail(
     </p>
   `)
 
-  await sendEmail(to, `Giving Receipt — ₦${amount.toLocaleString()} (${fund})`, html)
+  await sendEmail(to, `Giving Receipt - ₦${amount.toLocaleString()} (${fund})`, html)
 }
 
 // ─── Devotional alert email ───────────────────────────────────────────────────
@@ -234,7 +234,7 @@ export async function devotionalAlertEmail(
 ) {
   const html = baseTemplate(`
     <h2 style="color:#1A1A1A;margin:0 0 16px;font-size:24px;">
-      Pastor Chii Daily — Episode ${episode}
+      Pastor Chii Daily - Episode ${episode}
     </h2>
     <p style="margin:0 0 16px;">
       Hi ${firstName}, a new devotional is available:

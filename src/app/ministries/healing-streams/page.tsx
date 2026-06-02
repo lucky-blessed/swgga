@@ -7,7 +7,7 @@ import { HeartHandshake, Lock, ShieldCheck, Heart, Play, Headphones, Calendar } 
 import { useState } from 'react'
 
 const messages = [
-  { type: 'video', title: 'When Love Grows Cold — Rekindling Your Marriage', date: '16 Feb 2026', duration: '48 min', gradient: 'from-[#0D1B2A] to-[#1E3A8A]' },
+  { type: 'video', title: 'When Love Grows Cold - Rekindling Your Marriage', date: '16 Feb 2026', duration: '48 min', gradient: 'from-[#0D1B2A] to-[#1E3A8A]' },
   { type: 'audio', title: 'Forgiveness as a Foundation', date: '19 Jan 2026', duration: '35 min', gradient: 'from-[#92650A] to-[#B8860B]' },
   { type: 'video', title: 'Raising Godly Children in a Broken World', date: '15 Dec 2025', duration: '52 min', gradient: 'from-[#166534] to-[#0D3320]' },
   { type: 'audio', title: 'The Power of Covenant in Marriage', date: '17 Nov 2025', duration: '41 min', gradient: 'from-[#0D1B2A] to-[#152D6E]' },
@@ -78,7 +78,7 @@ export default function HealingStreamsPage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
 
-          {/* LEFT — About the ministry */}
+          {/* LEFT - About the ministry */}
           <div>
             <div className="w-14 h-14 bg-[#EBF0FA] rounded-2xl flex items-center justify-center mb-6">
               <HeartHandshake size={28} className="text-[#1E3A8A]" />
@@ -122,7 +122,7 @@ export default function HealingStreamsPage() {
             </div>
           </div>
 
-          {/* RIGHT — Confidential contact form */}
+          {/* RIGHT - Confidential contact form */}
           <div>
             <div className="bg-white border border-gray-100 rounded-2xl shadow-sm p-6 sm:p-8">
               <div className="flex items-center gap-3 mb-2">
@@ -193,7 +193,7 @@ export default function HealingStreamsPage() {
             <h2 className="font-[family-name:var(--font-heading)] text-3xl font-bold text-[#1A1A1A] mb-2">
               Healing Streams Media
             </h2>
-            <p className="text-gray-400 text-base">Messages from our monthly programmes — watch or listen at your own pace</p>
+            <p className="text-gray-400 text-base">Messages from our monthly programmes - watch or listen at your own pace</p>
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
             {messages.map((msg) => (

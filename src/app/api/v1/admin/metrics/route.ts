@@ -1,5 +1,5 @@
 // src/app/api/v1/admin/metrics/route.ts
-// Admin dashboard metrics — cached in Redis for 5 minutes
+// Admin dashboard metrics - cached in Redis for 5 minutes
 // Returns member count, giving total, prayer requests, events
 
 import { NextResponse } from 'next/server'
@@ -56,7 +56,7 @@ export async function GET() {
     return NextResponse.json(metrics)
   } catch (error) {
     console.error('[admin/metrics] Error:', error)
-    // Return zeros on error — dashboard still loads
+    // Return zeros on error - dashboard still loads
     return NextResponse.json({
       totalMembers: 0, givingThisMonth: 0, pendingPrayers: 0,
       upcomingEvents: 0, attendanceMonth: 0, lastUpdated: new Date().toISOString(),

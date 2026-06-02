@@ -14,7 +14,7 @@ export default function GiveCTA() {
         <div className="inline-block bg-[rgba(184,134,11,0.2)] border border-[rgba(184,134,11,0.4)]
                         text-[#F5C518] text-xs font-bold tracking-widest uppercase
                         px-4 py-2 rounded-full mb-6">
-          Give Online — Nigeria &amp; Worldwide
+          Give Online - Nigeria &amp; Worldwide
         </div>
 
         {/* Heading */}
@@ -25,7 +25,7 @@ export default function GiveCTA() {
 
         {/* Subtext */}
         <p className="text-blue-200 text-base sm:text-lg leading-relaxed mb-8">
-          Every gift helps us raise a nation of discipled men — grounded, rooted,
+          Every gift helps us raise a nation of discipled men - grounded, rooted,
           and living in the Word of God.
         </p>
 

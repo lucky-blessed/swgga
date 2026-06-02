@@ -25,7 +25,7 @@ const ministries = [
     icon: Heart,
     name: 'Daughter of Esther',
     tagline: "Women's Fellowship",
-    description: 'Empowering women through the Word of God — building strength, sisterhood, and Spirit-led purpose in every season of life.',
+    description: 'Empowering women through the Word of God - building strength, sisterhood, and Spirit-led purpose in every season of life.',
     href: '/ministries/womens-fellowship',
     featured: false,
   },
@@ -41,7 +41,7 @@ const ministries = [
     icon: Star,
     name: "Children of Destiny",
     tagline: 'Ages 3 to 12',
-    description: 'Age-appropriate spiritual education for children — teaching the Word of God through stories, songs, activities, and Spirit-filled worship.',
+    description: 'Age-appropriate spiritual education for children - teaching the Word of God through stories, songs, activities, and Spirit-filled worship.',
     href: '/ministries/childrens-church',
     featured: false,
   },
@@ -57,7 +57,7 @@ const ministries = [
     icon: Globe,
     name: 'Evangelism & Outreach',
     tagline: 'Taking the Gospel Out to Reach The Unreached',
-    description: 'Taking the gospel of Jesus Christ beyond the walls of Sure Word — through street evangelism, community outreach, and missions across Delta State.',
+    description: 'Taking the gospel of Jesus Christ beyond the walls of Sure Word - through street evangelism, community outreach, and missions across Delta State.',
     href: '/ministries/evangelism',
     featured: false,
   },
@@ -73,7 +73,7 @@ const ministries = [
     icon: HeartHandshake,
     name: 'Healing Streams',
     tagline: 'Healing Marriages & Strenghtening Relationships',
-    description: 'A confidential ministry dedicated to marriage restoration, family healing, and emotional wholeness — through Spirit-led counselling and the Word of God.',
+    description: 'A confidential ministry dedicated to marriage restoration, family healing, and emotional wholeness - through Spirit-led counselling and the Word of God.',
     href: '/ministries/healing-streams',
     featured: false,
   },
@@ -100,7 +100,7 @@ export default function MinistriesPage() {
             Our Ministries
           </h1>
           <p className="text-blue-200 text-lg max-w-2xl mx-auto">
-            Ten vibrant ministries — from daily devotional to marriage restoration, from children to outreach
+            Ten vibrant ministries - from daily devotional to marriage restoration, from children to outreach
           </p>
         </div>
       </section>

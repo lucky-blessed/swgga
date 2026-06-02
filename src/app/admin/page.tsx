@@ -1,6 +1,6 @@
 'use client'
 // src/app/admin/page.tsx
-// Admin Dashboard — Task 2
+// Admin Dashboard - Task 2
 // Live metrics from Supabase (Redis-cached), Recharts charts, quick actions
 
 import { useEffect, useState } from 'react'
@@ -97,16 +97,16 @@ const QUICK_ACTIONS = [
 
 // ── Setup checklist ────────────────────────────────────────────────────────
 const CHECKLIST = [
-  { done: true,  label: 'Database schema — 21 tables with RLS' },
-  { done: true,  label: 'Sanity CMS — 6 content types live' },
-  { done: true,  label: 'SMS notifications — Twilio configured' },
-  { done: true,  label: 'Email notifications — SendGrid configured' },
-  { done: true,  label: 'Cloudinary — profile photo upload ready' },
+  { done: true,  label: 'Database schema - 21 tables with RLS' },
+  { done: true,  label: 'Sanity CMS - 6 content types live' },
+  { done: true,  label: 'SMS notifications - Twilio configured' },
+  { done: true,  label: 'Email notifications - SendGrid configured' },
+  { done: true,  label: 'Cloudinary - profile photo upload ready' },
   { done: true,  label: 'Pastor Chii Daily pipeline live' },
   { done: true,  label: 'RSS podcast feed at /api/podcast' },
   { done: false, label: 'Add first church members' },
   { done: false, label: 'Record first giving transactions' },
-  { done: false, label: 'Member portal — Week 6' },
+  { done: false, label: 'Member portal - Week 6' },
 ]
 
 // ── Main dashboard ──────────────────────────────────────────────────────────

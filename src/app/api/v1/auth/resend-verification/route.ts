@@ -45,7 +45,7 @@ export async function POST(req: NextRequest) {
       )
     }
 
-    // Rate limit — max 3 resends per hour
+    // Rate limit - max 3 resends per hour
     const rateLimitKey = `resend_verify:${user.id}`
     const attempts = await redis.incr(rateLimitKey)
     if (attempts === 1) await redis.expire(rateLimitKey, 3600)

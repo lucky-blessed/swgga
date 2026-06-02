@@ -87,7 +87,7 @@ export async function POST(req: NextRequest) {
       )
     }
 
-    // Password strength — must have at least one letter and one number
+    // Password strength - must have at least one letter and one number
     if (!/[a-zA-Z]/.test(password) || !/[0-9]/.test(password)) {
       return NextResponse.json(
         { error: 'Password must contain at least one letter and one number' },
@@ -142,7 +142,7 @@ export async function POST(req: NextRequest) {
         phone:         normalised_phone,
         password_hash,
         role:          'R10',
-        // inactive until email verified — phone-only users are active immediately
+        // inactive until email verified - phone-only users are active immediately
         is_active:     !email?.trim(),
       })
       .select('id, email, phone, role')
@@ -199,7 +199,7 @@ export async function POST(req: NextRequest) {
         verificationSent = true
       } catch (emailErr) {
         console.error('[auth/register] verification email error:', emailErr)
-        // Don't fail registration if email fails — user can request resend
+        // Don't fail registration if email fails - user can request resend
       }
     }
 

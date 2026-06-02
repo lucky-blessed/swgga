@@ -1,5 +1,6 @@
 // src/app/api/v1/admin/giving/summary/route.ts
 import { NextRequest, NextResponse } from 'next/server'
+import { userHasPermission } from '@/lib/auth/permissions'
 import { createClient } from '@/lib/supabase/server'
 import { redis } from '@/lib/db/redis'
 
@@ -17,9 +18,8 @@ const FUND_LABELS: Record<string, string> = {
 
 export async function GET(req: NextRequest) {
   const role = req.headers.get('x-user-role')
-  if (!role || !ALLOWED_ROLES.includes(role)) {
-    return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
-  }
+  const _uid = req.headers.get("x-user-id")
+  if (!(await userHasPermission(_uid ?? "", role ?? "", ALLOWED_ROLES, "FINANCIAL_ACCESS"))) return NextResponse.json({ error: "Forbidden" }, { status: 403 })
 
   const { searchParams } = req.nextUrl
   const from = searchParams.get('from') ?? ''

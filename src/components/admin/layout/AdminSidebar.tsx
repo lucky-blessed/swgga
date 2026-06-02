@@ -6,8 +6,7 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import {
-  LayoutDashboard, Users, CalendarCheck, DollarSign,
+import { FileText, LayoutDashboard, Users, CalendarCheck, DollarSign,
   FolderOpen, Calendar, BookOpen, Megaphone,
   Video, ClipboardList, ShieldCheck, Flame,
   ChevronLeft, ChevronRight, LogOut, ExternalLink, X
@@ -34,8 +33,9 @@ const NAV_ITEMS: NavItem[] = [
   { label: 'Announcements',  href: '/admin/announcements',icon: Megaphone,       permission: null },
   { label: 'Conference Room',href: '/admin/conference',   icon: Video,           permission: 'CONFERENCE_SCHEDULE' },
   { label: 'Audit Logs',     href: '/admin/audit',        icon: ClipboardList,   permission: null },
-  { label: 'Admin Accounts', href: '/admin/settings/accounts', icon: Users, permission: null },
-  { label: 'RBAC & Security',href: '/admin/security',     icon: ShieldCheck,     permission: null },
+  { label: 'Weekly Reports',  href: '/admin/reports',      icon: FileText,        permission: null },
+  { label: 'Admin Accounts', href: '/admin/settings/accounts', icon: Users, permission: 'ADMIN_MANAGEMENT' },
+  { label: 'RBAC & Security',href: '/admin/security/rbac', icon: ShieldCheck,    permission: 'ADMIN_MANAGEMENT' },
 ]
 
 interface AdminSidebarProps {
@@ -55,7 +55,10 @@ export default function AdminSidebar({
   const visibleItems = NAV_ITEMS.filter(item => {
     if (!user) return false
     if (!item.permission) return true // visible to all admin roles
-    return (PERMISSIONS[item.permission] as readonly string[]).includes(user.role)
+    // Check base role permission OR granted per-user permission override
+    const hasRolePermission    = (PERMISSIONS[item.permission] as readonly string[]).includes(user.role)
+    const hasGrantedPermission = (user.permissions ?? []).includes(item.permission)
+    return hasRolePermission || hasGrantedPermission
   })
 
   const roleColor = user ? (ROLE_COLORS[user.role] || ROLE_COLORS['R05']) : ROLE_COLORS['R05']
@@ -109,7 +112,7 @@ export default function AdminSidebar({
               <Flame size={14} className="text-[#0A1628]" />
             </div>
             <div>
-              <p className="text-white text-xs font-bold leading-none">Sure Word GGA</p>
+              <p className="text-white text-xs font-bold leading-none">Sure Word Glorious Gospel Assembly</p>
               <p className="text-[#F5C518] text-[10px] font-semibold leading-none mt-0.5">Admin Platform</p>
             </div>
           </div>
@@ -191,7 +194,7 @@ export default function AdminSidebar({
           </div>
         )}
 
-        {/* Collapse toggle — desktop only */}
+        {/* Collapse toggle - desktop only */}
         <button
           onClick={onCollapse}
           className={`hidden lg:flex items-center justify-center w-full mt-2 py-1.5 rounded-xl text-[#334155] hover:text-[#64748B] hover:bg-white/5 transition-all duration-200 ${

@@ -1,5 +1,6 @@
 // src/app/api/v1/admin/prayer/[id]/route.ts
 import { NextRequest, NextResponse } from 'next/server'
+import { userHasPermission } from '@/lib/auth/permissions'
 import { createClient } from '@/lib/supabase/server'
 
 const VIEW_ROLES   = ['R01', 'R02', 'R08']
@@ -12,13 +13,12 @@ export async function GET(
   const role   = req.headers.get('x-user-role')
   const userId = req.headers.get('x-user-id')
 
-  if (!role || !VIEW_ROLES.includes(role)) {
-    return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
-  }
+  const _uid = req.headers.get("x-user-id")
+  if (!(await userHasPermission(_uid ?? "", role ?? "", VIEW_ROLES, "PRAYER_CONNECT"))) return NextResponse.json({ error: "Forbidden" }, { status: 403 })
 
   const { id } = await params
   const supabase = await createClient()
-  const isAdmin  = ['R01', 'R02'].includes(role)
+  const isAdmin  = ['R01', 'R02'].includes(role ?? '')
 
   const { data, error } = await supabase
     .from('prayer_requests')
@@ -87,9 +87,8 @@ export async function PATCH(
   const role   = req.headers.get('x-user-role')
   const userId = req.headers.get('x-user-id')
 
-  if (!role || !VIEW_ROLES.includes(role)) {
-    return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
-  }
+  const _uid = req.headers.get("x-user-id")
+  if (!(await userHasPermission(_uid ?? "", role ?? "", VIEW_ROLES, "PRAYER_CONNECT"))) return NextResponse.json({ error: "Forbidden" }, { status: 403 })
 
   const { id } = await params
   const body = await req.json().catch(() => null)

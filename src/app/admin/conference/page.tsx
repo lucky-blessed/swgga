@@ -85,7 +85,7 @@ export default function ConferencePage() {
     if (!form.title?.trim()) { setFormError('Title is required.');          return }
     if (!form.scheduled_time) { setFormError('Scheduled time is required.'); return }
 
-    // datetime-local is local time — append timezone offset to parse correctly
+    // datetime-local is local time - append timezone offset to parse correctly
     const scheduledDate = new Date(form.scheduled_time)
     const nowMinus5Min  = new Date(Date.now() - 5 * 60 * 1000)
     if (scheduledDate <= nowMinus5Min) {

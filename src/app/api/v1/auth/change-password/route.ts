@@ -1,5 +1,5 @@
 // src/app/api/v1/auth/change-password/route.ts
-// Authenticated password change — requires current password verification
+// Authenticated password change - requires current password verification
 
 import { NextRequest, NextResponse } from 'next/server'
 import bcrypt from 'bcryptjs'

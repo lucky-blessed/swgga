@@ -1,5 +1,6 @@
 // src/app/api/v1/admin/giving/[id]/route.ts
 import { NextRequest, NextResponse } from 'next/server'
+import { userHasPermission } from '@/lib/auth/permissions'
 import { createClient } from '@/lib/supabase/server'
 
 const ALLOWED_ROLES = ['R01', 'R02', 'R04']
@@ -9,9 +10,8 @@ export async function GET(
   { params }: { params: Promise<{ id: string }> }
 ) {
   const role = req.headers.get('x-user-role')
-  if (!role || !ALLOWED_ROLES.includes(role)) {
-    return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
-  }
+  const _uid = req.headers.get("x-user-id")
+  if (!(await userHasPermission(_uid ?? "", role ?? "", ALLOWED_ROLES, "FINANCIAL_ACCESS"))) return NextResponse.json({ error: "Forbidden" }, { status: 403 })
 
   const { id } = await params
   const supabase = await createClient()
@@ -76,9 +76,8 @@ export async function PATCH(
   const role   = req.headers.get('x-user-role')
   const userId = req.headers.get('x-user-id')
 
-  if (!role || !ALLOWED_ROLES.includes(role)) {
-    return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
-  }
+  const _uid = req.headers.get("x-user-id")
+  if (!(await userHasPermission(_uid ?? "", role ?? "", ALLOWED_ROLES, "FINANCIAL_ACCESS"))) return NextResponse.json({ error: "Forbidden" }, { status: 403 })
 
   const { id } = await params
   const body = await req.json().catch(() => null)
@@ -86,7 +85,7 @@ export async function PATCH(
     return NextResponse.json({ error: 'Invalid request body' }, { status: 400 })
   }
 
-  // Only status and receipt_sent are mutable — financial records are immutable
+  // Only status and receipt_sent are mutable - financial records are immutable
   const allowed  = ['status', 'receipt_sent']
   const updates  = Object.fromEntries(
     Object.entries(body).filter(([k]) => allowed.includes(k))

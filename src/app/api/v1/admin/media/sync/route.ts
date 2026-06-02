@@ -67,7 +67,7 @@ export async function POST(req: NextRequest) {
         ministry_tag:     null,
     }))
 
-    // Upsert — update if sanity_id exists, insert if not
+    // Upsert - update if sanity_id exists, insert if not
     const { data, error } = await supabase
       .from('sermons')
       .upsert(rows, { onConflict: 'sanity_id' })

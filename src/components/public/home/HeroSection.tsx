@@ -1,5 +1,5 @@
 'use client'
-// HeroSection — world-class elevated hero for SWGGA
+// HeroSection - world-class elevated hero for SWGGA
 // Features: atmospheric background, animated text reveal,
 // live countdown to next Sunday service, premium button styling
 
@@ -54,15 +54,15 @@ export default function HeroSection() {
       {/* Deep navy base */}
       <div className="absolute inset-0 bg-[#040D1A]" />
 
-      {/* Atmospheric radial light — top centre */}
+      {/* Atmospheric radial light - top centre */}
       <div className="absolute inset-0 pointer-events-none"
         style={{ background: 'radial-gradient(ellipse 80% 60% at 50% 0%, rgba(30,58,138,0.7) 0%, transparent 70%)' }} />
 
-      {/* Gold atmospheric glow — bottom left */}
+      {/* Gold atmospheric glow - bottom left */}
       <div className="absolute inset-0 pointer-events-none"
         style={{ background: 'radial-gradient(ellipse 50% 40% at 15% 90%, rgba(184,134,11,0.15) 0%, transparent 60%)' }} />
 
-      {/* Gold atmospheric glow — top right */}
+      {/* Gold atmospheric glow - top right */}
       <div className="absolute inset-0 pointer-events-none"
         style={{ background: 'radial-gradient(ellipse 40% 40% at 85% 10%, rgba(184,134,11,0.1) 0%, transparent 60%)' }} />
 
@@ -151,7 +151,7 @@ export default function HeroSection() {
             transition: 'opacity 0.8s ease 0.55s, transform 0.8s ease 0.55s',
           }}
         >
-          {/* Primary CTA — Plan a Visit */}
+          {/* Primary CTA - Plan a Visit */}
           <Link href="/contact"
             className="group relative w-full sm:w-auto flex items-center justify-center gap-2.5 px-8 py-4 rounded-2xl font-bold text-base overflow-hidden transition-all duration-300"
             style={{
@@ -165,7 +165,7 @@ export default function HeroSection() {
             Plan a Visit
           </Link>
 
-          {/* Secondary CTA — Watch Live */}
+          {/* Secondary CTA - Watch Live */}
           <Link href="/ministries/pastor-chii-daily"
             className="group w-full sm:w-auto flex items-center justify-center gap-2.5 px-8 py-4 rounded-2xl font-bold text-base text-white border border-white/20 hover:border-white/40 hover:bg-white/10 backdrop-blur-sm transition-all duration-300"
           >
@@ -175,7 +175,7 @@ export default function HeroSection() {
             Watch Live
           </Link>
 
-          {/* Tertiary CTA — Give */}
+          {/* Tertiary CTA - Give */}
           <Link href="/give"
             className="group w-full sm:w-auto flex items-center justify-center gap-2.5 px-8 py-4 rounded-2xl font-bold text-base text-[#F5C518] border border-[rgba(184,134,11,0.4)] hover:bg-[rgba(184,134,11,0.1)] backdrop-blur-sm transition-all duration-300"
           >

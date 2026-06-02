@@ -43,7 +43,7 @@ export default function AboutPage() {
               <div className="lg:w-2/5 relative min-h-[420px] lg:min-h-[540px]">
                 <Image
                   src="/images/pastor-chii.jpg"
-                  alt="Rev. Chijioke Igbani — Senior Pastor, Sure Word GGA"
+                  alt="Rev. Chijioke Igbani - Senior Pastor, Sure Word Glorious Gospel Assembly"
                   fill
                   className="object-cover object-top"
                   priority
@@ -57,7 +57,7 @@ export default function AboutPage() {
               <div className="flex-1 p-6 sm:p-8 lg:p-12 flex flex-col justify-center">
                 <h3 className="font-[family-name:var(--font-heading)] text-2xl sm:text-3xl font-bold text-[#1A1A1A] mb-1">Rev. Chijioke Igbani</h3>
                 <p className="text-[#B8860B] font-semibold text-sm tracking-wide mb-6">Senior Pastor · Founder · Sure Word Glorious Gospel Assemly</p>
-                <p className="text-[#374151] text-base leading-relaxed mb-8">Rev. Chijioke Igbani is the founder and Senior Pastor of Sure Word Glorious Gospel Assembly. A man of deep faith, prayer, and unwavering commitment to the Word, he has dedicated his life to building a community where the gospel transforms lives. Under his visionary leadership, the church has become a vibrant family of believers impacting Warri, Delta State, and beyond — through Spirit-filled worship, practical discipleship, and compassionate outreach through ministries like Healing Streams and Catch Them Young. His vision to raise a nation of discipled men who are grounded, rooted, and living in the Word drives everything Sure Word does.</p>
+                <p className="text-[#374151] text-base leading-relaxed mb-8">Rev. Chijioke Igbani is the founder and Senior Pastor of Sure Word Glorious Gospel Assembly. A man of deep faith, prayer, and unwavering commitment to the Word, he has dedicated his life to building a community where the gospel transforms lives. Under his visionary leadership, the church has become a vibrant family of believers impacting Warri, Delta State, and beyond - through Spirit-filled worship, practical discipleship, and compassionate outreach through ministries like Healing Streams and Catch Them Young. His vision to raise a nation of discipled men who are grounded, rooted, and living in the Word drives everything Sure Word does.</p>
                 <div>
                   <Link href="/ministries/pastor-chii-daily" className="inline-flex items-center gap-2 bg-[#B8860B] hover:bg-[#92650A] text-white text-sm font-bold px-6 py-3 rounded-full transition-colors duration-200">Join Pastor Chii Daily</Link>
                 </div>
@@ -110,7 +110,7 @@ export default function AboutPage() {
           </div>
           <div className="rounded-2xl overflow-hidden border border-gray-100 h-48 bg-gradient-to-br from-[#EBF0FA] to-[#DBEAFE] flex flex-col items-center justify-center gap-3">
             <MapPin size={40} className="text-[#1E3A8A]" />
-            <p className="text-[#374151] font-bold text-sm">Google Maps — Warri / Effurun, Delta State</p>
+            <p className="text-[#374151] font-bold text-sm">Google Maps - Warri / Effurun, Delta State</p>
             <Link href="https://maps.google.com/?q=Warri,Delta+State,Nigeria" target="_blank" className="bg-[#1E3A8A] hover:bg-[#0F2460] text-white text-xs font-bold px-4 py-2 rounded-full transition-colors">Get Directions</Link>
           </div>
         </div>

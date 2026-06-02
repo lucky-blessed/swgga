@@ -69,6 +69,16 @@ export async function GET(request: NextRequest) {
       .eq('id', user.ministry_id)
       .single() : { data: null }
 
+    // Fetch granted permission overrides
+    const { data: permOverrides } = await supabase
+      .from('user_permissions')
+      .select('permission, granted, revoked_at')
+      .eq('user_id', payload.sub)
+
+    const grantedPermissions = (permOverrides ?? [])
+      .filter((p: any) => p.granted && !p.revoked_at)
+      .map((p: any) => p.permission)
+
     if (!user.is_active) {
       return NextResponse.json(
         { error: 'Account is not active' },
@@ -90,6 +100,7 @@ export async function GET(request: NextRequest) {
       word_streak: (user as any).word_streak_count ?? 0,
       membership_status: m?.membership_status ?? null,
       ministry:   ministry ?? null,
+      granted_permissions: grantedPermissions,
       created_at: user.created_at,
     })
 

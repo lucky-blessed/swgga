@@ -1,7 +1,7 @@
 // src/lib/auth/client.ts
 // Client-side auth utilities
 // Stores access token in memory (not localStorage) for security
-// Refresh token lives in HTTP-only cookie — never accessible to JS
+// Refresh token lives in HTTP-only cookie - never accessible to JS
 
 let _accessToken: string | null = null
 
@@ -18,7 +18,7 @@ export function clearAccessToken() {
 }
 
 // Stores token in a JS-accessible cookie for SSR pages
-// Access token is short-lived (8h admin / 24h member) — acceptable to cookie
+// Access token is short-lived (8h admin / 24h member) - acceptable to cookie
 export function persistAccessToken(token: string) {
   _accessToken = token
   // Set as a non-httpOnly cookie so Next.js middleware can read it

@@ -9,7 +9,7 @@ export const eventType = defineType({
     defineField({ name: 'slug', title: 'Slug', type: 'slug', options: { source: 'title' }, validation: r => r.required() }),
     defineField({ name: 'date', title: 'Event Date', type: 'datetime', validation: r => r.required() }),
     defineField({ name: 'description', title: 'Description', type: 'text', rows: 4 }),
-    defineField({ name: 'location', title: 'Location', type: 'string', initialValue: 'Sure Word GGA, Warri' }),
+    defineField({ name: 'location', title: 'Location', type: 'string', initialValue: 'Sure Word Glorious Gospel Assembly, Warri' }),
     defineField({ name: 'ministry', title: 'Ministry / Tag', type: 'string',
       options: { list: ['Service', 'Youth Ministry', 'Healing Streams', 'CTY', 'Special Events', 'Impact Fellowship'] } }),
     defineField({ name: 'registrationEnabled', title: 'Registration Required', type: 'boolean', initialValue: false }),

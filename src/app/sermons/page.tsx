@@ -1,4 +1,4 @@
-// Sermons page — pulls live sermon data from Sanity CMS
+// Sermons page - pulls live sermon data from Sanity CMS
 // Falls back to a loading state while fetching
 // Uses 'use client' because of the filter/search interactivity
 
@@ -92,14 +92,14 @@ export default function SermonsPage() {
             Sermons and Media
           </h1>
           <p className="text-blue-200 text-lg max-w-2xl mx-auto">
-            Watch, listen, read — messages to ground you, root you, and keep you living in the Word
+            Watch, listen, read - messages to ground you, root you, and keep you living in the Word
           </p>
         </div>
       </section>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
 
-        {/* FILTER BAR — type filter + search */}
+        {/* FILTER BAR - type filter + search */}
         <div className="flex flex-wrap gap-3 mb-8">
           <select
             value={typeFilter}
@@ -146,7 +146,7 @@ export default function SermonsPage() {
 
         {/* SERMON GRID */}
         {loading ? (
-          // Loading skeleton — shows while Sanity data is being fetched
+          // Loading skeleton - shows while Sanity data is being fetched
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 mb-8">
             {[...Array(8)].map((_, i) => (
               <div key={i} className="bg-gray-100 rounded-2xl overflow-hidden animate-pulse">
@@ -176,7 +176,7 @@ export default function SermonsPage() {
                 className="bg-white border border-gray-100 rounded-2xl overflow-hidden hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 cursor-pointer group"
                 onClick={() => { const url = sermon.facebookUrl || sermon.youtubeUrl; if (url) window.open(url, '_blank') }}
               >
-                {/* Thumbnail — uses Sanity image if available, otherwise gradient */}
+                {/* Thumbnail - uses Sanity image if available, otherwise gradient */}
                 <div className={`bg-gradient-to-br ${GRADIENTS[i % GRADIENTS.length]} aspect-video flex items-center justify-center`}
                   style={sermon.thumbnailUrl ? { backgroundImage: `url(${sermon.thumbnailUrl})`, backgroundSize: 'cover', backgroundPosition: 'center' } : {}}>
                   {!sermon.thumbnailUrl && <ThumbIcon type={sermon.sermonType} />}
@@ -197,7 +197,7 @@ export default function SermonsPage() {
           </div>
         )}
 
-        {/* LOAD MORE — only shown when there are results */}
+        {/* LOAD MORE - only shown when there are results */}
         {filtered.length > 0 && (
           <div className="text-center pb-12">
             <button className="border-2 border-gray-200 hover:border-[#1E3A8A] text-gray-500 hover:text-[#1E3A8A] font-bold px-8 py-3 rounded-full transition-colors duration-200 text-sm">

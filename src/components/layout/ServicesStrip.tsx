@@ -1,16 +1,16 @@
 // src/components/layout/ServicesStrip.tsx
 // Thin announcement bar above the navbar
 // Shows service types and church location
-// No hardcoded times — managed via CMS
+// No hardcoded times - managed via CMS
 
 import { Calendar, MapPin } from 'lucide-react'
 
 export default function ServicesStrip() {
   return (
-    // Dark background strip — py-2 = 8px padding top and bottom
+    // Dark background strip - py-2 = 8px padding top and bottom
     <div className="bg-[#0D1B2A] py-2 px-4">
 
-      {/* Flex row — wraps on mobile, scrollable horizontally */}
+      {/* Flex row - wraps on mobile, scrollable horizontally */}
       <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-center
                       gap-4 sm:gap-8 text-xs text-blue-300">
 

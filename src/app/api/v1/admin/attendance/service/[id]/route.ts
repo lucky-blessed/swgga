@@ -1,5 +1,6 @@
 // src/app/api/v1/admin/attendance/service/[id]/route.ts
 
+import { userHasPermission } from '@/lib/auth/permissions'
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
 
@@ -9,9 +10,8 @@ const SERVICE_TYPES = ['sunday_first', 'sunday_second', 'wednesday', 'special']
 
 export async function GET(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const role = req.headers.get('x-user-role')
-  if (!role || !VIEW_ROLES.includes(role)) {
-    return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
-  }
+  const _uid = req.headers.get("x-user-id")
+  if (!(await userHasPermission(_uid ?? "", role ?? "", VIEW_ROLES, "MEMBER_MANAGEMENT"))) return NextResponse.json({ error: "Forbidden" }, { status: 403 })
 
   const { id } = await params
   const supabase = await createClient()

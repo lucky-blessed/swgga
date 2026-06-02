@@ -1,5 +1,6 @@
 // src/app/api/v1/admin/events/route.ts
 import { NextRequest, NextResponse } from 'next/server'
+import { userHasPermission } from '@/lib/auth/permissions'
 import { createClient } from '@/lib/supabase/server'
 
 const VIEW_ROLES   = ['R01', 'R02', 'R03', 'R04', 'R05', 'R06']
@@ -7,9 +8,8 @@ const CREATE_ROLES = ['R01', 'R03', 'R05', 'R06']
 
 export async function GET(req: NextRequest) {
   const role = req.headers.get('x-user-role')
-  if (!role || !VIEW_ROLES.includes(role)) {
-    return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
-  }
+  const userId = req.headers.get("x-user-id")
+  if (!(await userHasPermission(userId ?? "", role ?? "", VIEW_ROLES, "MEMBER_MANAGEMENT"))) return NextResponse.json({ error: "Forbidden" }, { status: 403 })
 
   const { searchParams } = req.nextUrl
   const search     = searchParams.get('search')?.trim() ?? ''

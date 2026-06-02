@@ -78,7 +78,7 @@ export default function JitsiRoom({
             <Loader2 size={16} className="animate-spin" />
             <span className="text-sm">Connecting to meeting room…</span>
           </div>
-          <p className="text-[#334155] text-xs">Sure Word GGA · Leadership Conference</p>
+          <p className="text-[#334155] text-xs">Sure Word Glorious Gospel Assembly · Leadership Conference</p>
         </div>
       )}
 
@@ -89,7 +89,7 @@ export default function JitsiRoom({
         allow="camera; microphone; fullscreen; display-capture; autoplay"
         className="w-full h-full min-h-[600px] border-0"
         onLoad={() => setLoading(false)}
-        title={`SWGGA Meeting — ${roomId}`}
+        title={`SWGGA Meeting - ${roomId}`}
       />
     </div>
   )

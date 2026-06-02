@@ -37,7 +37,7 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // OTP is valid — delete it so it cannot be reused
+    // OTP is valid - delete it so it cannot be reused
     await redis.del(otpKey)
 
     // Find the user by phone number

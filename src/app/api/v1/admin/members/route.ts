@@ -1,14 +1,14 @@
 // src/app/api/v1/admin/members/route.ts
 import { NextRequest, NextResponse } from 'next/server'
+import { userHasPermission } from '@/lib/auth/permissions'
 import { createClient } from '@/lib/supabase/server'
 
 const ALLOWED_ROLES = ['R01', 'R02', 'R03', 'R04', 'R05']
 
 export async function GET(req: NextRequest) {
   const role = req.headers.get('x-user-role')
-  if (!role || !ALLOWED_ROLES.includes(role)) {
-    return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
-  }
+  const userId = req.headers.get("x-user-id")
+  if (!(await userHasPermission(userId ?? "", role ?? "", ALLOWED_ROLES, "MEMBER_MANAGEMENT"))) return NextResponse.json({ error: "Forbidden" }, { status: 403 })
 
   const { searchParams } = req.nextUrl
   const search   = searchParams.get('search')?.trim() ?? ''
@@ -65,7 +65,7 @@ export async function GET(req: NextRequest) {
   }
 
   if (ministry !== 'all') {
-    // ministry_id is on users — filter via embedded relation
+    // ministry_id is on users - filter via embedded relation
     query = query.eq('users.ministry_id', ministry)
   }
 
@@ -81,7 +81,7 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: 'Failed to fetch members', detail: error.message }, { status: 500 })
   }
 
-  // Normalise shape for the frontend — merge users fields up
+  // Normalise shape for the frontend - merge users fields up
   const members = (data ?? []).map((m: any) => {
     const u = m.users ?? {}
     return {
@@ -98,7 +98,7 @@ export async function GET(req: NextRequest) {
       membership_status:   m.membership_status,
       last_attendance_date: m.last_attendance_date,
       // pastoral_notes only included for R01/R02
-      ...((['R01', 'R02'].includes(role)) ? { pastoral_notes: m.pastoral_notes } : {}),
+      ...((['R01', 'R02'].includes(role ?? '')) ? { pastoral_notes: m.pastoral_notes } : {}),
       // from users
       email:               u.email,
       phone:               u.phone,
@@ -127,7 +127,7 @@ export async function PATCH(req: NextRequest) {
   const role   = req.headers.get('x-user-role')
   const userId = req.headers.get('x-user-id')
 
-  if (!role || !['R01', 'R02', 'R03'].includes(role)) {
+  if (!role || !['R01', 'R02', 'R03'].includes(role ?? '')) {
     return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
   }
 
@@ -143,7 +143,7 @@ export async function PATCH(req: NextRequest) {
 
   const supabase = await createClient()
 
-  // members.id === users.id — update membership_status on members
+  // members.id === users.id - update membership_status on members
   const { error: updateErr } = await supabase
     .from('members')
     .update({ membership_status: body.status })

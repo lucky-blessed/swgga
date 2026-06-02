@@ -1,6 +1,6 @@
 'use client'
 // AdminTopbar.tsx
-// Top navigation bar — hamburger, breadcrumb, notifications, profile dropdown
+// Top navigation bar - hamburger, breadcrumb, notifications, profile dropdown
 
 import { useState } from 'react'
 import { usePathname } from 'next/navigation'
@@ -60,7 +60,7 @@ function Breadcrumbs() {
   )
 }
 
-// Mock notification count — will be Redis-backed in Task 2
+// Mock notification count - will be Redis-backed in Task 2
 const MOCK_NOTIFICATIONS = 3
 
 export default function AdminTopbar({ onMobileOpen }: AdminTopbarProps) {
@@ -71,7 +71,7 @@ export default function AdminTopbar({ onMobileOpen }: AdminTopbarProps) {
   return (
     <header className="h-14 bg-[#0A1628] border-b border-white/5 flex items-center justify-between px-4 flex-shrink-0 z-10">
 
-      {/* Left — hamburger + breadcrumbs */}
+      {/* Left - hamburger + breadcrumbs */}
       <div className="flex items-center gap-3">
         <button
           onClick={onMobileOpen}
@@ -82,7 +82,7 @@ export default function AdminTopbar({ onMobileOpen }: AdminTopbarProps) {
         <Breadcrumbs />
       </div>
 
-      {/* Right — notifications + profile */}
+      {/* Right - notifications + profile */}
       <div className="flex items-center gap-2">
 
         {/* Notifications bell */}

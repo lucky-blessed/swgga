@@ -1,5 +1,5 @@
 // src/app/api/v1/admin/accounts/route.ts
-// Admin account management — R01 and R02 only
+// Admin account management - R01 and R02 only
 // POST: create a new admin account and send set-password email
 // GET:  list all admin accounts with password setup status
 
@@ -32,17 +32,17 @@ async function sendAdminWelcomeEmail(
   const html = `
     <!DOCTYPE html>
     <html>
-    <head><meta charset="utf-8"><title>Admin Account - Sure Word GGA</title></head>
+    <head><meta charset="utf-8"><title>Admin Account - Sure Word Glorious Gospel Assembly</title></head>
     <body style="margin:0;padding:0;background:#F3F4F6;">
       <div style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;max-width:600px;margin:0 auto;background:#ffffff;">
         <div style="background:linear-gradient(135deg,#0D1B2A 0%,#1E3A8A 100%);padding:32px 40px;text-align:center;">
-          <h1 style="color:#ffffff;margin:0;font-size:22px;font-weight:700;">Sure Word GGA</h1>
+          <h1 style="color:#ffffff;margin:0;font-size:22px;font-weight:700;">Sure Word Glorious Gospel Assembly</h1>
           <p style="color:#93C5FD;margin:6px 0 0;font-size:13px;">Admin Platform Access</p>
         </div>
         <div style="padding:40px;color:#374151;line-height:1.6;">
           <h2 style="color:#1A1A1A;margin:0 0 16px;font-size:22px;">Welcome, ${firstName}!</h2>
           <p style="margin:0 0 16px;">
-            An admin account has been created for you on the Sure Word GGA digital platform by
+            An admin account has been created for you on the Sure Word Glorious Gospel Assembly digital platform by
             <strong>${creatorName}</strong>.
           </p>
           <div style="background:#F9FAFB;border:1px solid #E5E7EB;border-radius:8px;padding:20px;margin:0 0 24px;">
@@ -97,7 +97,7 @@ async function sendAdminWelcomeEmail(
     </body>
     </html>
   `
-  await sendEmail(to, 'Your Sure Word GGA Admin Account', html)
+  await sendEmail(to, 'Your Sure Word Glorious Gospel Assembly Admin Account', html)
 }
 
 export async function POST(req: NextRequest) {
@@ -148,7 +148,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'An account with this email already exists' }, { status: 409 })
   }
 
-  // Create with temp password — account inactive until password is set
+  // Create with temp password - account inactive until password is set
   const tempPassword  = crypto.randomBytes(32).toString('hex')
   const password_hash = await bcrypt.hash(tempPassword, 12)
 
@@ -180,7 +180,7 @@ export async function POST(req: NextRequest) {
     occupation: custom_role?.trim() || null, // store custom role title in occupation
   })
 
-  // Store set-password token in Redis — 24hr expiry
+  // Store set-password token in Redis - 24hr expiry
   const token = crypto.randomBytes(32).toString('hex')
   await redis.set(
     `admin_set_password:${token}`,

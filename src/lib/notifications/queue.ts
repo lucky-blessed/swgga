@@ -39,6 +39,6 @@ export async function enqueueNotification(job: NotificationJob): Promise<void> {
     await queue.add(job.type, job, { priority: job.type === 'sms' ? 1 : 2 })
   } catch (err) {
     console.error('[queue] Failed to enqueue notification:', err)
-    // Don't throw — notification failure should not break the main request
+    // Don't throw - notification failure should not break the main request
   }
 }

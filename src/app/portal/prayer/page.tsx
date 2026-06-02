@@ -215,7 +215,7 @@ export default function PortalPrayerPage() {
                   : 'bg-transparent text-gray-500 border-white/10 hover:border-white/20'
                 }`}
             >
-              {keepPrivate ? 'Private — Pastor only' : 'Not private'}
+              {keepPrivate ? 'Private - Pastor only' : 'Not private'}
             </button>
           </div>
         </div>

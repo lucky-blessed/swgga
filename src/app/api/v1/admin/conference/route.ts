@@ -1,5 +1,6 @@
 // src/app/api/v1/admin/conference/route.ts
 import { NextRequest, NextResponse } from 'next/server'
+import { userHasPermission } from '@/lib/auth/permissions'
 import { createClient } from '@/lib/supabase/server'
 import crypto from 'crypto'
 
@@ -9,10 +10,7 @@ const CREATE_ROLES = ['R01', 'R02']
 export async function GET(req: NextRequest) {
   const role   = req.headers.get('x-user-role')
   const userId = req.headers.get('x-user-id')
-
-  if (!role || !VIEW_ROLES.includes(role)) {
-    return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
-  }
+  if (!(await userHasPermission(userId ?? "", role ?? "", VIEW_ROLES, "CONFERENCE_SCHEDULE"))) return NextResponse.json({ error: "Forbidden" }, { status: 403 })
 
   const { searchParams } = req.nextUrl
   const filter = searchParams.get('filter') ?? 'upcoming' // upcoming | past | all
@@ -23,7 +21,7 @@ export async function GET(req: NextRequest) {
   const supabase = await createClient()
   const now      = new Date().toISOString()
 
-  const isAdmin = ['R01', 'R02'].includes(role)
+  const isAdmin = ['R01', 'R02'].includes(role ?? '')
 
   let query = supabase
     .from('conference_meetings')
@@ -44,7 +42,7 @@ export async function GET(req: NextRequest) {
       )
     `, { count: 'exact' })
 
-  // R01/R02 see all meetings — others see only meetings they are invited to
+  // R01/R02 see all meetings - others see only meetings they are invited to
   if (!isAdmin) {
     query = query.eq('conference_participants.user_id', userId)
   }
@@ -70,7 +68,7 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: 'Failed to fetch meetings' }, { status: 500 })
   }
 
-  const meetings = (data ?? []).map((m: any) => normaliseMeeting(m, role))
+  const meetings = (data ?? []).map((m: any) => normaliseMeeting(m, role ?? ''))
 
   return NextResponse.json({
     meetings,
@@ -85,7 +83,7 @@ export async function POST(req: NextRequest) {
   const role   = req.headers.get('x-user-role')
   const userId = req.headers.get('x-user-id')
 
-  if (!role || !CREATE_ROLES.includes(role)) {
+  if (!role || !CREATE_ROLES.includes(role ?? '')) {
     return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
   }
 
@@ -98,7 +96,7 @@ export async function POST(req: NextRequest) {
     )
   }
 
-  // Generate Jitsi room ID — format: swgga-{8 random hex chars}
+  // Generate Jitsi room ID - format: swgga-{8 random hex chars}
   const jitsi_room_id = `swgga-${crypto.randomUUID().slice(0, 8)}`
   const meeting_url   = `https://meet.jit.si/${jitsi_room_id}`
 
@@ -163,7 +161,7 @@ export async function POST(req: NextRequest) {
 // ─── Normalise ────────────────────────────────────────────────────────────────
 
 function normaliseMeeting(m: any, role: string) {
-  const isAdmin     = ['R01', 'R02'].includes(role)
+  const isAdmin     = ['R01', 'R02'].includes(role ?? '')
   const creatorMember = m.creator?.members as any
 
   return {
@@ -172,7 +170,7 @@ function normaliseMeeting(m: any, role: string) {
     scheduled_time:    m.scheduled_time,
     duration_minutes:  m.duration_minutes,
     jitsi_room_id:     m.jitsi_room_id,
-    // Meeting URL only visible to R01/R02 in UI — still returned for join logic
+    // Meeting URL only visible to R01/R02 in UI - still returned for join logic
     meeting_url:       isAdmin ? m.meeting_url : null,
     notes:             m.notes,
     recording_enabled: m.recording_enabled,

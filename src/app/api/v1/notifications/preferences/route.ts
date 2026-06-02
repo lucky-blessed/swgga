@@ -1,5 +1,5 @@
 // src/app/api/v1/notifications/preferences/route.ts
-// Member notification preferences — GET and PATCH
+// Member notification preferences - GET and PATCH
 
 import { NextRequest, NextResponse } from 'next/server'
 import { createServiceClient } from '@/lib/supabase/server'
@@ -62,7 +62,7 @@ export async function PATCH(req: NextRequest) {
     return NextResponse.json({ error: 'Preferences object required' }, { status: 400 })
   }
 
-  // Sanitize — only allow known keys, enforce boolean values
+  // Sanitize - only allow known keys, enforce boolean values
   const sanitized: Record<string, boolean> = {}
   for (const key of ALLOWED_KEYS) {
     if (key in body.preferences) {
@@ -81,7 +81,7 @@ export async function PATCH(req: NextRequest) {
     .eq('id', userId)
 
   if (error) {
-    // Column may not exist yet — store in Redis as fallback
+    // Column may not exist yet - store in Redis as fallback
     console.error('[notifications/preferences PATCH]', error.message)
     return NextResponse.json({ error: 'Failed to save preferences' }, { status: 500 })
   }

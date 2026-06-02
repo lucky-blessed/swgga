@@ -13,10 +13,11 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 const queryClient = new QueryClient()
 
 interface AdminUser {
-  id:       string
-  role:     Role
-  name:     string
-  initials: string
+  id:          string
+  role:         Role
+  name:         string
+  initials:     string
+  permissions:  string[]
 }
 
 interface AdminContextValue {
@@ -26,7 +27,7 @@ interface AdminContextValue {
 
 const AdminContext = createContext<AdminContextValue>({ user: null, loading: true })
 
-// Role display names — shown in the sidebar and top bar
+// Role display names - shown in the sidebar and top bar
 const ROLE_LABELS: Record<string, string> = {
   R01: 'Super Admin',
   R02: 'Senior Pastor',
@@ -41,7 +42,7 @@ const ROLE_LABELS: Record<string, string> = {
   R11: 'Guest',
 }
 
-// Role badge colours — shown as a pill in the top bar
+// Role badge colours - shown as a pill in the top bar
 export const ROLE_COLORS: Record<string, { bg: string; text: string }> = {
   R01: { bg: 'bg-[#B8860B]/20',  text: 'text-[#F5C518]' },
   R02: { bg: 'bg-[#1E3A8A]/30',  text: 'text-[#93C5FD]' },
@@ -69,10 +70,11 @@ export function AdminProvider({ children }: { children: ReactNode }) {
         if (res.ok) {
           const data = await res.json()
           setUser({
-            id:       data.id,
-            role:     data.role,
-            name:     data.name || 'Admin User',
-            initials: (data.name || 'AU').split(' ').map((n: string) => n[0]).join('').toUpperCase().slice(0, 2),
+            id:          data.id,
+            role:         data.role,
+            name:         data.name || 'Admin User',
+            initials:     (data.name || 'AU').split(' ').map((n: string) => n[0]).join('').toUpperCase().slice(0, 2),
+            permissions:  data.granted_permissions ?? [],
           })
         } else {
           window.location.href = "/admin/login"

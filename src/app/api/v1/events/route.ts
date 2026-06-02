@@ -1,5 +1,5 @@
 // src/app/api/v1/events/route.ts
-// Public events API — R11+ (no auth required)
+// Public events API - R11+ (no auth required)
 // Used by the public website events page
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
@@ -26,7 +26,7 @@ export async function GET(req: NextRequest) {
   if (filter === 'upcoming') query = query.gte('start_time', now)
   if (filter === 'past')     query = query.lt('start_time',  now)
 
-  // Hide members-only events from public — check JWT if present
+  // Hide members-only events from public - check JWT if present
   const authHeader = req.headers.get('authorization')
   const token = authHeader?.replace('Bearer ', '') ??
                 req.cookies.get('swgga_access')?.value

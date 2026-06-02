@@ -7,7 +7,7 @@ import { verifyAccessToken } from '@/lib/auth/jwt'
 import { redis } from '@/lib/db/redis'
 import { PERMISSIONS } from '@/lib/auth/rbac'
 
-// API routes that are public — no token required
+// API routes that are public - no token required
 const PUBLIC_API_ROUTES = [
   '/api/v1/auth/login',
   '/api/v1/auth/logout',
@@ -46,7 +46,7 @@ export async function proxy(request: NextRequest) {
   if (isPublicAPI) return NextResponse.next()
 
   // Determine if this is a protected route
-  // Portal auth pages are public — must not be protected
+  // Portal auth pages are public - must not be protected
   const isPortalAuthPage = pathname.startsWith('/portal/login') ||
                            pathname.startsWith('/portal/register') ||
                            pathname.startsWith('/portal/verify-email') ||
@@ -88,7 +88,7 @@ export async function proxy(request: NextRequest) {
     )
   }
 
-  // Check Redis blacklist — token may have been invalidated on logout
+  // Check Redis blacklist - token may have been invalidated on logout
   const isBlacklisted = await redis.get(`jwt_blacklist:${payload.jti}`)
   if (isBlacklisted) {
     if (isProtectedPage) {
@@ -101,7 +101,7 @@ export async function proxy(request: NextRequest) {
     )
   }
 
-  // RBAC — admin routes require an admin role
+  // RBAC - admin routes require an admin role
   if (pathname.startsWith('/admin')) {
     const hasAdminAccess = (PERMISSIONS.ADMIN_ACCESS as readonly string[])
       .includes(payload.role)
@@ -110,7 +110,7 @@ export async function proxy(request: NextRequest) {
     }
   }
 
-  // RBAC — financial routes require R01, R02, or R04
+  // RBAC - financial routes require R01, R02, or R04
   if (pathname.startsWith('/api/v1/admin/giving') || pathname.includes('/financial')) {
     const hasFinancialAccess = (PERMISSIONS.FINANCIAL_ACCESS as readonly string[])
       .includes(payload.role)

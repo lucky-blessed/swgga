@@ -1,5 +1,5 @@
 // src/components/public/home/UpcomingEvents.tsx
-// Upcoming events section — 2-column grid of event cards
+// Upcoming events section - 2-column grid of event cards
 // Each card has a date bubble, title, description, and ministry tag
 
 import Link from 'next/link'
@@ -25,7 +25,7 @@ const events = [
     day: '26',
     month: 'June',
     title: 'CTY Community Outreach',
-    description: 'Catch Them Young takes the gospel to the streets of Warri — all welcome.',
+    description: 'Catch Them Young takes the gospel to the streets of Warri - all welcome.',
     tag: 'CTY',
     tagColor: 'bg-[#DCFCE7] text-[#166534]',
   },
@@ -41,7 +41,7 @@ const events = [
 
 export default function UpcomingEvents() {
   return (
-    // Light grey background — alternates with the white Featured Sermon section
+    // Light grey background - alternates with the white Featured Sermon section
     <section className="bg-gray-50 py-16 lg:py-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
@@ -59,7 +59,7 @@ export default function UpcomingEvents() {
           </p>
         </div>
 
-        {/* Events grid — 1 column mobile, 2 columns desktop */}
+        {/* Events grid - 1 column mobile, 2 columns desktop */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {events.map((event) => (
             <div

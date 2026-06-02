@@ -73,8 +73,8 @@ function formatTime(dateStr: string): string {
 function buildWhatsApp(event: any): string {
   const date = formatDate(event.date)
   const time = formatTime(event.date)
-  const loc  = event.location ?? 'Sure Word GGA, Warri'
-  const msg  = `Join us for *${event.title}* at Sure Word GGA!\n\nDate: ${date}\nTime: ${time}\nLocation: ${loc}\n\nswgga.vercel.app/events`
+  const loc  = event.location ?? 'Sure Word Glorious Gospel Assembly, Warri'
+  const msg  = `Join us for *${event.title}* at Sure Word Glorious Gospel Assembly!\n\nDate: ${date}\nTime: ${time}\nLocation: ${loc}\n\nswgga.vercel.app/events`
   return `https://wa.me/?text=${encodeURIComponent(msg)}`
 }
 
@@ -220,7 +220,7 @@ function EventCard({ event, index, onViewDetails }: { event: any; index: number;
     >
       <div className="flex flex-col sm:flex-row">
 
-        {/* Flyer — left side */}
+        {/* Flyer - left side */}
         <div
           className="sm:w-2/5 flex-shrink-0 cursor-pointer relative overflow-hidden"
           onClick={() => onViewDetails(event)}
@@ -249,7 +249,7 @@ function EventCard({ event, index, onViewDetails }: { event: any; index: number;
           )}
         </div>
 
-        {/* Details — right side */}
+        {/* Details - right side */}
         <div className="flex-1 flex flex-col p-6 sm:p-8">
 
           {/* Top row */}
@@ -415,7 +415,7 @@ export default function EventsPage() {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="text-blue-200 text-lg max-w-2xl mx-auto"
           >
-            Services, programmes, and special events — stay connected with what is happening at Sure Word
+            Services, programmes, and special events - stay connected with what is happening at Sure Word
           </motion.p>
         </div>
       </section>
