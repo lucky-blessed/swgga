@@ -4,7 +4,7 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
-export type ServiceType = 'sunday_first' | 'sunday_second' | 'wednesday' | 'special'
+export type ServiceType = 'sunday_service' | 'word_feast' | 'moment_of_encounter' | 'healing_streams' | 'special'
 
 export interface ServiceRecord {
   id:             string
@@ -130,10 +130,11 @@ export function useUpdateServiceRecord() {
 
 export function exportServiceRecordsToCSV(records: ServiceRecord[]) {
   const SERVICE_LABEL: Record<ServiceType, string> = {
-    sunday_first:  'Sunday 1st Service',
-    sunday_second: 'Sunday 2nd Service',
-    wednesday:     'Wednesday Service',
-    special:       'Special Service',
+    sunday_service:      'Sunday Service',
+    word_feast:          'Word Feast',
+    moment_of_encounter: 'Moment of Encounter',
+    healing_streams:     'Healing Streams',
+    special:             'Special Service',
   }
 
   const headers = [

@@ -10,11 +10,12 @@ import {
   type ServiceType,
 } from '@/hooks/admin/useAttendance'
 
-const SERVICE_LABELS: Record<ServiceType, string> = {
-  sunday_first:  'Sunday 1st Service',
-  sunday_second: 'Sunday 2nd Service',
-  wednesday:     'Wednesday Service',
-  special:       'Special Service',
+const SERVICE_LABEL: Record<string, string> = {
+  sunday_service:      'Sunday Service',
+  word_feast:          'Word Feast',
+  moment_of_encounter: 'Moment of Encounter',
+  healing_streams:     'Healing Streams',
+  special:             'Special Service',
 }
 
 interface Props {
@@ -117,7 +118,7 @@ export default function ServiceRecordDrawer({ record, onClose }: Props) {
         <div className="flex items-center justify-between px-6 py-4 border-b border-white/5">
           <div>
             <h2 className="text-white font-semibold">
-              {SERVICE_LABELS[record.service_type]}
+              {SERVICE_LABEL[record.service_type]}
             </h2>
             <p className="text-[#64748B] text-sm">{record.service_date}</p>
           </div>

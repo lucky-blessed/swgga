@@ -47,6 +47,7 @@ export const PERMISSIONS = {
     // Who can access the member portal
     PORTAL_ACCESS: ['R01', 'R02', 'R03', 'R04', 'R05', 'R06', 'R07', 'R08', 'R09', 'R10'],
   ADMIN_MANAGEMENT: ['R01', 'R02'],
+  ANALYTICS_ACCESS:  ['R01', 'R02', 'R03', 'R04'],
 } as const
 
 // Helper function - checks if a role has a specific permission

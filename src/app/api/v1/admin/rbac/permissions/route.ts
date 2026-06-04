@@ -18,6 +18,7 @@ const GRANTABLE_PERMISSIONS = [
   { key: 'CONFERENCE_SCHEDULE', label: 'Conference Scheduling',   desc: 'Create and manage conference meetings' },
   { key: 'PASTORAL_NOTES',      label: 'Pastoral Notes',          desc: 'View confidential pastoral notes' },
   { key: 'ADMIN_MANAGEMENT',    label: 'Admin Account Management',desc: 'Create and manage admin accounts' },
+  { key: 'ANALYTICS_ACCESS',    label: 'Full Analytics Access',    desc: 'Access detailed attendance analytics and charts' },
 ]
 
 const ROLE_LABELS: Record<string, string> = {
