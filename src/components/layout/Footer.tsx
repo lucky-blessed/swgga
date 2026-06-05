@@ -129,7 +129,7 @@ export default function Footer() {
             </div>
 
             {/* Social links with labels */}
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-row flex-wrap gap-x-4 gap-y-2 justify-center sm:justify-start">
               {SOCIAL_LINKS.map(({ Icon, label, href }) => (
                 <a
                   key={label}
