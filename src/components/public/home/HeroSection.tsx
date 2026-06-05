@@ -166,7 +166,7 @@ export default function HeroSection() {
           </Link>
 
           {/* Secondary CTA - Watch Live */}
-          <Link href="/ministries/pastor-chii-daily"
+          <Link href="https://www.youtube.com/@SureWordGospel"
             className="group w-full sm:w-auto flex items-center justify-center gap-2.5 px-8 py-4 rounded-2xl font-bold text-base text-white border border-white/20 hover:border-white/40 hover:bg-white/10 backdrop-blur-sm transition-all duration-300"
           >
             <div className="w-6 h-6 rounded-full bg-red-500 flex items-center justify-center flex-shrink-0">

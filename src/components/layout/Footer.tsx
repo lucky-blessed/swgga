@@ -46,7 +46,7 @@ export default function Footer() {
               &ldquo;Making a difference by the Word.&rdquo;
             </p>
             {/* Social icons */}
-            <div className="flex items-center gap-2 justify-center sm:justify-start">
+            <div className="flex flex-wrap items-center gap-3 justify-center sm:justify-start">
               {SOCIAL_LINKS.map(({ Icon, label, href, color }) => (
                 <a
                   key={label}
@@ -54,9 +54,10 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
-                  className={`w-9 h-9 rounded-full bg-white/10 ${color} flex items-center justify-center transition-colors duration-200`}
+                  className={`flex items-center gap-2 px-3 py-2 rounded-full bg-white/10 ${color} transition-colors duration-200`}
                 >
-                  <Icon size={15} className="text-white" />
+                  <Icon size={14} className="text-white" />
+                  <span className="text-white text-xs font-medium">{label}</span>
                 </a>
               ))}
             </div>

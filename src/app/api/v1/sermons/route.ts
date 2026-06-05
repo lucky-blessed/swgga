@@ -19,7 +19,7 @@ export async function GET(req: NextRequest) {
     .from('sermons')
     .select(`
       id, title, speaker, series, topic, scripture,
-      content_type, video_url, audio_url, sermon_date,
+      content_type, video_url, audio_url, sermon_date, thumbnail_url,
       download_enabled, created_at
     `, { count: 'exact' })
 
