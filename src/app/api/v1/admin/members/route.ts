@@ -1,7 +1,7 @@
 // src/app/api/v1/admin/members/route.ts
 import { NextRequest, NextResponse } from 'next/server'
 import { userHasPermission } from '@/lib/auth/permissions'
-import { createClient } from '@/lib/supabase/server'
+import { createServiceClient } from '@/lib/supabase/server'
 
 const ALLOWED_ROLES = ['R01', 'R02', 'R03', 'R04', 'R05']
 
@@ -18,7 +18,7 @@ export async function GET(req: NextRequest) {
   const limit    = Math.min(50, parseInt(searchParams.get('limit') ?? '20'))
   const offset   = (page - 1) * limit
 
-  const supabase = await createClient()
+  const supabase = await createServiceClient()
 
   // members.id === users.id (1-to-1, CASCADE)
   // ministry_id and cell_group_id live on users
@@ -59,9 +59,17 @@ export async function GET(req: NextRequest) {
     )
   }
 
-  if (status !== 'all') {
+  if (status === 'pending_verification') {
+    // Show only unverified email accounts
+    query = query.eq('users.is_active', false)
+  } else if (status !== 'all') {
     // membership_status: active | pending | inactive
     query = query.eq('membership_status', status)
+    // Only show email-verified members for these statuses
+    query = query.eq('users.is_active', true)
+  } else {
+    // Default: only show verified members
+    query = query.eq('users.is_active', true)
   }
 
   if (ministry !== 'all') {
@@ -141,7 +149,7 @@ export async function PATCH(req: NextRequest) {
     return NextResponse.json({ error: 'Invalid status' }, { status: 400 })
   }
 
-  const supabase = await createClient()
+  const supabase = await createServiceClient()
 
   // members.id === users.id - update membership_status on members
   const { error: updateErr } = await supabase
