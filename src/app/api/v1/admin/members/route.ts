@@ -59,17 +59,18 @@ export async function GET(req: NextRequest) {
     )
   }
 
+  // Filter by is_active using a pre-fetched ID list (embedded relation filter doesn't work as WHERE)
   if (status === 'pending_verification') {
-    // Show only unverified email accounts
-    query = query.eq('users.is_active', false)
-  } else if (status !== 'all') {
-    // membership_status: active | pending | inactive
-    query = query.eq('membership_status', status)
-    // Only show email-verified members for these statuses
-    query = query.eq('users.is_active', true)
+    const { data: unverified } = await supabase
+      .from('users').select('id').eq('is_active', false)
+    const ids = (unverified ?? []).map((u: any) => u.id)
+    if (!ids.length) return NextResponse.json({ members: [], total: 0, page, limit })
+    query = query.in('id', ids)
   } else {
-    // Default: only show verified members
-    query = query.eq('users.is_active', true)
+    // Show all members (verified and unverified) — status badge handles display
+    if (status !== 'all') {
+      query = query.eq('membership_status', status)
+    }
   }
 
   if (ministry !== 'all') {

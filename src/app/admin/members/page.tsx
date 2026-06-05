@@ -179,7 +179,7 @@ function MemberRow({
 
       {/* Status */}
       <div className="flex-shrink-0">
-        <StatusBadge status={member.membership_status ?? 'pending'} />
+        <StatusBadge status={member.is_active === false ? 'pending_verification' : (member.membership_status ?? 'pending')} />
       </div>
 
       {/* Date joined */}
