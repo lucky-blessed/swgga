@@ -21,6 +21,7 @@ const STATUS_CONFIG = {
   active:   { color: 'text-[#22C55E]', bg: 'bg-[#22C55E]/10 border-[#22C55E]/20', dot: 'bg-[#22C55E]' },
   inactive: { color: 'text-[#F87171]', bg: 'bg-[#F87171]/10 border-[#F87171]/20', dot: 'bg-[#F87171]' },
   pending:  { color: 'text-[#F59E0B]', bg: 'bg-[#F59E0B]/10 border-[#F59E0B]/20', dot: 'bg-[#F59E0B]' },
+  pending_verification: { color: 'text-[#60A5FA]', bg: 'bg-[#60A5FA]/10 border-[#60A5FA]/20', dot: 'bg-[#60A5FA]' },
 }
 
 const ROLE_LABELS: Record<string, string> = {
@@ -376,6 +377,7 @@ export default function MembersPage() {
                 <option value="all">All Status</option>
                 <option value="active">Active</option>
                 <option value="inactive">Inactive</option>
+                <option value="pending_verification">Pending Verification</option>
                 <option value="pending">Pending</option>
               </select>
               <ChevronDown size={12}
