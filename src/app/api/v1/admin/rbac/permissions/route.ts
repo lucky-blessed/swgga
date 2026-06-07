@@ -19,6 +19,7 @@ const GRANTABLE_PERMISSIONS = [
   { key: 'PASTORAL_NOTES',      label: 'Pastoral Notes',          desc: 'View confidential pastoral notes' },
   { key: 'ADMIN_MANAGEMENT',    label: 'Admin Account Management',desc: 'Create and manage admin accounts' },
   { key: 'ANALYTICS_ACCESS',    label: 'Full Analytics Access',    desc: 'Access detailed attendance analytics and charts' },
+  { key: 'FIRST_TIMERS_ACCESS',  label: 'First Timers Access',       desc: 'View and manage first timer submissions and follow-ups' },
 ]
 
 const ROLE_LABELS: Record<string, string> = {

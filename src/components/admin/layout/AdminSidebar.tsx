@@ -6,7 +6,7 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { FileText, LayoutDashboard, Users, CalendarCheck, DollarSign,
+import { UserPlus, FileText, LayoutDashboard, Users, CalendarCheck, DollarSign,
   FolderOpen, Calendar, BookOpen, Megaphone,
   Video, ClipboardList, ShieldCheck, Flame,
   ChevronLeft, ChevronRight, LogOut, ExternalLink, X
@@ -33,6 +33,7 @@ const NAV_ITEMS: NavItem[] = [
   { label: 'Announcements',  href: '/admin/announcements',icon: Megaphone,       permission: null },
   { label: 'Conference Room',href: '/admin/conference',   icon: Video,           permission: 'CONFERENCE_SCHEDULE' },
   { label: 'Audit Logs',     href: '/admin/audit',        icon: ClipboardList,   permission: null },
+  { label: 'First Timers',    href: '/admin/first-timers', icon: UserPlus,        permission: 'FIRST_TIMERS_ACCESS' },
   { label: 'Weekly Reports',  href: '/admin/reports',      icon: FileText,        permission: null },
   { label: 'Admin Accounts', href: '/admin/settings/accounts', icon: Users, permission: 'ADMIN_MANAGEMENT' },
   { label: 'RBAC & Security',href: '/admin/security/rbac', icon: ShieldCheck,    permission: 'ADMIN_MANAGEMENT' },

@@ -8,7 +8,7 @@ const ministryLinks = [
   { label: 'CTY Royal Force',     href: '/ministries/youth',             icon: Zap,           desc: 'Youth Ministry' },
   { label: 'Daughter of Esther',  href: '/ministries/womens-fellowship', icon: Heart,         desc: "Women's Fellowship" },
   { label: 'Mighty Men of David', href: '/ministries/mens-fellowship',   icon: Shield,        desc: "Men's Fellowship" },
-  { label: "Children's Church",   href: '/ministries/childrens-church',  icon: Star,          desc: 'Ages 3 to 12' },
+  { label: "Children of Destiny",   href: '/ministries/childrens-church',  icon: Star,          desc: 'Ages 3 to 12' },
   { label: 'Choir & Worship',     href: '/ministries/choir',             icon: Music,         desc: 'Lifting His Name' },
   { label: 'Healing Streams',     href: '/ministries/healing-streams',   icon: HeartHandshake,desc: 'Marriage & Family' },
   { label: 'Impact Fellowship',   href: '/ministries/impact-fellowship', icon: Home,          desc: 'Cell Groups' },

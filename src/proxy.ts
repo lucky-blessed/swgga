@@ -29,6 +29,7 @@ const PUBLIC_API_ROUTES = [
   '/api/v1/auth/forgot-password',
   '/api/v1/auth/reset-password',
   '/api/v1/admin/accounts/set-password',
+  '/api/v1/first-timers',
   '/api/v1/events',
   '/api/v1/sermons',
   '/api/v1/devotionals',

@@ -10,10 +10,29 @@ import Link from 'next/link'
 
 export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false)
+  const [loading,   setLoading]   = useState(false)
+  const [error,     setError]     = useState('')
+  const [form, setForm] = useState({
+    first_name: '', last_name: '', phone: '', email: '', heard_from: '', message: ''
+  })
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
-    setSubmitted(true)
+    setLoading(true)
+    setError('')
+    try {
+      const res = await fetch('/api/v1/first-timers', {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify(form),
+      })
+      if (!res.ok) throw new Error('Submission failed')
+      setSubmitted(true)
+    } catch {
+      setError('Something went wrong. Please try again or call us directly.')
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
@@ -62,6 +81,8 @@ export default function ContactPage() {
                 </p>
               </div>
             ) : (
+              <>
+              {error && <div className="bg-red-50 border border-red-200 text-red-600 text-sm px-4 py-3 rounded-xl">{error}</div>}
               <form onSubmit={handleSubmit} className="flex flex-col gap-4">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
@@ -72,6 +93,8 @@ export default function ContactPage() {
                       type="text"
                       required
                       placeholder="Your first name"
+                      value={form.first_name}
+                      onChange={e => setForm(p => ({ ...p, first_name: e.target.value }))}
                       className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm outline-none focus:border-[#1E3A8A] transition-colors"
                     />
                   </div>
@@ -83,6 +106,8 @@ export default function ContactPage() {
                       type="text"
                       required
                       placeholder="Your last name"
+                      value={form.last_name}
+                      onChange={e => setForm(p => ({ ...p, last_name: e.target.value }))}
                       className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm outline-none focus:border-[#1E3A8A] transition-colors"
                     />
                   </div>
@@ -95,6 +120,8 @@ export default function ContactPage() {
                     type="tel"
                     required
                     placeholder="+234..."
+                    value={form.phone}
+                    onChange={e => setForm(p => ({ ...p, phone: e.target.value }))}
                     className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm outline-none focus:border-[#1E3A8A] transition-colors"
                   />
                 </div>
@@ -105,6 +132,8 @@ export default function ContactPage() {
                   <input
                     type="email"
                     placeholder="your@email.com"
+                    value={form.email}
+                    onChange={e => setForm(p => ({ ...p, email: e.target.value }))}
                     className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm outline-none focus:border-[#1E3A8A] transition-colors"
                   />
                 </div>
@@ -112,7 +141,7 @@ export default function ContactPage() {
                   <label className="text-[#374151] text-xs font-bold uppercase tracking-wider block mb-1.5">
                     How Did You Hear About Us?
                   </label>
-                  <select className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm outline-none focus:border-[#1E3A8A] transition-colors bg-white text-gray-600">
+                  <select value={form.heard_from} onChange={e => setForm(p => ({ ...p, heard_from: e.target.value }))} className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm outline-none focus:border-[#1E3A8A] transition-colors bg-white text-gray-600">
                     <option value="">Select an option</option>
                     <option>Friend or Family</option>
                     <option>Social Media</option>
@@ -130,16 +159,20 @@ export default function ContactPage() {
                   <textarea
                     rows={4}
                     placeholder="Any questions or anything you would like us to know..."
+                    value={form.message}
+                    onChange={e => setForm(p => ({ ...p, message: e.target.value }))}
                     className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm outline-none focus:border-[#1E3A8A] transition-colors resize-none"
                   />
                 </div>
                 <button
                   type="submit"
-                  className="bg-[#1E3A8A] hover:bg-[#0F2460] text-white font-bold px-6 py-4 rounded-full transition-colors duration-200 flex items-center justify-center gap-2 text-sm"
+                  disabled={loading}
+                  className="bg-[#1E3A8A] disabled:opacity-60 hover:bg-[#0F2460] text-white font-bold px-6 py-4 rounded-full transition-colors duration-200 flex items-center justify-center gap-2 text-sm"
                 >
-                  <Send size={16} /> Send Message
+                  <Send size={16} /> {loading ? 'Sending...' : 'Send Message'}
                 </button>
               </form>
+              </>
             )}
           </div>
 
