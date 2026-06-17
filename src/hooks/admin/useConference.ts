@@ -186,6 +186,36 @@ export function useLeaveMeeting() {
   return useMutation({ mutationFn: leaveMeeting })
 }
 
+// ─── Admin users (for participant picker) ─────────────────────────────────────
+
+export interface AdminUser {
+  id:    string
+  name:  string
+  role:  string
+  email: string
+  phone: string | null
+}
+
+async function fetchAdminUsers(): Promise<AdminUser[]> {
+  const res = await fetch('/api/v1/admin/accounts')
+  if (!res.ok) throw new Error('Failed to fetch admin users')
+  const data = await res.json()
+  return (data.accounts ?? []).map((a: any) => ({
+    id:    a.id,
+    name:  a.name,           // already a full name string
+    role:  a.role,
+    email: a.email,
+    phone: a.phone ?? null,
+  }))
+}
+
+export function useAdminUsers() {
+  return useQuery({
+    queryKey: ['admin-users-picker'],
+    queryFn:  fetchAdminUsers,
+    staleTime: 5 * 60 * 1000, // 5 min — doesn't need to be fresh
+  })
+}
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
 export function formatMeetingTime(scheduled_time: string): string {

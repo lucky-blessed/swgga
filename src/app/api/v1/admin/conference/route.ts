@@ -124,7 +124,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Failed to create meeting' }, { status: 500 })
   }
 
-  // Add participants if provided
+  // Add participants if provided + send notifications
   if (body.participant_ids?.length > 0) {
     const participantRows = (body.participant_ids as string[]).map((user_id: string) => ({
       meeting_id: meeting.id,
@@ -138,6 +138,101 @@ export async function POST(req: NextRequest) {
 
     if (participantErr) {
       console.error('[admin/conference participants]', participantErr.message)
+    } else {
+      // Fetch invitee details for notifications
+      const { data: invitees } = await supabase
+        .from('users')
+        .select(`
+          id, email, phone,
+          members ( first_name, last_name )
+        `)
+        .in('id', body.participant_ids as string[])
+
+      if (invitees?.length) {
+        const scheduledDate = new Date(meeting.scheduled_time)
+        const formattedTime = scheduledDate.toLocaleString('en-GB', {
+          weekday: 'long', day: '2-digit', month: 'long', year: 'numeric',
+          hour: '2-digit', minute: '2-digit', timeZone: 'Africa/Lagos',
+        })
+
+        await Promise.allSettled(
+          invitees.map(async (invitee: any) => {
+            const memberName = invitee.members
+              ? `${invitee.members.first_name} ${invitee.members.last_name}`.trim()
+              : 'Leader'
+            const firstName = invitee.members?.first_name ?? 'Leader'
+
+            // ── Email (SendGrid) ────────────────────────────────────────────
+            if (invitee.email) {
+              await fetch('https://api.sendgrid.com/v3/mail/send', {
+                method: 'POST',
+                headers: {
+                  Authorization: `Bearer ${process.env.SENDGRID_API_KEY}`,
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                  to:      [{ email: invitee.email, name: memberName }],
+                  from:    { email: process.env.SENDGRID_FROM_EMAIL!, name: 'SWGGA Admin' },
+                  subject: `Meeting Invite: ${meeting.title}`,
+                  html: `
+                    <div style="font-family:sans-serif;max-width:520px;margin:0 auto;background:#060E1A;color:#E2E8F0;padding:32px;border-radius:12px;">
+                      <h2 style="color:#F5C518;margin:0 0 8px;">📅 You've Been Invited to a Meeting</h2>
+                      <p style="color:#94A3B8;margin:0 0 24px;">Hi ${firstName}, you have been invited to attend the following leadership meeting.</p>
+                      <div style="background:#0A1628;border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:20px;margin-bottom:24px;">
+                        <p style="margin:0 0 8px;font-size:18px;font-weight:600;color:#fff;">${meeting.title}</p>
+                        <p style="margin:0 0 4px;color:#94A3B8;font-size:14px;">🕐 ${formattedTime} WAT</p>
+                        <p style="margin:0 0 4px;color:#94A3B8;font-size:14px;">⏱ Duration: ${meeting.duration_minutes} minutes</p>
+                        ${meeting.notes ? `<p style="margin:12px 0 0;color:#64748B;font-size:13px;font-style:italic;">${meeting.notes}</p>` : ''}
+                      </div>
+                      <a href="${process.env.NEXT_PUBLIC_APP_URL}/admin/conference/${meeting.id}"
+                         style="display:inline-block;background:#1E3A8A;color:#fff;padding:12px 24px;
+                                border-radius:8px;text-decoration:none;font-weight:600;font-size:14px;">
+                        View Meeting
+                      </a>
+                      <p style="margin:24px 0 0;color:#334155;font-size:12px;">
+                        Sure Word Glorious Gospel Assembly · SWGGA Admin Platform
+                      </p>
+                    </div>
+                  `,
+                }),
+              }).catch(err => console.error('[SendGrid invite]', err))
+            }
+
+            // ── SMS (Twilio) ────────────────────────────────────────────────
+            if (invitee.phone) {
+              const smsBody =
+                `SWGGA Meeting Invite: "${meeting.title}" on ${formattedTime} WAT. ` +
+                `Duration: ${meeting.duration_minutes} min. ` +
+                `View: ${process.env.NEXT_PUBLIC_APP_URL}/admin/conference/${meeting.id}`
+
+              await fetch(
+                `https://api.twilio.com/2010-04-01/Accounts/${process.env.TWILIO_ACCOUNT_SID}/Messages.json`,
+                {
+                  method: 'POST',
+                  headers: {
+                    Authorization: `Basic ${Buffer.from(
+                      `${process.env.TWILIO_ACCOUNT_SID}:${process.env.TWILIO_AUTH_TOKEN}`
+                    ).toString('base64')}`,
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                  },
+                  body: new URLSearchParams({
+                    From: process.env.TWILIO_PHONE_NUMBER!,
+                    To:   invitee.phone,
+                    Body: smsBody,
+                  }).toString(),
+                }
+              ).catch(err => console.error('[Twilio invite]', err))
+
+              // Mark sms_sent on the participant row
+              await supabase
+                .from('conference_participants')
+                .update({ sms_sent: true, notified_at: new Date().toISOString() })
+                .eq('meeting_id', meeting.id)
+                .eq('user_id', invitee.id)
+            }
+          })
+        )
+      }
     }
   }
 
