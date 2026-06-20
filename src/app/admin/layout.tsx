@@ -11,6 +11,7 @@ import { usePathname } from 'next/navigation'
 import { AdminProvider } from '@/components/admin/providers/AdminProvider'
 import AdminSidebar from '@/components/admin/layout/AdminSidebar'
 import AdminTopbar from '@/components/admin/layout/AdminTopbar'
+import MeetingInviteWidget from '@/components/admin/conference/MeetingInviteWidget'
 import { Toaster } from 'sonner'
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
@@ -61,6 +62,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           },
         }}
       />
+      <MeetingInviteWidget />
     </AdminProvider>
   )
 }

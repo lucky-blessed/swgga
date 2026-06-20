@@ -216,6 +216,32 @@ export function useAdminUsers() {
     staleTime: 5 * 60 * 1000, // 5 min — doesn't need to be fresh
   })
 }
+
+// ─── My meeting invites (for global dashboard widget) ─────────────────────────
+
+export interface MeetingInvite {
+  id:                string
+  title:             string
+  scheduled_time:    string
+  duration_minutes:  number
+  status:            MeetingStatus
+  invited_by:        string
+}
+
+async function fetchMyInvites(): Promise<MeetingInvite[]> {
+  const res = await fetch('/api/v1/admin/conference/my-invites')
+  if (!res.ok) throw new Error('Failed to fetch invites')
+  const data = await res.json()
+  return data.invites ?? []
+}
+
+export function useMyMeetingInvites() {
+  return useQuery({
+    queryKey: ['my-meeting-invites'],
+    queryFn:  fetchMyInvites,
+    refetchInterval: 60 * 1000, // poll every 60s to catch new invites
+  })
+}
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
 export function formatMeetingTime(scheduled_time: string): string {

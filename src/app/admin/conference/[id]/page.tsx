@@ -9,12 +9,12 @@ import {
   Mic, MicOff,
 } from 'lucide-react'
 import { useAdminUser } from '@/components/admin/providers/AdminProvider'
+import JitsiRoom from '@/components/admin/conference/JitsiRoom'
 import { type MeetingStatus,
     useMeeting, useUpdateMeeting, useCancelMeeting,
   formatMeetingTime, getMeetingDuration, STATUS_CONFIG,
   type MeetingParticipant,
 } from '@/hooks/admin/useConference'
-import JitsiRoom from '@/components/admin/conference/JitsiRoom'
 
 export default function MeetingDetailPage() {
   const params   = useParams()
@@ -29,7 +29,9 @@ export default function MeetingDetailPage() {
   const updateMutation = useUpdateMeeting()
   const cancelMutation = useCancelMeeting()
 
-  const [showJitsi,     setShowJitsi]     = useState(false)
+  const [joining,   setJoining]   = useState(false)
+  const [joinError, setJoinError] = useState('')
+  const [showJitsi, setShowJitsi] = useState(false)
   const [showCancel,    setShowCancel]    = useState(false)
   const [copied,        setCopied]        = useState(false)
   const [statusError,   setStatusError]   = useState('')
@@ -75,6 +77,11 @@ export default function MeetingDetailPage() {
       setCopied(true)
       setTimeout(() => setCopied(false), 2000)
     }
+  }
+
+  function handleJoinClick() {
+    setJoinError('')
+    setShowJitsi(true)
   }
 
   async function markCompleted() {
@@ -140,7 +147,7 @@ export default function MeetingDetailPage() {
         <div className="flex items-center gap-2 flex-shrink-0">
           {canJoin && !showJitsi && (
             <button
-              onClick={() => setShowJitsi(true)}
+              onClick={handleJoinClick}
               className={`flex items-center gap-2 px-4 py-2 rounded-xl
                           font-semibold text-sm transition-colors
                           ${isLive
@@ -166,7 +173,8 @@ export default function MeetingDetailPage() {
         </div>
       </div>
 
-      {/* Jitsi Room */}
+
+
       {showJitsi && meeting.jitsi_room_id && (
         <div className="rounded-2xl overflow-hidden" style={{ height: '600px' }}>
           <JitsiRoom
@@ -302,6 +310,13 @@ export default function MeetingDetailPage() {
           )}
         </div>
       </div>
+
+      {joinError && (
+        <div className="bg-red-500/10 border border-red-500/20 rounded-xl
+                        px-4 py-3 text-red-400 text-sm">
+          {joinError}
+        </div>
+      )}
 
       {/* Status error */}
       {statusError && (
