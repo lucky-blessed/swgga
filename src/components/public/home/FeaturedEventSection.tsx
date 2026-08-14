@@ -161,10 +161,9 @@ export default function FeaturedEventSection({ event }: { event: FeaturedEvent |
     <>
       <style>{`
         @keyframes kenBurns {
-          0%   { transform: scale(1.0) translate(0px, 0px); }
-          33%  { transform: scale(1.05) translate(-6px, -4px); }
-          66%  { transform: scale(1.04) translate(4px, -2px); }
-          100% { transform: scale(1.0) translate(0px, 0px); }
+          0%   { transform: scale(1.0) translateX(2%); }
+          50%  { transform: scale(1.03) translateX(-2%); }
+          100% { transform: scale(1.0) translateX(2%); }
         }
         @keyframes badgePulse {
           0%, 100% { box-shadow: 0 0 0 0 rgba(239,68,68,0.5); }
@@ -181,14 +180,14 @@ export default function FeaturedEventSection({ event }: { event: FeaturedEvent |
         }
       `}</style>
 
-      <section className="relative w-full overflow-hidden" style={{ minHeight: '95vh' }}>
+      <section className="relative w-full overflow-hidden bg-[#040C18]" style={{ height: "80vh", minHeight: "500px" }}>
 
         {/* ── Flyer background ── */}
-        <div className="absolute inset-0 bg-[#040C18]">
+        <div className="absolute inset-0">
           <div
             className="absolute inset-0"
             style={{
-              animation: 'kenBurns 22s ease-in-out infinite',
+              animation: 'kenBurns 12s ease-in-out infinite',
               transformOrigin: 'center center',
             }}
           >
@@ -196,8 +195,8 @@ export default function FeaturedEventSection({ event }: { event: FeaturedEvent |
               src={flyerSrc}
               alt={event.title}
               fill
-              className="object-cover"
-              style={{ objectPosition: 'center center' }}
+              className="object-cover" style={{ objectPosition: "center 15%" }}
+              
               sizes="100vw"
               priority
             />
@@ -211,14 +210,14 @@ export default function FeaturedEventSection({ event }: { event: FeaturedEvent |
 
         {/* Bottom-heavy gradient — keeps text readable */}
         <div className="absolute inset-0 z-10"
-             style={{ background: 'linear-gradient(to top, rgba(4,12,24,0.97) 0%, rgba(4,12,24,0.85) 25%, rgba(4,12,24,0.4) 55%, rgba(4,12,24,0.1) 100%)' }} />
+             style={{ background: 'linear-gradient(to top, rgba(4,12,24,0.75) 0%, rgba(4,12,24,0.55) 30%, rgba(4,12,24,0.25) 60%, rgba(4,12,24,0.05) 100%)' }} />
 
         {/* Left vignette */}
         <div className="absolute inset-0 z-10"
              style={{ background: 'linear-gradient(to right, rgba(4,12,24,0.7) 0%, transparent 50%)' }} />
 
         {/* ── Content ── */}
-        <div className="relative z-20 flex flex-col justify-end min-h-[95vh] pb-14 lg:pb-20">
+        <div className="absolute inset-0 z-20 flex flex-col justify-end pb-8 sm:pb-14 lg:pb-20">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
 
             {/* Badge */}
@@ -247,7 +246,7 @@ export default function FeaturedEventSection({ event }: { event: FeaturedEvent |
 
             {/* Details row */}
             <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-              className="flex flex-wrap items-center gap-x-6 gap-y-2 mb-6">
+              className="flex flex-col sm:flex-row sm:flex-wrap items-start sm:items-center gap-y-1.5 sm:gap-x-6 sm:gap-y-2 mb-6">
               {[
                 { icon: <Calendar size={13} />, text: dateLabel },
                 ...(event.sessionTimes ? [{ icon: <Clock size={13} />, text: event.sessionTimes.replace(/"$/, '') }] : []),
@@ -263,7 +262,7 @@ export default function FeaturedEventSection({ event }: { event: FeaturedEvent |
             </motion.div>
 
             {/* Speakers */}
-            <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.37, ease: [0.22, 1, 0.36, 1] }} className="flex flex-wrap gap-2 mb-9">
+            <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.37, ease: [0.22, 1, 0.36, 1] }} className="flex flex-wrap gap-1.5 sm:gap-2 mb-6 sm:mb-9">
               {(event.speakers ?? []).map((s, i) => (
                 <motion.div
                   key={s.name}
