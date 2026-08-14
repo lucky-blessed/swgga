@@ -160,6 +160,16 @@ export default function FeaturedEventSection({ event }: { event: FeaturedEvent |
   return (
     <>
       <style>{`
+        .swgga-event-section {
+          height: calc(100vw * 415 / 1080);
+          min-height: 220px;
+        }
+        @media (min-width: 768px) {
+          .swgga-event-section {
+            height: 80vh;
+            min-height: 500px;
+          }
+        }
         @keyframes kenBurns {
           0%   { transform: scale(1.0) translateX(2%); }
           50%  { transform: scale(1.03) translateX(-2%); }
@@ -180,7 +190,7 @@ export default function FeaturedEventSection({ event }: { event: FeaturedEvent |
         }
       `}</style>
 
-      <section className="relative w-full overflow-hidden bg-[#040C18]" style={{ height: "80vh", minHeight: "500px" }}>
+      <section className="relative w-full overflow-hidden bg-[#040C18] swgga-event-section">
 
         {/* ── Flyer background ── */}
         <div className="absolute inset-0">
@@ -217,7 +227,7 @@ export default function FeaturedEventSection({ event }: { event: FeaturedEvent |
              style={{ background: 'linear-gradient(to right, rgba(4,12,24,0.7) 0%, transparent 50%)' }} />
 
         {/* ── Content ── */}
-        <div className="absolute inset-0 z-20 flex flex-col justify-end pb-8 sm:pb-14 lg:pb-20">
+        <div className="absolute inset-0 z-20 flex flex-col justify-end pb-4 md:pb-14 lg:pb-20">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
 
             {/* Badge */}
@@ -246,7 +256,7 @@ export default function FeaturedEventSection({ event }: { event: FeaturedEvent |
 
             {/* Details row */}
             <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-              className="flex flex-col sm:flex-row sm:flex-wrap items-start sm:items-center gap-y-1.5 sm:gap-x-6 sm:gap-y-2 mb-6">
+              className="hidden md:flex flex-wrap items-center gap-x-6 gap-y-2 mb-6">
               {[
                 { icon: <Calendar size={13} />, text: dateLabel },
                 ...(event.sessionTimes ? [{ icon: <Clock size={13} />, text: event.sessionTimes.replace(/"$/, '') }] : []),
@@ -262,7 +272,7 @@ export default function FeaturedEventSection({ event }: { event: FeaturedEvent |
             </motion.div>
 
             {/* Speakers */}
-            <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.37, ease: [0.22, 1, 0.36, 1] }} className="flex flex-wrap gap-1.5 sm:gap-2 mb-6 sm:mb-9">
+            <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.37, ease: [0.22, 1, 0.36, 1] }} className="hidden md:flex flex-wrap gap-2 mb-9">
               {(event.speakers ?? []).map((s, i) => (
                 <motion.div
                   key={s.name}
@@ -285,7 +295,7 @@ export default function FeaturedEventSection({ event }: { event: FeaturedEvent |
             </motion.div>
 
             {/* CTAs */}
-            <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.5, ease: [0.22, 1, 0.36, 1] }} className="flex flex-col sm:flex-row gap-3">
+            <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.5, ease: [0.22, 1, 0.36, 1] }} className="flex flex-row gap-2 md:gap-3">
               <Link
                 href="/contact"
                 className="inline-flex items-center justify-center
