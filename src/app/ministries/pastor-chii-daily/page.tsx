@@ -55,7 +55,7 @@ function Countdown({ facebookLiveUrl }: { facebookLiveUrl?: string }) {
       </div>
       <p className="text-white/30 text-xs italic mb-4">Facebook Live every evening · 9:00 PM WAT</p>
       <button
-        onClick={() => window.open(facebookLiveUrl || 'https://www.facebook.com', '_blank')}
+        onClick={() => window.open(facebookLiveUrl || 'https://www.facebook.com/', '_blank')}
         className="inline-flex items-center gap-2 bg-[#1877F2] hover:bg-[#1565D8] text-white text-xs font-bold px-4 py-2 rounded-full transition-colors duration-200"
       >
         <FaFacebook size={14} /> Join Live on Facebook

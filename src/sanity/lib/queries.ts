@@ -82,3 +82,75 @@ export const upcomingEventsQuery = groq`
     "imageLqip": image.asset->metadata.lqip,
   }
 `
+
+// Gallery 
+
+export const GALLERY_STORIES_QUERY = groq`
+  *[_type == "galleryStory"] | order(order asc) {
+    _id,
+    title,
+    description,
+    order,
+    "slug": slug.current,
+    "coverImage": coverImage {
+      "url": asset->url,
+      "lqip": asset->metadata.lqip,
+      alt
+    },
+    "photos": *[_type == "galleryPhoto" && references(^._id)] | order(date desc) [0..4] {
+      _id,
+      title,
+      "image": image {
+        "url": asset->url,
+        "lqip": asset->metadata.lqip,
+        "width": asset->metadata.dimensions.width,
+        "height": asset->metadata.dimensions.height,
+        alt
+      }
+    }
+  }
+`
+
+export const GALLERY_PHOTOS_QUERY = groq`
+  *[_type == "galleryPhoto"] | order(featured desc, date desc) {
+    _id,
+    title,
+    description,
+    category,
+    tags,
+    date,
+    featured,
+    "story": story->{ _id, title },
+    "image": image {
+      "url": asset->url,
+      "lqip": asset->metadata.lqip,
+      "width": asset->metadata.dimensions.width,
+      "height": asset->metadata.dimensions.height,
+      alt
+    }
+  }
+`
+
+// Featured event (homepage spotlight)
+export const featuredEventQuery = groq`
+  *[_type == "event" && featured == true] | order(date desc) [0] {
+    _id,
+    title,
+    theme,
+    date,
+    endDate,
+    sessionTimes,
+    description,
+    location,
+    registrationEnabled,
+    speakers[] { name, role },
+    "flyer": image {
+      "url": asset->url,
+      "lqip": asset->metadata.lqip,
+    },
+    "eventPhotos": eventPhotos[] {
+      "url": asset->url,
+      "lqip": asset->metadata.lqip,
+    },
+  }
+`

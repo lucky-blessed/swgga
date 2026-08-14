@@ -48,7 +48,7 @@ export default function HeroSection() {
   }, [])
 
   return (
-    <section className="relative min-h-screen flex flex-col overflow-hidden">
+    <section className="relative min-h-[75vh] flex flex-col overflow-hidden">
 
       {/* ── BACKGROUND LAYERS ──────────────────────────────────────────── */}
       {/* Deep navy base */}
@@ -77,7 +77,7 @@ export default function HeroSection() {
         style={{ width: '400px', height: '300px', background: 'radial-gradient(ellipse at top, rgba(184,134,11,0.08) 0%, transparent 70%)', transform: 'translateX(-50%)' }} />
 
       {/* ── HERO CONTENT ───────────────────────────────────────────────── */}
-      <div className="relative z-10 flex flex-col items-center justify-center flex-1 px-4 sm:px-6 lg:px-8 pt-12 pb-8 text-center">
+      <div className="relative z-10 flex flex-col items-center justify-center flex-1 px-4 sm:px-6 lg:px-8 pt-8 pb-6 text-center">
 
         {/* Location pill */}
         <div
@@ -101,9 +101,9 @@ export default function HeroSection() {
           }}
         >
           <h1 className="font-[family-name:var(--font-heading)] text-white leading-none mb-3">
-            <span className="block text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight">Sure Word</span>
+            <span className="block text-2xl sm:text-4xl lg:text-5xl font-bold tracking-tight">Sure Word</span>
             <span
-              className="block text-4xl sm:text-6xl lg:text-7xl font-bold"
+              className="block text-3xl sm:text-5xl lg:text-6xl font-bold"
               style={{
                 background: 'linear-gradient(135deg, #F5C518 0%, #B8860B 40%, #F5C518 70%, #92650A 100%)',
                 WebkitBackgroundClip: 'text',
@@ -113,7 +113,7 @@ export default function HeroSection() {
             >
               Glorious Gospel
             </span>
-            <span className="block text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight">Assembly</span>
+            <span className="block text-2xl sm:text-4xl lg:text-5xl font-bold tracking-tight">Assembly</span>
           </h1>
         </div>
 

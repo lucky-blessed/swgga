@@ -4,6 +4,8 @@ import { eventType } from './event'
 import { ministryType } from './ministry'
 import { announcementType } from './announcement'
 import { prayerConnectType } from './prayerConnect'
+import { galleryPhotoType } from './galleryPhoto'  
+import { galleryStoryType } from './galleryStory' 
 
 export const schemaTypes = [
   sermonType,
@@ -12,4 +14,6 @@ export const schemaTypes = [
   ministryType,
   announcementType,
   prayerConnectType,
+  galleryPhotoType,  
+  galleryStoryType,
 ]
