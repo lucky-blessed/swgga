@@ -25,8 +25,8 @@ export default function GiveCTA() {
 
         {/* Subtext */}
         <p className="text-blue-200 text-base sm:text-lg leading-relaxed mb-8">
-          Every gift helps us raise a nation of discipled men - grounded, rooted,
-          and living in the Word of God.
+          Every gift helps us raise a nation of discipled men - rooted, grounded,
+          and living in the Word.
         </p>
 
         {/* Give Now button */}

@@ -139,7 +139,7 @@ export default function HeroSection() {
             transition: 'opacity 0.8s ease 0.4s, transform 0.8s ease 0.4s',
           }}
         >
-          &ldquo;Raising a nation of discipled men who are grounded, rooted<br className="hidden sm:block" /> and are living in the Word of God.&rdquo;
+          &ldquo;Raising a nation of discipled men who are rooted, grounded<br className="hidden sm:block" /> and are living in the Word.&rdquo;
         </p>
 
         {/* CTA Buttons */}

@@ -32,10 +32,12 @@ export default function ServicesStrip() {
           <span>Friday Evangelism and Outreach</span>
         </div>
 
+        {/* Divider before location */}
+        <div className="hidden sm:block w-px h-3 bg-white/20" />
         {/* Location */}
-        <div className="flex items-center gap-1.5">
-          <MapPin size={12} className="text-[#B8860B]" />
-          <span>Warri &amp; Effurun, Delta State</span>
+        <div className="flex items-center gap-1.5 text-white/50">
+          <MapPin size={16} className="text-[#B8860B]" />
+          <span className="italic">Warri &amp; Effurun, Delta State</span>
         </div>
 
       </div>

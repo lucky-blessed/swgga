@@ -21,7 +21,7 @@ const lato = Lato({
 
 export const metadata: Metadata = {
   title: 'Sure Word Glorious Gospel Assembly',
-  description: 'Raising a nation of discipled men who are grounded, rooted and are living in the Word of God.',
+  description: 'Raising a nation of discipled men who are rooted, grounded and are living in the Word.',
 }
 
 export default function RootLayout({

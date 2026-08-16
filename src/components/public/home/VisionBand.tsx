@@ -24,7 +24,7 @@ export default function VisionBand() {
       <div className="relative max-w-4xl mx-auto px-4 sm:px-6 text-center">
         <div className="text-[#7A5408] text-4xl font-serif leading-none mb-2 opacity-60">&ldquo;</div>
         <p className="font-[family-name:var(--font-heading)] text-[#0D1B2A] text-lg sm:text-xl font-bold leading-relaxed italic">
-          Raising a nation of discipled men who are grounded, rooted and are living in the Word of God.
+          Raising a nation of discipled men who are rooted, grounded and are living in the Word.
         </p>
         <p className="text-[#0D1B2A]/60 text-sm font-semibold mt-3">
           - Rev. Chijioke Igbani · Senior Pastor, Sure Word Glorious Gospel Assembly
