@@ -96,7 +96,7 @@ export default function Footer() {
                 { label: 'CTY Outreach',       href: '/cty' },
                 { label: 'Pastor Chii Daily',  href: '/ministries/pastor-chii-daily' },
                 { label: 'Daughter of Esther', href: '/ministries/womens-fellowship' },
-
+                { label: 'Mighty Men of David', href: '/ministries/mighty-men' },
 
                 { label: 'CTY Royal Force',    href: '/ministries/youth' },
                 { label: 'Healing Streams',    href: '/ministries/healing-streams' },
