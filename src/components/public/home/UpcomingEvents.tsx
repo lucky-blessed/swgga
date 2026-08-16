@@ -1,114 +1,149 @@
 // src/components/public/home/UpcomingEvents.tsx
-// Upcoming events section - 2-column grid of event cards
-// Each card has a date bubble, title, description, and ministry tag
+// Fetches upcoming events live from Sanity CMS
 
 import Link from 'next/link'
+import { sanityFetch } from '@/sanity/lib/client'
+import { upcomingEventsQuery } from '@/sanity/lib/queries'
 
-const events = [
-  {
-    day: '12',
-    month: 'June',
-    title: 'Youth Sunday Service',
-    description: 'Our young adults lead the entire Sunday service ...; worship, prayer and the Word.',
-    tag: 'CTY Royal Force',
-    tagColor: 'bg-[#EBF0FA] text-[#1E3A8A]',
-  },
-  {
-    day: '19',
-    month: 'June',
-    title: 'Building Strong Family',
-    description: 'Healing marriages and strenghtening relationships.',
-    tag: 'Healing Streams',
-    tagColor: 'bg-[#FDF6E3] text-[#92650A]',
-  },
-  {
-    day: '26',
-    month: 'June',
-    title: 'CTY Community Outreach',
-    description: 'Catch Them Young takes the gospel to the streets of Warri - all welcome.',
-    tag: 'CTY',
-    tagColor: 'bg-[#DCFCE7] text-[#166534]',
-  },
-  {
-    day: '20',
-    month: 'June',
-    title: "Crusade",
-    description: "...In him was life; and the life was the light of men. And the light shineth in darkness; and the darkness comprehended it not.",
-    tag: "The light of Men",
-    tagColor: 'bg-[#FDF6E3] text-[#92650A]',
-  },
-]
+interface SanityEvent {
+  _id:                 string
+  title:               string
+  slug:                { current: string }
+  date:                string
+  description:         string | null
+  location:            string | null
+  ministry:            string | null
+  registrationEnabled: boolean
+  imageUrl:            string | null
+}
 
-export default function UpcomingEvents() {
+function formatDate(dateStr: string) {
+  const d = new Date(dateStr)
+  return {
+    day:   d.toLocaleDateString('en-GB', { day: '2-digit', timeZone: 'Africa/Lagos' }),
+    month: d.toLocaleDateString('en-GB', { month: 'short', timeZone: 'Africa/Lagos' }).toUpperCase(),
+    full:  d.toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Africa/Lagos' }),
+  }
+}
+
+const MINISTRY_COLORS: Record<string, string> = {
+  'Service':          'bg-blue-100 text-blue-700',
+  'Youth Ministry':   'bg-purple-100 text-purple-700',
+  'Healing Streams':  'bg-yellow-100 text-yellow-700',
+  'CTY':              'bg-green-100 text-green-700',
+  'Special Events':   'bg-red-100 text-red-700',
+  'Impact Fellowship':'bg-orange-100 text-orange-700',
+}
+
+export default async function UpcomingEvents() {
+  const events = await sanityFetch<SanityEvent[]>(upcomingEventsQuery).catch(() => [])
+
   return (
-    // Light grey background - alternates with the white Featured Sermon section
-    <section className="bg-gray-50 py-16 lg:py-24">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-16 bg-white">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
 
-        {/* Section header */}
+        {/* Header */}
         <div className="mb-10">
           <p className="text-[#B8860B] text-xs font-bold tracking-widest uppercase mb-2">
             This Week
           </p>
-          <h2 className="font-[family-name:var(--font-heading)] text-3xl sm:text-4xl
-                         font-bold text-[#1A1A1A] mb-3">
-            Upcoming Events
-          </h2>
-          <p className="text-gray-400 text-base">
-            Stay connected with what&apos;s happening at Sure Word
-          </p>
-        </div>
-
-        {/* Events grid - 1 column mobile, 2 columns desktop */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          {events.map((event) => (
-            <div
-              key={event.title}
-              className="bg-white border border-gray-100 rounded-2xl p-5
-                         flex items-start gap-4 hover:shadow-md hover:border-[#1E3A8A]
-                         transition-all duration-200 group cursor-pointer"
-            >
-              {/* Date bubble */}
-              {/* flex-shrink-0 prevents the bubble from shrinking on small screens */}
-              <div className="flex-shrink-0 w-14 h-14 bg-[#1E3A8A] rounded-xl
-                              flex flex-col items-center justify-center">
-                <span className="text-white font-bold text-lg leading-none">
-                  {event.day}
-                </span>
-                <span className="text-blue-300 text-xs font-semibold uppercase">
-                  {event.month}
-                </span>
-              </div>
-
-              {/* Event details */}
-              <div className="flex-1 min-w-0">
-                <h4 className="font-bold text-[#1A1A1A] text-sm sm:text-base
-                               mb-1 group-hover:text-[#1E3A8A] transition-colors">
-                  {event.title}
-                </h4>
-                <p className="text-gray-400 text-xs sm:text-sm leading-relaxed mb-3">
-                  {event.description}
-                </p>
-                {/* Ministry tag pill */}
-                <span className={`inline-block text-xs font-bold px-3 py-1
-                                  rounded-full ${event.tagColor}`}>
-                  {event.tag}
-                </span>
-              </div>
-
+          <div className="flex items-end justify-between">
+            <div>
+              <h2 className="text-3xl sm:text-4xl font-bold text-[#0D1B2A]"
+                  style={{ fontFamily: 'Playfair Display, serif' }}>
+                Upcoming Events
+              </h2>
+              <p className="text-gray-500 mt-1 text-sm">
+                Stay connected with what&apos;s happening at Sure Word
+              </p>
             </div>
-          ))}
+            <Link href="/events"
+                  className="hidden sm:flex items-center gap-1 text-[#B8860B]
+                             hover:text-[#92650A] text-sm font-semibold
+                             transition-colors">
+              View All Events →
+            </Link>
+          </div>
         </div>
 
-        {/* View all events link */}
-        <div className="mt-8 text-center">
-          <Link href="/events"
-            className="text-[#1E3A8A] hover:text-[#B8860B] text-sm font-bold
-                       transition-colors inline-flex items-center gap-1">
-            View All Events →
-          </Link>
-        </div>
+        {/* Events grid */}
+        {events.length === 0 ? (
+          <div className="text-center py-16">
+            <p className="text-gray-400 text-sm">No upcoming events at the moment.</p>
+            <p className="text-gray-300 text-xs mt-1">Check back soon or visit our events page.</p>
+            <Link href="/events"
+                  className="inline-block mt-4 text-[#B8860B] text-sm font-semibold hover:underline">
+              View All Events →
+            </Link>
+          </div>
+        ) : (
+          <>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {events.slice(0, 4).map((event, i) => {
+                const date = formatDate(event.date)
+                const isHighlighted = i === 1
+                return (
+                  <div
+                    key={event._id}
+                    className={`flex items-start gap-4 p-5 rounded-2xl border
+                                transition-shadow hover:shadow-md
+                                ${isHighlighted
+                                  ? 'border-[#B8860B]/30 bg-[#FDF8EE]'
+                                  : 'border-gray-100 bg-white'
+                                }`}
+                  >
+                    {/* Date badge */}
+                    <div className="flex-shrink-0 w-14 h-14 rounded-xl
+                                    bg-[#0D1B2A] flex flex-col items-center
+                                    justify-center text-white">
+                      <span className="text-xl font-bold leading-none">
+                        {date.day}
+                      </span>
+                      <span className="text-[10px] font-semibold tracking-wider
+                                       text-[#F5C518] uppercase mt-0.5">
+                        {date.month}
+                      </span>
+                    </div>
 
+                    {/* Details */}
+                    <div className="flex-1 min-w-0">
+                      <h3 className="font-bold text-[#0D1B2A] text-sm leading-snug mb-1 truncate">
+                        {event.title}
+                      </h3>
+                      {event.description && (
+                        <p className="text-gray-500 text-xs leading-relaxed line-clamp-2 mb-2">
+                          {event.description}
+                        </p>
+                      )}
+                      <div className="flex flex-wrap items-center gap-2">
+                        {event.ministry && (
+                          <span className={`text-[10px] font-semibold px-2.5 py-0.5
+                                           rounded-full ${MINISTRY_COLORS[event.ministry]
+                                           ?? 'bg-gray-100 text-gray-600'}`}>
+                            {event.ministry}
+                          </span>
+                        )}
+                        {event.location && (
+                          <span className="text-[10px] text-gray-400 truncate">
+                            {event.location}
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                )
+              })}
+            </div>
+
+            {/* Mobile view all link */}
+            <div className="mt-6 text-center sm:hidden">
+              <Link href="/events"
+                    className="text-[#B8860B] text-sm font-semibold hover:underline">
+                View All Events →
+              </Link>
+            </div>
+          </>
+        )}
       </div>
     </section>
   )

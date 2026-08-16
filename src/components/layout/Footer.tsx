@@ -93,11 +93,13 @@ export default function Footer() {
             </h5>
             <div className="flex flex-col gap-2.5 items-center sm:items-start">
               {[
-                { label: 'CTY Royal Force',    href: '/ministries/youth' },
-                { label: 'Daughter of Esther', href: '/ministries/womens-fellowship' },
-                { label: 'Healing Streams',    href: '/ministries/healing-streams' },
-                { label: 'Pastor Chii Daily',  href: '/ministries/pastor-chii-daily' },
                 { label: 'CTY Outreach',       href: '/cty' },
+                { label: 'Pastor Chii Daily',  href: '/ministries/pastor-chii-daily' },
+                { label: 'Daughter of Esther', href: '/ministries/womens-fellowship' },
+
+
+                { label: 'CTY Royal Force',    href: '/ministries/youth' },
+                { label: 'Healing Streams',    href: '/ministries/healing-streams' },
                 { label: 'Impact Fellowship',  href: '/ministries/impact-fellowship' },
               ].map((link) => (
                 <Link key={link.label} href={link.href}
